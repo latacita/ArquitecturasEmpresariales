@@ -82,11 +82,41 @@
 
 \begin{frame}[c]
     \frametitle{Capa de Dominio}
+    \begin{center}
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures00.eps}
+            }
+        }
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures01.eps}
+            }
+        }
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures02.eps}
+            }
+        }
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Responsabilidades de la Capa de Dominio}
-    %% Copiar y pegar del Tema 1
+	\begin{enumerate}[<+->]
+        \item Atender las peticiones de los clientes.
+        \item Asegurar que las peticiones se gestionan de acuerdo con las \alert{reglas de negocio} existentes.
+        \item Validar las peticiones de los clientes.
+        \item Controlar la seguridad de las operaciones.
+        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
+        \item Gestionar la comunicación con los servicios externos.
+        \item Asegurar la \alert{transacionalidad} de las operaciones.
+        \item Gestionar de manera adecuada casos excepcionales.
+        \item Ejecutar operaciones periódicas de mantenimiento.
+        \item Facilitar la interconexión con otros sistemas.
+        \item Facilitar la eficiencia del sistema.
+        \item Ayudar a mejorar la experiencia de usuario.
+	\end{enumerate}
 \end{frame}
 
 \section{Patrones para la Capa de Dominio}
@@ -95,12 +125,12 @@
 
 \begin{frame}
     \framtitle{Antipatrón \emph{Smart UI}}
-    
-    %% Put all the business logic into the user interface. Chop the application into 
-    %% small functions and implement them as separate user interfaces, embedding 
-    %% the business rules into them. Use a relational database as a shared repository of 
+
+    %% Put all the business logic into the user interface. Chop the application into
+    %% small functions and implement them as separate user interfaces, embedding
+    %% the business rules into them. Use a relational database as a shared repository of
     %% the data. Use the most automated UI building and visual programming tools available.
-    
+
 Advantages
 Productivity is high and immediate for simple applications.
 Less capable developers can work this way with little training.
