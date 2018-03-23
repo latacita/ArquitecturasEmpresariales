@@ -82,66 +82,141 @@
 
 \begin{frame}[c]
     \frametitle{Capa de Dominio}
+    \begin{center}
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures00.eps}
+            }
+        }
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures01.eps}
+            }
+        }
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/introduccion/enterpriseArchitectures02.eps}
+            }
+        }
+    \end{center}
 \end{frame}
 
 \begin{frame}
     \frametitle{Responsabilidades de la Capa de Dominio}
-    %% Copiar y pegar del Tema 1
+	\begin{enumerate}[<+->]
+        \item Atender las peticiones de los clientes.
+        \item Asegurar que las peticiones se gestionan de acuerdo con las \alert{reglas de negocio} existentes.
+        \item Validar las peticiones de los clientes.
+        \item Controlar la seguridad de las operaciones.
+        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
+        \item Gestionar la comunicación con los servicios externos.
+        \item Asegurar la \alert{transacionalidad} de las operaciones.
+        \item Gestionar de manera adecuada casos excepcionales.
+        \item Ejecutar operaciones periódicas de mantenimiento.
+        \item Facilitar la interconexión con otros sistemas.
+        \item Facilitar la eficiencia del sistema.
+        \item Ayudar a mejorar la experiencia de usuario.
+	\end{enumerate}
 \end{frame}
 
 \section{Patrones para la Capa de Dominio}
 
 \subsection{Table Module}
 
-\begin{frame}
-    \framtitle{Antipatrón \emph{Smart UI}}
-    
-    %% Put all the business logic into the user interface. Chop the application into 
-    %% small functions and implement them as separate user interfaces, embedding 
-    %% the business rules into them. Use a relational database as a shared repository of 
-    %% the data. Use the most automated UI building and visual programming tools available.
-    
-Advantages
-Productivity is high and immediate for simple applications.
-Less capable developers can work this way with little training.
-Even deficiencies in requirements analysis can be overcome by releasing a prototype to users
-and then quickly changing the product to fit their requests.
-Applications are decoupled from each other, so that delivery schedules of small modules can
-be planned relatively accurately. Expanding the system with additional, simple behavior can
-be easy.
-Relational databases work well and provide integration at the data level.
-4GL tools work well.
-When applications are handed off, maintenance programmers will be able to quickly redo
-portions they can't figure out, because the effects of the changes should be localized to each
-particular UI.
-Disadvantages
-Integration of applications is difficult except through the database.
-There is no reuse of behavior and no abstraction of the business problem. Business rules
-have to be duplicated in each operation to which they apply.
-Rapid prototyping and iteration reach a natural limit because the lack of abstraction limits
-refactoring options.
-Complexity buries you quickly, so the growth path is strictly toward additional simple
-applications. There is no graceful path to richer behavior.
-\end{frame}
+%\begin{frame}
+%    \framtitle{Antipatrón \emph{Smart UI}}
+%
+%    %% Put all the business logic into the user interface. Chop the application into
+%    %% small functions and implement them as separate user interfaces, embedding
+%    %% the business rules into them. Use a relational database as a shared repository of
+%    %% the data. Use the most automated UI building and visual programming tools available.
+%
+%Advantages
+%Productivity is high and immediate for simple applications.
+%Less capable developers can work this way with little training.
+%Even deficiencies in requirements analysis can be overcome by releasing a prototype to users
+%and then quickly changing the product to fit their requests.
+%Applications are decoupled from each other, so that delivery schedules of small modules can
+%be planned relatively accurately. Expanding the system with additional, simple behavior can
+%be easy.
+%Relational databases work well and provide integration at the data level.
+%4GL tools work well.
+%When applications are handed off, maintenance programmers will be able to quickly redo
+%portions they can't figure out, because the effects of the changes should be localized to each
+%particular UI.
+%Disadvantages
+%Integration of applications is difficult except through the database.
+%There is no reuse of behavior and no abstraction of the business problem. Business rules
+%have to be duplicated in each operation to which they apply.
+%Rapid prototyping and iteration reach a natural limit because the lack of abstraction limits
+%refactoring options.
+%Complexity buries you quickly, so the growth path is strictly toward additional simple
+%applications. There is no graceful path to richer behavior.
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Table Module (deprecated)}
+%    \begin{block}{Problema}
+%        \begin{enumerate}{}
+%        \end{enumerate}
+%    \end{block}
+%\end{frame}
 
 \begin{frame}
-    \frametitle{Table Module (deprecated)}
-    \begin{block}{Problema}
-        \begin{enumerate}{}
-        \end{enumerate}
-    \end{block}
+    \frametitle{Table Module}
+     TODO
 \end{frame}
 
 \subsection{Transaction Script}
 
 \begin{frame}
     \frametitle{Transaction Script}
-    %% Copiar y pegar del Tema 1
+     TODO   
 \end{frame}
 
 \subsection{Domain Model + Service Layer}
 
+\begin{frame}
+    \frametitle{Domain Model}
+     TODO
+\end{frame}
+
+\begin{frame}
+    \frametitle{Service Layer}
+     TODO
+\end{frame}
+
 \section{Domain-Driven Design}
+
+\subsection{Introducción}
+
+\begin{frame}[c]
+    \frametitle{Domain-Driven Design}
+     \begin{block}{Domain-Driven Design}
+     \alert{Domain-Driven Design} es una técnica de desarrollo sw donde todo el diseño de un producto sw gira en torno a un elemento central y fundamental que es el \emph{modelo de dominio}, el cual captura el dominio y la lógica de negocio de dicho producto sw. 
+     \end{block}
+      %% Contar la historia de Monty Python
+      %% Contar la historia del PCB
+      
+      %% Ventajas e Incovenientes: https://goo.gl/gPx5DE
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Domain-Driven Design}
+     \begin{block}{Ubiquitous Language}
+     TODO
+     \end{block}
+     %% Leer Capítulo 3 de Evans
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Domain-Driven Design}
+     \begin{block}{Entities}
+     TODO
+     \end{block}
+     %% Leer Capítulo 3 de Evans
+\end{frame}
+
 
 \section{Sumario y Conclusiones}
 
