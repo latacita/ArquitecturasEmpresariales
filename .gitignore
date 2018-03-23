@@ -8,3 +8,6 @@
 *.synctex
 *.toc
 *.prj
+*.sav
+*.dvi
+*.blg
