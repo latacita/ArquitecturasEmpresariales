@@ -40,14 +40,14 @@
     \end{center}
 \end{frame}
 
-\section{IntroducciÃ³n}
+\section{Introducción}
 
-\subsection{Objetivos y BibliografÃ­a}
+\subsection{Objetivos y Bibliografía}
 
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Comprender en profundidad cuÃ¡les son las responsabilidades de la capa de persistencia.
+         \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
          \item Comprender el funcionamiento de los puentes de persistencia de objetos.
          \item Conocer los patrones de persistencia estructurales.
          \item Conocer los patrones de acceso a datos.
@@ -58,10 +58,10 @@
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{BibliografÃ­a}
+    \frametitle{Bibliografía}
     \begin{thebibliography}{1}
 
-        \bibitem[Fowler, 2002]{Fowler2002x}
+        \bibitem[Fowler, 2002]{Fowler2002}
         Fowler, M. (2002).
         \newblock {\em {Patterns of Enterprise Application Architecture}}.
         \newblock Addison-Wesley.
@@ -69,13 +69,15 @@
         \bibitem[Esposito and Saltarello, 2014]{Esposito2014}
         Esposito, D. y Saltarello, A. (2014).
         \newblock {\em {Microsoft .NET - Architecting Applications for the
-          Enterprise}}. 2Âª Ed..
+          Enterprise}}. 2ª Ed..
         \newblock Microsoft Press
 
         \bibitem[Bauer, 2015]{Bauer2015}
         Bauer, C., King. G. y Gregory G. (2015).
-        \newblock {\em {Java Persistence with Hibernate}}. 2Âª Ed.
+        \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
         \newblock Manning
+
+        %% JPA
 
         %% Spring Data
 
@@ -102,19 +104,46 @@
 \begin{frame}[c]
 	\frametitle{Responsabilidades de la Capa de Persistencia}
 	\begin{enumerate}[<+->]
-        \item Almacenar los datos de manera no volÃ¡til.
-        \item Recuperar datos del almacÃ©n persistente,
+        \item Almacenar los datos de manera no volátil.
+        \item Recuperar datos del almacén persistente,
         \item Asegurar la disponibilidad de los datos.
         \item Controlar la integridad de los datos.
         \item Asegurar un acceso eficiente a los datos.
 	\end{enumerate}
 \end{frame}
 
+\begin{frame}[c]
+    \frametitle{Tecnologías de Persistencia}
+    \begin{description}
+        \item[Relacional] Madurez, robustez y propiedades ACID.
+        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
+        \item[XML/JSON] Simplicidad.
+    \end{description}
+\end{frame}
+
+
 \section{Puentes de Persistencia de Objetos}
+
+\begin{frame}[c]
+    \frametitle{Impedancia Objeto - Persistencia}
+    \begin{block}{Impedancia Objetual}
+    La \emph{impedancia objetual} se refiere al desacoplamiento que puede existir en los conceptos del paradigma orientado a objetos y el paradigma utilizado por el almacén de persistencia.
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Impedancia Objeto - Relacional}
+     %% Atributos multivaluados -
+     %% Asociaciones            -
+     %% Navegabilidad           -
+     %% Herencia                -
+     %% Evitar joins            -
+\end{frame}
+
 
 \begin{frame}
     \frametitle{Puentes de Persistencia de Objetos}
-    %% Imagen con el esquema de pesistencia
+    %% Imagen con el esquema de persistencia
 \end{frame}
 
 \section{Patrones Estructurales}
