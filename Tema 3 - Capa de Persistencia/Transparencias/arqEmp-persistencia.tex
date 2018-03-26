@@ -4,12 +4,12 @@
 
 \title[Capa de Persistencia]{Capa de Persistencia}
 
-\author[P. Sánchez]{\alert{Pablo Sánchez}}
+\author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
 \institute[IIE]{
-		   Dpto. Ingeniería Informática y Electrónica \\
+		   Dpto. Ingenier{\'i}a Inform{\'a}tica y Electr{\'o}nica \\
 		   Universidad de Cantabria \\
-		   Santander (Cantabria, España) \\
+		   Santander (Cantabria, Espa{\~n}a) \\
 		   \texttt{p.sanchez@unican.es}
 }
 
@@ -34,31 +34,31 @@
     \begin{center}
         Todo el material contenido en este documento no constituye en modo alguno una obra de referencia o apuntes oficiales mediante el cual se puedan preparar las pruebas evaluables necesarias para superar la asignatura. \ \\
         \ \\
-        Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisión del contenido sobre el cual versarán las mencionadas pruebas evaluables.  \ \\
+        Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisi{\'o}n del contenido sobre el cual versar{\'a}n las mencionadas pruebas evaluables.  \ \\
         \ \\
-        Dicho de forma más clara, \alert{estas transparencias no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura.}
+        Dicho de forma m{\'a}s clara, \alert{estas transparencias no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura.}
     \end{center}
 \end{frame}
 
-\section{Introducción}
+\section{IntroducciÃ³n}
 
-\subsection{Objetivos y Bibliografía}
+\subsection{Objetivos y BibliografÃ­a}
 
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
+         \item Comprender en profundidad cuÃ¡les son las responsabilidades de la capa de persistencia.
          \item Comprender el funcionamiento de los puentes de persistencia de objetos.
          \item Conocer los patrones de persistencia estructurales.
-         \item Conocer los patrones de acceso a datos. 
+         \item Conocer los patrones de acceso a datos.
          \item Conocer los patrones de control de la concurrencia.
-         \item Ser capaz de utilizar JPA para generar esquemas relacionales. 
-         \item Ser capaz de utilizar repositorios para acceder a datos persistentes. 
+         \item Ser capaz de utilizar JPA para generar esquemas relacionales.
+         \item Ser capaz de utilizar repositorios para acceder a datos persistentes.
     \end{enumerate}
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Bibliografía}
+    \frametitle{BibliografÃ­a}
     \begin{thebibliography}{1}
 
         \bibitem[Fowler, 2002]{Fowler2002x}
@@ -67,29 +67,47 @@
         \newblock Addison-Wesley.
 
         \bibitem[Esposito and Saltarello, 2014]{Esposito2014}
-        Esposito, D. and Saltarello, A. (2014).
+        Esposito, D. y Saltarello, A. (2014).
         \newblock {\em {Microsoft .NET - Architecting Applications for the
-          Enterprise}}. 2ª Ed..
+          Enterprise}}. 2Âª Ed..
         \newblock Microsoft Press
-        
-        %% Hibernate
-        
-        %% JPA 
-        
+
+        \bibitem[Bauer, 2015]{Bauer2015}
+        Bauer, C., King. G. y Gregory G. (2015).
+        \newblock {\em {Java Persistence with Hibernate}}. 2Âª Ed.
+        \newblock Manning
+
         %% Spring Data
 
     \end{thebibliography}
 \end{frame}
 
-\subsection{Contexto: Capa de Dominio}
+\subsection{Contexto: Capa de Persistencia}
 
 \begin{frame}[c]
     \frametitle{Capa de Persistencia}
+    \begin{center}
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+            }
+        }
+        \only<1|handout:0>{
+            \rput[lt](0,0){
+                \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+            }
+    \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Responsabilidades de la Capa de Persistencia}
-    %% Copiar y pegar del Tema 1
+\begin{frame}[c]
+	\frametitle{Responsabilidades de la Capa de Persistencia}
+	\begin{enumerate}[<+->]
+        \item Almacenar los datos de manera no volÃ¡til.
+        \item Recuperar datos del almacÃ©n persistente,
+        \item Asegurar la disponibilidad de los datos.
+        \item Controlar la integridad de los datos.
+        \item Asegurar un acceso eficiente a los datos.
+	\end{enumerate}
 \end{frame}
 
 \section{Puentes de Persistencia de Objetos}
@@ -103,7 +121,7 @@
 
 \section{Patrones de Acceso a Datos}
 
-%% DAO 
+%% DAO
 
 %% Repository
 
