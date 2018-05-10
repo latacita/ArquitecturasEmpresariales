@@ -245,11 +245,11 @@
     \begin{block}{Problema}
         \begin{enumerate}
             \item ¿Cómo transformo una clase a relacional?
-        \end{enumerate}    
+        \end{enumerate}
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos: 
+            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos:
             \begin{enumerate}
                 \item<3-> Crear una tabla con el mismo nombre de la clase.
                 \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
@@ -284,11 +284,11 @@
     \uncover<2->{
         \begin{block}{Solución}
             \begin{enumerate}
-                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase. 
+                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase.
                 \item<3-> Añadir un nuevo atributo que ejerza de clave primaria.
             \end{enumerate}
         \end{block}
-    }    
+    }
 \end{frame}
 
 \subsection{Transformación de Asociaciones}
@@ -297,13 +297,48 @@
 
 \subsubsection{Foreign Key Mapping}
 
-\subsection{Transformación de Herencias}
-
 \subsubsection{Association Table Mapping}
+
+\subsection{Transformación de Herencias}
 
 \subsubsection{Single Table Inheritance}
 
+\begin{frame}[c]
+    \frametitle{Single Table Inheritance}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item ¿Cómo implemento una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
+                \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
+                \item<3-> Transforma la clase resultante a una tabla.
+                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de una tabla, los atributos que no correspondan a dicha instance simplemente se ignoran.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Single Table Inheritance}
+    \rput[lt](3.5,0){
+            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+    }
+%    \only<2->{
+%%        \rput[lt](3,-4){
+%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+%%        }
+%    }
+\end{frame}
+
+\subsubsection{Concrete Table Inheritance}
+
 \subsubsection{Class Table Inheritance}
+
+\subsubsection{Comparación de Transformación de Herencias}
 
 \section{Patrones de Acceso a Datos}
 
@@ -333,15 +368,35 @@
 
 \subsection{Optimistic Lock}
 
-\section{Java Persistence API}
+\section{Java Persistence API y Spring Data}
 
-\subsection{Elementos Estructurales}
+\subsection{Esquema}
 
-\subsection{Validación}
+\subsection{Anotaciones JPA}
 
-\subsection{Comportamiento}
+\begin{frame}[c]
+    \frametitle{Anotaciones JPA}
+    \begin{description}
+        \item[@Entity] 
+        \item[@Embeddable]
+        \item[@Id]
+        \item[@GeneratedValue]
+        \item[@Embedded]
+        \item[@OneToOne]
+        \item[@OneToMany]
+        \item[@ManyToOne]
+        \item[@ManyToMany]
+        \item[mappeddBy]
+        \item[@Inheritance(strategy=)]                 
+    \end{description}
+\end{frame}
 
-\section{Spring Data}
+
+% \subsection{Validación en JPA}
+
+\subsection{Clases JPA}
+
+\subsection{Spring Data}
 
 \section{Sumario y Conclusiones}
 
