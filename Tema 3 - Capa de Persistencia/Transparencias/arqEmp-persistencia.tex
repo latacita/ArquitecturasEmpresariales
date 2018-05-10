@@ -261,12 +261,12 @@
 
 \begin{frame}
     \frametitle{Class to Table}
-    \rput[lt](3,0){
-            \includegraphics[width=0.60\linewidth]{images/structure/class2Table00.eps}
+    \rput[lt](3.5,0){
+            \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
     }
     \only<2->{
-        \rput[lt](2.5,-4.5){
-                \includegraphics[width=0.60\linewidth]{images/structure/class2Table01.eps}
+        \rput[lt](3,-4){
+                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
         }
     }
 \end{frame}
@@ -278,57 +278,17 @@
     \frametitle{Identity Field}
     \begin{block}{Problema}
         \begin{enumerate}
-            \item ¿Cómo determino la clave primaria de cada objeto que necesito guardar en la base de datos relacional?
+            \item ¿Cómo obtengo una clave primaria para cada objeto que necesito guardar en la base de datos relacional?
         \end{enumerate}
     \end{block}
     \uncover<2->{
-        \begin{block}{Característica de una Buena Clave}
+        \begin{block}{Solución}
             \begin{enumerate}
-                \item<2-> Única para cada objeto.
-                \item<3-> Inmutable (o cuasi inmutable).
-                \item<4-> Fácil de comparar.
+                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase.
+                \item<3-> Añadir un nuevo atributo que ejerza de clave primaria.
             \end{enumerate}
         \end{block}
     }
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Identity Field - Claves en el Modelo Relacional}
-    \begin{center}
-        \includegraphics[width=0.60\linewidth]{images/structure/identityField00.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Identity Field - Solución}
-    \begin{block}{Solución}
-        Dada una clase $A$:
-        \begin{enumerate}[<+->]
-            \item<2-> Utilizar un atributo o conjunto de atributos ya existentes en esa clase $A$ que ya sean clave o puedan desempeñar adecuadamente el papel de clave.
-            \item<3-> Añadir un nuevo atributo a la clase $A$ que ejerza el papel de clave primaria para su almacenamiento en una base de datos relacional. En este caso, dicho atributo no se deberá utilizar más allá de la capa de persistencia.
-        \end{enumerate}
-    \end{block}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Identity Field - Ejemplo}
-    \begin{center}
-        %% Clase viaje con nuevo atributo introducido.
-        \includegraphics[width=0.60\linewidth]{images/structure/identityField01.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Identity Field - Estrategias de Generación de Claves}
-    \begin{enumerate}
-        \item<1-> Autogenerada por el gestor de bases de datos.
-            \begin{itemize}
-                \item<2-> Necesitas salvar el objeto para conocer su clave.
-                \item<3-> Limita ciertas optimizaciones a nivel de ORM.
-            \end{itemize}
-        \item<2-> Autogenerada por la aplicación.
-        \item<3->
-    \end{enumerate}
 \end{frame}
 
 \subsection{Transformación de Asociaciones}
@@ -337,53 +297,54 @@
 
 \subsubsection{Foreign Key Mapping}
 
-\subsection{Transformación de Herencias}
-
 \subsubsection{Association Table Mapping}
+
+\subsection{Transformación de Herencias}
 
 \subsubsection{Single Table Inheritance}
 
-\subsubsection{Class Table Inheritance}
-
-\section{Patrones de Acceso a Datos}
-
-\subsubsection{Data Access Object}
-
 \begin{frame}[c]
-    \frametitle{Data Access Objects - Data Mappers}
+    \frametitle{Single Table Inheritance}
     \begin{block}{Problema}
-        Hacer que los objetos de un modelo de dominio puedan ser almacenados en, y recuperados de, un elemento persistente, \uncover<2->{manteniendo a la vez dichos objetos independientes de la tecnología concreta utilizada para su persistencia;}
-        \uncover<3->{de manera que los cambios que se produzcan en dicho almacén persistente no afecten al modelo de dominio}.
+        \begin{enumerate}
+            \item ¿Cómo implemento una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
     \end{block}
-    \uncover<4->{
+    \uncover<2->{
         \begin{block}{Solución}
-            Por cada clase del modelo del dominio, crear una clase, denominada \emph{Data Access Object (DAO)} o \emph{Data Mapper}, que se encargue de gestionar el almacenamiento y recuperación de los objetos de dicha clase mediante una tecnología de persistencia concreta.
+            \begin{enumerate}
+                \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
+                \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
+                \item<3-> Transforma la clase resultante a una tabla.
+                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de una tabla, los atributos que no correspondan a dicha instance simplemente se ignoran.
+            \end{enumerate}
         \end{block}
     }
 \end{frame}
 
-\begin{frame}[c]
-    \frametitle{Data Mapper - Ejemplo}
-    \begin{center}
-        TODO
-        %% Ejemplo de clase con su correspondiente Data Mapper
-        %% Enlace a repositorio de GitHub conteniendo un ejemplo de Data Mapper
-        %% \includegraphics[width=0.60\linewidth]{images/structure/identityField01.eps}
-    \end{center}
+\begin{frame}
+    \frametitle{Single Table Inheritance}
+    \rput[lt](3.5,0){
+            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+    }
+%    \only<2->{
+%%        \rput[lt](3,-4){
+%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+%%        }
+%    }
 \end{frame}
 
-%% Complicaciones:
-%% * Actualización de modificaciones.
-%% * Actualización de colecciones.
-%% * Cómo cargar un objeto con sus relaciones sin traerme todo la base de datos a memoria.
+\subsubsection{Concrete Table Inheritance}
 
-%% Ventajas:
-%%
-%% * Aisla el modelo de dominio de la tecnología de persistencia.
-%% * Permite intercambiar capas de persistencia para testing.
-%% * Permite hybrid polystores.
-%% * Permite optimizaciones en persistencia sin modificar dominio.
-%% *
+\subsubsection{Class Table Inheritance}
+
+\subsubsection{Comparación de Transformación de Herencias}
+
+\section{Patrones de Acceso a Datos}
+
+\subsection{Objetos de Acceso a Datos}
+
+\subsubsection{Data Access Object}
 
 \subsubsection{Inheritance Mappers}
 
@@ -391,40 +352,15 @@
 
 \subsubsection{Repositories}
 
-\begin{frame}[c]
-    \frametitle{Repository}
-    \begin{block}{Problema}
-        Cómo manipular colecciones de objetos como si estuviesen alojados en memoria, de manera independiente a la tecnología de persistencia utilizada,
-    \end{block}
-    \uncover<4->{
-        \begin{block}{Solución}
-            Por cada colección de objetos de la cual haya que extraer un cierto subconjunto, crear
-        \end{block}
-    }
-\end{frame}
-
-
 \subsection{Patrones Auxiliares}
 
 \subsubsection{Lazy Load}
 
+\subsubsection{Unit of Work}
+
 \subsubsection{Identity Field}
 
 \subsubsection{Query Object}
-
-\subsubsection{Unit of Work}
-
-\begin{frame}[c]
-    \frametitle{Unit of Work}
-    \begin{block}{Problema}
-        Cómo manipular colecciones de objetos como si estuviesen alojados en memoria, de manera independiente a la tecnología de persistencia utilizada,
-    \end{block}
-    \uncover<4->{
-        \begin{block}{Solución}
-            Por cada colección de objetos de la cual haya que extraer un cierto subconjunto, crear
-        \end{block}
-    }
-\end{frame}
 
 \section{Patrones de Control de la Concurrencia}
 
@@ -432,17 +368,27 @@
 
 \subsection{Optimistic Lock}
 
-\section{Java Persistence API}
+\section{Java Persistence API y Spring Data}
 
-\subsection{Elementos Estructurales}
+\subsection{Esquema}
 
-\subsection{Validación}
-
-\subsection{Comportamiento}
+\subsection{Anotaciones JPA}
 
 \begin{frame}[c]
-    \frametitle{Entity Manager}
-    %% Unidad de Trabajo en JPA
+    \frametitle{Anotaciones JPA}
+    \begin{description}
+        \item[@Entity]
+        \item[@Embeddable]
+        \item[@Id]
+        \item[@GeneratedValue]
+        \item[@Embedded]
+        \item[@OneToOne]
+        \item[@OneToMany]
+        \item[@ManyToOne]
+        \item[@ManyToMany]
+        \item[mappeddBy]
+        \item[@Inheritance(strategy=)]
+    \end{description}
 \end{frame}
 
 \begin{frame}[c]
@@ -452,15 +398,16 @@
     %% una entidad, normalmente un agregado
 \end{frame}
 
-
-
-
 \begin{frame}[c]
     \frametitle{Ciclo de Vida de una Entidad JPA}
     %% Detecta transacciones de usuario.
 \end{frame}
 
-\section{Spring Data}
+% \subsection{Validación en JPA}
+
+\subsection{Clases JPA}
+
+\subsection{Spring Data}
 
 \section{Sumario y Conclusiones}
 
