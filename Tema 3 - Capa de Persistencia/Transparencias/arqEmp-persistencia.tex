@@ -245,11 +245,11 @@
     \begin{block}{Problema}
         \begin{enumerate}
             \item ¿Cómo transformo una clase a relacional?
-        \end{enumerate}    
+        \end{enumerate}
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos: 
+            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos:
             \begin{enumerate}
                 \item<3-> Crear una tabla con el mismo nombre de la clase.
                 \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
@@ -261,12 +261,12 @@
 
 \begin{frame}
     \frametitle{Class to Table}
-    \rput[lt](3.5,0){
-            \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
+    \rput[lt](3,0){
+            \includegraphics[width=0.60\linewidth]{images/structure/class2Table00.eps}
     }
     \only<2->{
-        \rput[lt](3,-4){
-                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+        \rput[lt](2.5,-4.5){
+                \includegraphics[width=0.60\linewidth]{images/structure/class2Table01.eps}
         }
     }
 \end{frame}
@@ -278,17 +278,57 @@
     \frametitle{Identity Field}
     \begin{block}{Problema}
         \begin{enumerate}
-            \item ¿Cómo obtengo una clave primaria para cada objeto que necesito guardar en la base de datos relacional?
+            \item ¿Cómo determino la clave primaria de cada objeto que necesito guardar en la base de datos relacional?
         \end{enumerate}
     \end{block}
     \uncover<2->{
-        \begin{block}{Solución}
+        \begin{block}{Característica de una Buena Clave}
             \begin{enumerate}
-                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase. 
-                \item<3-> Añadir un nuevo atributo que ejerza de clave primaria.
+                \item<2-> Única para cada objeto.
+                \item<3-> Inmutable (o cuasi inmutable).
+                \item<4-> Fácil de comparar.
             \end{enumerate}
         \end{block}
-    }    
+    }
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identity Field - Claves en el Modelo Relacional}
+    \begin{center}
+        \includegraphics[width=0.60\linewidth]{images/structure/identityField00.eps}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identity Field - Solución}
+    \begin{block}{Solución}
+        Dada una clase $A$:
+        \begin{enumerate}[<+->]
+            \item<2-> Utilizar un atributo o conjunto de atributos ya existentes en esa clase $A$ que ya sean clave o puedan desempeñar adecuadamente el papel de clave.
+            \item<3-> Añadir un nuevo atributo a la clase $A$ que ejerza el papel de clave primaria para su almacenamiento en una base de datos relacional. En este caso, dicho atributo no se deberá utilizar más allá de la capa de persistencia.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identity Field - Ejemplo}
+    \begin{center}
+        %% Clase viaje con nuevo atributo introducido.
+        \includegraphics[width=0.60\linewidth]{images/structure/identityField01.eps}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identity Field - Estrategias de Generación de Claves}
+    \begin{enumerate}
+        \item<1-> Autogenerada por el gestor de bases de datos.
+            \begin{itemize}
+                \item<2-> Necesitas salvar el objeto para conocer su clave.
+                \item<3-> Limita ciertas optimizaciones a nivel de ORM.
+            \end{itemize}
+        \item<2-> Autogenerada por la aplicación.
+        \item<3->
+    \end{enumerate}
 \end{frame}
 
 \subsection{Transformación de Asociaciones}
@@ -307,9 +347,43 @@
 
 \section{Patrones de Acceso a Datos}
 
-\subsection{Objetos de Acceso a Datos}
-
 \subsubsection{Data Access Object}
+
+\begin{frame}[c]
+    \frametitle{Data Access Objects - Data Mappers}
+    \begin{block}{Problema}
+        Hacer que los objetos de un modelo de dominio puedan ser almacenados en, y recuperados de, un elemento persistente, \uncover<2->{manteniendo a la vez dichos objetos independientes de la tecnología concreta utilizada para su persistencia;}
+        \uncover<3->{de manera que los cambios que se produzcan en dicho almacén persistente no afecten al modelo de dominio}.
+    \end{block}
+    \uncover<4->{
+        \begin{block}{Solución}
+            Por cada clase del modelo del dominio, crear una clase, denominada \emph{Data Access Object (DAO)} o \emph{Data Mapper}, que se encargue de gestionar el almacenamiento y recuperación de los objetos de dicha clase mediante una tecnología de persistencia concreta.
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Data Mapper - Ejemplo}
+    \begin{center}
+        TODO
+        %% Ejemplo de clase con su correspondiente Data Mapper
+        %% Enlace a repositorio de GitHub conteniendo un ejemplo de Data Mapper
+        %% \includegraphics[width=0.60\linewidth]{images/structure/identityField01.eps}
+    \end{center}
+\end{frame}
+
+%% Complicaciones:
+%% * Actualización de modificaciones.
+%% * Actualización de colecciones.
+%% * Cómo cargar un objeto con sus relaciones sin traerme todo la base de datos a memoria.
+
+%% Ventajas:
+%%
+%% * Aisla el modelo de dominio de la tecnología de persistencia.
+%% * Permite intercambiar capas de persistencia para testing.
+%% * Permite hybrid polystores.
+%% * Permite optimizaciones en persistencia sin modificar dominio.
+%% *
 
 \subsubsection{Inheritance Mappers}
 
@@ -317,15 +391,40 @@
 
 \subsubsection{Repositories}
 
+\begin{frame}[c]
+    \frametitle{Repository}
+    \begin{block}{Problema}
+        Cómo manipular colecciones de objetos como si estuviesen alojados en memoria, de manera independiente a la tecnología de persistencia utilizada,
+    \end{block}
+    \uncover<4->{
+        \begin{block}{Solución}
+            Por cada colección de objetos de la cual haya que extraer un cierto subconjunto, crear
+        \end{block}
+    }
+\end{frame}
+
+
 \subsection{Patrones Auxiliares}
 
 \subsubsection{Lazy Load}
 
-\subsubsection{Unit of Work}
-
 \subsubsection{Identity Field}
 
 \subsubsection{Query Object}
+
+\subsubsection{Unit of Work}
+
+\begin{frame}[c]
+    \frametitle{Unit of Work}
+    \begin{block}{Problema}
+        Cómo manipular colecciones de objetos como si estuviesen alojados en memoria, de manera independiente a la tecnología de persistencia utilizada,
+    \end{block}
+    \uncover<4->{
+        \begin{block}{Solución}
+            Por cada colección de objetos de la cual haya que extraer un cierto subconjunto, crear
+        \end{block}
+    }
+\end{frame}
 
 \section{Patrones de Control de la Concurrencia}
 
@@ -340,6 +439,23 @@
 \subsection{Validación}
 
 \subsection{Comportamiento}
+
+\begin{frame}[c]
+    \frametitle{Entity Manager}
+    %% Unidad de Trabajo en JPA
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Ciclo de Vida de una Entidad JPA}
+    %% Diagrama de las actividades
+    %% Se puede llegar a través de agregados, es decir, como referencia desde
+    %% una entidad, normalmente un agregado  
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Ciclo de Vida de una Entidad JPA}
+    %% Detecta transacciones de usuario.
+\end{frame}
 
 \section{Spring Data}
 
