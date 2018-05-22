@@ -107,7 +107,14 @@
 \begin{frame}[c]
 	\frametitle{Responsabilidades de la Capa de Presentación}
 	\begin{enumerate}[<+->]
-        \item TODO
+        \item Permitir a los usuarios interactuar con el sistema.
+        \item Introducir datos en el sistema (validándolos previamente).
+        \item Visualizar los datos de manera amigable al usuario.
+        \item Facilitar operaciones simples (filtros y redistribuciones) sobre los datos.
+        \item Facilitar la navegación por el sistema.
+        \item Mejorar la experiencia de usuario (UX). %% Hellmans
+        \item Mantener la comunicación con el servidor.
+        \item Gestionar situaciones excepcionales.
 	\end{enumerate}
 \end{frame}
 
@@ -124,9 +131,15 @@
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{HTML - Head y Body}
+    \frametitle{Head y Body}
     %% Definición
 \end{frame}
+
+\begin{frame}[c]
+    \frametitle{Directivas Cabecera}
+    %% Definición
+\end{frame}
+
 
 \begin{frame}[c]
     \frametitle{HTML - Etiquetas Básicas}
@@ -144,7 +157,9 @@
     \begin{description}
         \item[em]
         \item[strong]
-        \item[tt] *
+        \item[mark]
+        \item[sub]
+        \item[sup]
     \end{description}
 \end{frame}
 
@@ -242,10 +257,11 @@
     \frametitle{CSS - Modelo de Cajas}
     %% Imagen
     %% https://www.w3schools.com/css/css_boxmodel.asp
+    %% Box-sizing
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{CSS - Reglas}
+    \frametitle{CSS - Esquema de una propiedad}
     %% font-family, size, decoration, color
     %% background-color, background-image,
     %% border (style, width, color, collapse),
@@ -265,6 +281,12 @@
 \end{frame}
 
 \begin{frame}[c]
+    \frametitle{CSS - Reglas}
+    %% Selector, propueddes
+\end{frame}
+
+
+\begin{frame}[c]
     \frametitle{CSS - Selectores}
     %% Elemento
     %% Clase
@@ -274,42 +296,36 @@
 
 \begin{frame}[c]
     \frametitle{CSS - Pseudoselectores}
-    %% Elemento
-    %% Clase
-    %% Id
-    %% Anidamiento
+    %% Enlaces (link, visited, hover, active)
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{CSS - Pseudoselectores}
-    %% Elemento
-    %% Clase
-    %% Id
-    %% Anidamiento
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{CSS - Position}
-    %% Elemento
-    %% Clase
-    %% Id
-    %% Anidamiento
+    %% First-child, first-letter, last-child.
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{CSS - Display}
-    %% Elemento
-    %% Clase
-    %% Id
-    %% Anidamiento
+    %% Inline
+    %% Block
+    %% None
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{CSS - Float}
-    %% Elemento
-    %% Clase
-    %% Id
-    %% Anidamiento
+    %% Left
+    %% Right
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{CSS - Overflow}
+    %% auto
+    %%
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{CSS - Position}
+    %%
 \end{frame}
 
 \begin{frame}[c]
@@ -327,7 +343,12 @@
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Eventos}
+    \frametitle{HTML DOM}
+    %% Definición
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Eventos HTML}
     %% Definición
 \end{frame}
 
@@ -365,8 +386,16 @@
 
 \begin{frame}[c]
     \frametitle{Ejemplo de Bootstrap}
-    %% Inline
-    %% Externos
+    %% Alerts
+    %% Badges
+    %% Tables
+\end{frame}
+
+\section{Nociones Básicas de Diseño Web}
+
+\begin{frame}[c]
+    \frametitle{Nociones Básicas de Diseño Web}
+    %% ¿¿??
 \end{frame}
 
 \section{AJAX}
@@ -377,7 +406,7 @@
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{AJAX - Ejemplo}
+    \frametitle{XML HttpRequest}
     %% Inline
     %% Externos
 \end{frame}
@@ -439,8 +468,19 @@
 \section{CORS}
 
 \begin{frame}[c]
-    \frametitle{CORS}
-    %% Definición
+    \frametitle{Peticiones de Origen Cruzado}
+    \begin{block}{(Cross-Origin Resource Request}
+         Una \alert{\emph{Cross-Origin Resource Request}} es una petición HTTP a un dominio, protocolo o puerto distintos al del recurso desde el que se origina la petición.
+    \end{block}
+    %% Esquema
+\end{frame}    
+
+\begin{frame}[c]
+    \frametitle{Peticiones de Origen Cruzado}
+    \begin{block}{(Cross-Origin Resource Sharing (CORS)}
+        \alert{\emph{Cross-Origin Resource Sharing (CORS)}} es un mecanismo por el que 
+        se indica a un cliente, que ha solicitado un recurso a través del protocolo HTTP, que para procesar dicho recurso podría ser necesario realizar \emph{peticiones de dominio cruzado}, indicando
+    \end{block}
 \end{frame}
 
 \begin{frame}[c]
