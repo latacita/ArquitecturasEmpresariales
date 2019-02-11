@@ -1,79 +1,15 @@
-%% \documentclass[handout,a4paper,slidestop,xcolor=pst,dvips,blue]{beamer}
 \documentclass[a4paper,t,xcolor=pst,dvips,colortheme]{beamer}
 
+\input{slidesHeader.tex}
 
-\newcommand{\imp}[1]{{\small{\sf #1}}}
+\title[Aplicaciones Empresariales]{Tecnolog√≠as para el Desarrollo de Aplicaciones Empresariales sobre Internet}
 
-\usepackage{beamerthemesplit}
-\usepackage[latin1]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{graphicx}
-\usepackage{pstricks} % PSTricks package
-\usepackage{setspace}
-\usepackage{multirow}
-\usepackage{listings}
-\usepackage{pgfpages}
-\usepackage{etoolbox}
-
-\makeatletter
-\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
-\makeatother
-
-\setbeamercovered{dynamic}
-\setcounter{tocdepth}{2}
-\setbeamercolor{frametitle}{fg=black,bg=white}
-\setbeamercolor{section in toc shaded}{fg=black}
-\setbeamercolor{section in toc}{fg=red}
-\setbeamercolor{subsection in toc shaded}{fg=black}
-\setbeamercolor{subsection in toc}{fg=red}
-\setbeamerfont{section in toc}{size=\small}
-\setbeamerfont{subsection in toc}{size=\small}
-\setbeamertemplate{section in toc shaded}[default][99]
-\setbeamertemplate{subsection in toc shaded}[default][99]
-
-\setbeamertemplate{frametitle}{
-	\begin{centering}
-		\insertframetitle
-		\par
-	\end{centering}
-}
-
-\AtBeginSection[]
-{\begin{frame}[c]
-  \frametitle{Õndice}
-	\tableofcontents[currentsection,
-        sectionstyle=show/shaded,
-        subsectionstyle=hide]
-\end{frame}}
-
-\AtBeginSubsection[]
-{\begin{frame}[c]
-	\frametitle{Õndice}
-	\tableofcontents[
-  		currentsection,
-  		sectionstyle=shaded/shaded,
-  		currentsubsection,
-  		subsectionstyle=show/shaded/hide
-		]
-\end{frame}}
-
-\setbeamertemplate{frametitle}{
-	\begin{centering}
-		\insertframetitle
-		\par
-	\end{centering}
-}
-
-\usetheme[secheader]{Boadilla}
-
-\title[TecnologÌas Web]{TecnologÌas para el Desarrollo de Aplicaciones Empresariales sobre Internet}
-
-\author[Pablo S·nchez]{\alert{Pablo S·nchez}}
+\author[Pablo S√°nchez]{\alert{Pablo S√°nchez}}
 
 \institute[I2E]{
 		   Dpto. Ingenier{\'i}a Inform{\'a}tica y Electr{\'o}nica \\
 		   Universidad de Cantabria \\
-		   Santander (Cantabria, EspaÒa) \\
+		   Santander (Cantabria, Espa√±a) \\
 		   p.sanchez@unican.es
 }
 
@@ -93,7 +29,7 @@
 	\end{columns}
 \end{frame}
 
-\section{Õndice}
+\section{√çndice}
 
 \section{Datos Administrativos}
 
@@ -122,11 +58,11 @@
 	\begin{center}
 	\begin{tabular}{||l|c|c|c|c|c||}
 	\hline \hline
-				   & Lunes & Martes  & MiÈrcoles & Jueves  & Viernes \\ \hline \hline
-    15:30 - 16:30  &       &         &           &         &         \\ \hline
-    16:30 - 17:30  &       &         &           &         &         \\ \hline
-	17:30 - 18:30  &       & Aula 13 &           & Aula 13 &         \\ \hline
-    18:30 - 19:30  &       & Aula 13 &           & Aula 13 &         \\ \hline
+				   & Lunes & Martes  & Mi√©rcoles & Jueves  & Viernes \\ \hline \hline
+    15:30 - 16:30  &       & Aula X  &           &         &         \\ \hline
+    16:30 - 17:30  &       & Aula X  &           &         &         \\ \hline
+	17:30 - 18:30  &       &         &           & Aula X  &         \\ \hline
+    18:30 - 19:30  &       &         &           & Aula X  &         \\ \hline
     \hline
 	\end{tabular}
 	\end{center}
@@ -139,9 +75,9 @@
 	\begin{center}
 	\begin{tabular}{||l|c|c|c|c|c||}
 	\hline \hline
-				   & Lunes & Martes  & MiÈrcoles & Jueves  & Viernes \\ \hline \hline
-    15:30 - 16:30  &       & Aula 13 &           & Aula 13 &         \\ \hline
-    16:30 - 17:30  &       & Aula 13 &           & Aula 13 &         \\ \hline
+				   & Lunes & Martes  & Mi√©rcoles & Jueves  & Viernes \\ \hline \hline
+    15:30 - 16:30  &       & Aula X  &           & Aula X  &         \\ \hline
+    16:30 - 17:30  &       & Aula X  &           & Aula X  &         \\ \hline
 	17:30 - 18:30  &       &         &           &         &         \\ \hline
     18:30 - 19:30  &       &         &           &         &         \\ \hline
     \hline
@@ -149,17 +85,18 @@
 	\end{center}
 	\end{small}
 	\begin{itemize}
-		\item<2-> La asistencia a las clases teÛricas y pr·cticas no es obligatoria, \uncover<3->{\alert{pero si altamente recomendable e incluso necesaria}.}
+        \item<2-> Las clases de los Martes y Mi√©rcoles ser√°n indistintamente de teor√≠a o laboratorio, seg√∫n convenga al ritmo de la asignatura.
+		\item<3-> La asistencia a las clases te√≥ricas y pr√°cticas no es obligatoria, \uncover<4->{\alert{pero si altamente recomendable e incluso necesaria}.}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[c]
-	\frametitle{Horario TutorÌas}
+	\frametitle{Horario Tutor√≠as}
     \begin{itemize}[<+->]
-        \item A cualquier hora, preferentemente de maÒana.
+        \item A cualquier hora, preferentemente de ma√±ana.
         \item Disponible tardes de Martes y Jueves.
-        \item Si se quiere asegurar disponibilidad, avisar con antelaciÛn.
-        \item Disponible a travÈs de correo y \alert{moodle}.
+        \item Si se quiere asegurar disponibilidad, avisar con antelaci√≥n.
+        \item Disponible a trav√©s de correo y \alert{moodle}.
 	\end{itemize}
 \end{frame}
 
@@ -170,15 +107,16 @@
 \begin{frame}[c]
    \frametitle{Objetivos de la Asignatura}
    \begin{enumerate}[<+->]
-        \item Comprender el concepto de aplicaciÛn empresarial.
-        \item Comprender cÛmo se divide una aplicaciÛn empresarial en capas.
-        \item Saber aplicar patrones para el diseÒo de una capa de negocio.
-        \item Conocer, comprender y saber configurar patrones para la creaciÛn de puentes objeto-relacional.
-        \item Saber utilizar herramientas para la generaciÛn de puentes objeto-relacional.
-        \item Saber aplicar patrones para el diseÒo de una capa de servicio.
-        \item Saber especificar y diseÒar una capa de servicios REST.
-        \item Saber aplicar patrones para el diseÒo de una capa de presentaciÛn.
-        \item Ser capaz de utilizar servicios proporcionados por los servidores de aplicaciones.
+        \item Comprender el concepto de aplicaci√≥n empresarial.
+        \item Comprender c√≥mo se divide una aplicaci√≥n empresarial en capas.
+        \item Saber aplicar patrones para el dise√±o de una capa de negocio.
+        \item Saber aplicar los principios de \emph{Domain-Driven Design}.
+        \item Conocer, comprender y saber configurar patrones para la creaci√≥n de puentes objeto-relacional.
+        \item Saber utilizar herramientas para la generaci√≥n de puentes objeto-relacional.
+        \item Saber aplicar patrones para el dise√±o de una capa de servicio.
+        \item Saber especificar y dise√±ar una capa de servicios REST.
+        \item Saber aplicar patrones para el dise√±o de una capa de presentaci√≥n.
+        \item Ser capaz de utilizar los servicios proporcionados por los servidores de aplicaciones.
 	\end{enumerate}
 \end{frame}
 
@@ -186,14 +124,15 @@
    \frametitle{Resultados de Aprendizaje}
    \begin{enumerate}[<+->]
         \item Elaborar modelos de dominio utilizando POJOs.
+        \item Saber clasificar elementos de dominio conforme a la metodolog√≠a \emph{Domain-Driven Design}.
         \item Anotar un modelo de dominio para persistirlo utilizando JPA.
-        \item Usar Spring para la construcciÛn de capas de persistencia.
-        \item Definir una interfaz REST para la manipulaciÛn de modelos de dominio.
+        \item Usar Spring para la definici√≥n de repositorios de acceso a datos.
+        \item Especificar una interfaz REST para la manipulaci√≥n de modelos de dominio.
         \item Serializar objetos en formato JSON usando anotaciones.
-        \item Implementar una controlador HTTP usando Spring.
-        \item Implementar una capa de servicio usando POJOS.
+        \item Implementar una controlador REST usando Spring.
+        \item Implementar una capa de servicio usando Spring.
         \item Implementar una interfaz SPA utilizando AngularJS.
-        \item Ser capaz de utilizar tokens de autenticaciÛn.
+        \item Ser capaz de utilizar tokens de autenticaci√≥n.
         \item Utilizar los servicios de Spring para el control de accesos.
 	\end{enumerate}
 \end{frame}
@@ -207,11 +146,12 @@
 		\item<2-> Capa de Negocio: Entidades de Dominio.
 		\item<3-> Capa de Persistencia.
 		\item<4-> Capa de Negocio: Servicios.
-		\item<5-> Capa de PresentaciÛn.
+		\item<5-> Capa de Presentaci√≥n.
+        \item<6-> Seguridad: Control de Accesos.
 	\end{enumerate}
 \end{frame}
 
-\section{MetodologÌa}
+\section{Metodolog√≠a}
 
 \subsection{Plataforma}
 
@@ -219,8 +159,8 @@
 	\frametitle{Plataforma de Trabajo}
 	\begin{itemize}
 		\item<1-> La plataforma de trabajo de la asignatura es \emph{moodle}.
-		\item<2-> Todas las notificaciones y publicaciones se har·n a travÈs de \emph{moodle}.
-		\item<3-> \alert{Es obligaciÛn del alumno estar atento a las posibles notificaciones y avisos que se realicen a travÈs de moodle}.
+		\item<2-> Todas las notificaciones y publicaciones se har√°n a trav√©s de \emph{moodle}.
+		\item<3-> \alert{Es obligaci√≥n del alumno estar atento a las posibles notificaciones y avisos que se realicen a trav√©s de moodle}.
 	\end{itemize}
 \end{frame}
 
@@ -229,60 +169,63 @@
 \begin{frame}
 	\frametitle{Clases en Aula}
 	\begin{block}{Objetivo}
-        Entender los conocimientos teÛricos que constituyen la base de las habilidades y destrezas a adquirir al final de la asignatura.
+        Entender los conocimientos te√≥ricos que constituyen la base de las habilidades y destrezas a adquirir al final de la asignatura.
 	\end{block}
     \begin{itemize}
-        \item<2-> PreparaciÛn autÛnoma y exposiciÛn del contenido teÛrico..
-        \item<3-> Clases magistrales.
-		\item<4-> La asistencia a las clases teÛricas y pr·cticas no es obligatoria,
-                  \alert<5->{pero si altamente recomendable e incluso necesaria}.
-		\item<6-> Sin conocimiento teÛrico es imposible alcanzar las habilidades pr·cticas.
+        \item<2-> Clases magistrales, fundamentalmente de pizarra.
+		\item<3-> Sin conocimiento te√≥rico es imposible alcanzar las habilidades pr√°cticas.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Clases en Laboratorio}
 	\begin{block}{Objetivo}
-        Aplicar los conceptos teÛricos aprendidos en las clases de aula al desarrollo de un sistema software real de mediana escala, con el objetivo de desarrollar las competencias procedimentales y actitudinales popias de un Ingeniero.
+        Aplicar los conceptos te√≥ricos aprendidos en las clases de aula al desarrollo de un sistema software real de mediana escala, con el objetivo de desarrollar las competencias procedimentales y actitudinales propias de un Ingeniero.
 	\end{block}
 	\begin{itemize}
-        \item<2-> Desarrollo de un proyecto relativo a una pequeÒa aplicaciÛn empresarial.
-        \item<3-> El desarrollo estar· dividido en varias etapas, al final de cada una de las cuales se realizar· su correspondiente entrega.
+        \item<2-> Desarrollo de un proyecto relativo a una peque√±a aplicaci√≥n empresarial.
+        \item<3-> El desarrollo estar√° dividido en varias etapas, al final de cada una de las cuales se realizar√° su correspondiente entrega.
 	\end{itemize}
 \end{frame}
 
-\section{MÈtodos de EvaluaciÛn/CalificaciÛn}
+\section{M√©todos de Evaluaci√≥n y Calificaci√≥n}
 
-\subsection{FÛrmula CalificaciÛn}
+\subsection{F√≥rmula Calificaci√≥n}
 
 \begin{frame}[c]
-	\frametitle{C·lculo de la CalificaciÛn Final}
-	\begin{block}{FÛrmula de C·lculo de la CalificaciÛn Final}
-		\begin{align*}
-			Calificaci\acute{o}n\  Final  = \   & Proyecto \times 0.75 + \\
-                                   & Prueba\  Final\  Escrita \times 0.25 \\
-		\end{align*}
+	\frametitle{C√°lculo de la Calificaci√≥n Final}
+	\begin{block}{F√≥rmula de C√°lculo de la Calificaci√≥n Final}
+		\begin{center}
+        \begin{tabular}{ll}
+			Calificaci√≥n  Final  =  & Proyecto $\times$ 0.75 + \\
+                                    & Prueba  Final  Escrita $\times$ 0.25 \\
+		\end{tabular}
+        \end{center}
 	\end{block}
 	\begin{itemize}
-		\item<2-> Para poder aplicar la fÛrmula anterior se debe obtener un mÌnimo de 5.00 en el proyecto.
-        \item<3-> En virtud del transcurso de la asignatura, se podr· eximir a determinados alumnos de la realizaciÛn de la prueba final escrita.
+		\item<2-> Para poder aplicar la f√≥rmula anterior se debe obtener un m√≠nimo de 5.00 en el proyecto.
 	\end{itemize}
 \end{frame}
 
-\subsection{PonderaciÛn de las Etapas del Proyecto}
+\subsection{Ponderaci√≥n de las Etapas del Proyecto}
 
 \begin{frame}[c]
-    \frametitle{PonderaciÛn de las Etapas del Proyecto}
+    \frametitle{Ponderaci√≥n de las Etapas del Proyecto}
     \begin{center}
 	\begin{tabular}{|ll|r|}
     \hline \hline
-	E1 & ElaboraciÛn del Modelo de Domino & 10\% \\ \hline
-	E2 & Anotaciones JPA                  & 10\%\\ \hline
-    E3 & Desarrollo de los Repositorios   & 10\% \\ \hline
-    E4 & Desarrollo de la API REST        & 10\% \\ \hline
-    E5 & ImplementaciÛn del controlador HTTP   &  10\% \\ \hline
-    E6 & ImplementaciÛn de la capa de servicio &  10\% \\ \hline
-    E7 & ImplementaciÛn de la capa de presentaciÛn & 40\% \\ 
+	E01 & Modelo de Domino     & 10\% \\ \hline
+    E02 & Domain-Driven Design & 10\% \\ \hline	
+    E03 & Implementaci√≥n POJOs &  5\% \\ \hline 
+    E04 & Anotaciones JPA                  & 10\% \\ \hline
+    E05 & Desarrollo de los Repositorios   &  5\% \\ \hline
+    E06 & Especificaci√≥n de la API REST    & 10\% \\ \hline
+    E07 & Implementaci√≥n del Controlador HTTP   &   10\% \\ \hline
+    E08 & Implementaci√≥n de la Capa de Servicio &  10\% \\ \hline
+    E09 & Implementaci√≥n del Router SPA & 10\% \\
+    E10 & Implementaci√≥n de P√°ginas Din√°micas & 10\% \\    
+    E11 & Implementaci√≥n de Componentes Gr√°ficos & 10\% \\
+    E12 & Implementaci√≥n del Control de Accesos & 10\% \\        
     \hline \hline
 	\end{tabular}
     \end{center}
@@ -293,19 +236,20 @@
 \begin{frame}[c]
     \frametitle{Prueba Final}
 	\begin{enumerate}[<+->]
-		\item Prueba evaluable escrita en las fechas asignadas por el centro.
-		\item La prueba contendr· ejercicios y cuestiones sobre razonamientos teÛricos.
-        \item Se podr· hacer uso todo tipo de material escrito.
-        \item En ning˙n caso se dejar· hacer uso de de dispositivos electrÛnicos, especialmente, de aquellos con capacidades de comunicaciÛn inal·mbrica.
-		\item \alert{El material escrito debe servir para consultar cuestiones puntuales, pero en el caso ideal no deberÌa hacerse ning˙n uso de los mismos}.
-		\item Aquellas respuestas que sean una simple copia de lo disponible en alg˙n tipo de material de la asignatura se calificar·n con 0 puntos.
+        \item Si se entregan todas las pr√°cticas en fecha, el alumno podr√° quedar exento de realizar la  prueba final escrita.
+        \item En caso de entregar las pr√°cticas en Septiembre, se deber√° realizar obligatoriamente la prueba escrita.
+		\item La prueba contendr√° ejercicios y cuestiones sobre razonamientos te√≥ricos.
+        \item Se podr√° hacer uso todo tipo de material escrito.
+        \item En ning√∫n caso se dejar√° hacer uso de de dispositivos electr√≥nicos, especialmente, de aquellos con capacidades de comunicaci√≥n inal√°mbrica.
+		\item \alert{El material escrito debe servir para consultar cuestiones puntuales, pero en el caso ideal no deber√≠a hacerse ning√∫n uso de los mismos}.
+		\item Aquellas respuestas que sean una simple copia de lo disponible en alg√≠n tipo de material de la asignatura se calificar√°n con 0 puntos.
 	\end{enumerate}
 \end{frame}
 
-\section{BibliografÌa}
+\section{Bibliograf√≠a}
 
 \begin{frame}[c]
-	\frametitle{BibliografÌa Principal}
+	\frametitle{Bibliograf√≠a Principal}
     \begin{thebibliography}{1}
 
 \bibitem{Fowler2002}
@@ -319,10 +263,11 @@ Eric J. Evans.
 \newblock Pearson, 2003.
 
 %% Meter algo de SPA
+%% Meter algo de REST
 
 \end{thebibliography}
 \end{frame}
 
-%% Meter bibliografÌa tecnolÛgica.
+%% Meter bibliograf√≠a tecnol√≥gica.
 
 \end{document}
