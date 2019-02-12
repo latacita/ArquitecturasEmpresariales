@@ -53,40 +53,54 @@
 \subsection{Horarios}
 
 \begin{frame}[c]
-	\frametitle{Horario de Clases (Tercer Periodo)}
+	\frametitle{Horario de Clases}
 	\begin{small}
-	\begin{center}
-	\begin{tabular}{||l|c|c|c|c|c||}
-	\hline \hline
-				   & Lunes & Martes  & Miércoles & Jueves  & Viernes \\ \hline \hline
-    15:30 - 16:30  &       & Aula X  &           &         &         \\ \hline
-    16:30 - 17:30  &       & Aula X  &           &         &         \\ \hline
-	17:30 - 18:30  &       &         &           & Aula X  &         \\ \hline
-    18:30 - 19:30  &       &         &           & Aula X  &         \\ \hline
-    \hline
-	\end{tabular}
-	\end{center}
-	\end{small}
-\end{frame}
+    \only<1|handout:0>{
+    	\begin{center}
+        \textbf{Tercer Periodo} \\ \ \\
+    	\begin{tabular}{||l|c|c|c|c|c||}
+    	\hline \hline
+    				   & Lunes & Martes  & Miércoles & Jueves  & Viernes \\ \hline \hline
+        15:30 - 16:30  &       & Aula 5  &           &         &         \\ \hline
+        16:30 - 17:30  &       & Aula 5  &           &         &         \\ \hline
+    	17:30 - 18:30  &       &         &           & Aula 5  &         \\ \hline
+        18:30 - 19:30  &       &         &           & Aula 5  &         \\ \hline
+        \hline
+    	\end{tabular}
+    	\end{center}
+    }
+    \only<2-|handout:0>{
+    	\begin{center}
+        \textbf{Cuarto Periodo} \\ \ \\
+    	\begin{tabular}{||l|c|c|c|c|c||}
+    	\hline \hline
+    				   & Lunes & Martes  & Miércoles & Jueves  & Viernes \\ \hline \hline
+        15:30 - 16:30  &       & Aula 5  &           & Aula 5  &         \\ \hline
+        16:30 - 17:30  &       & Aula 5  &           & Aula 5  &         \\ \hline
+    	17:30 - 18:30  &       &         &           &         &         \\ \hline
+        18:30 - 19:30  &       &         &           &         &         \\ \hline
+        \hline
+    	\end{tabular}
+    	\end{center}
+    }
+    \only<0|handout:1>{
+        	\begin{center}
+        \textbf{Tercer (3) y Cuarto (4) Periodo} \\ \ \\
+    	\begin{tabular}{||l|c|c|c|c|c||}
+    	\hline \hline
+    				   & Lunes & Martes  & Miércoles & Jueves     & Viernes \\ \hline \hline
+        15:30 - 16:30  &       & Aula 5  &           & Aula 5 (4) &         \\ \hline
+        16:30 - 17:30  &       & Aula 5  &           & Aula 5 (4) &         \\ \hline
+    	17:30 - 18:30  &       &         &           & Aula 5 (3) &         \\ \hline
+        18:30 - 19:30  &       &         &           & Aula 5 (3) &         \\ \hline
+        \hline
+    	\end{tabular}
+    	\end{center}
+    }
 
-\begin{frame}[c]
-	\frametitle{Horario de Clases (Cuarto Periodo)}
-	\begin{small}
-	\begin{center}
-	\begin{tabular}{||l|c|c|c|c|c||}
-	\hline \hline
-				   & Lunes & Martes  & Miércoles & Jueves  & Viernes \\ \hline \hline
-    15:30 - 16:30  &       & Aula X  &           & Aula X  &         \\ \hline
-    16:30 - 17:30  &       & Aula X  &           & Aula X  &         \\ \hline
-	17:30 - 18:30  &       &         &           &         &         \\ \hline
-    18:30 - 19:30  &       &         &           &         &         \\ \hline
-    \hline
-	\end{tabular}
-	\end{center}
 	\end{small}
 	\begin{itemize}
-        \item<2-> Las clases de los Martes y Miércoles serán indistintamente de teoría o laboratorio, según convenga al ritmo de la asignatura.
-		\item<3-> La asistencia a las clases teóricas y prácticas no es obligatoria, \uncover<4->{\alert{pero si altamente recomendable e incluso necesaria}.}
+        \item<3-> Las clases de los Martes y Jueves serán indistintamente de teoría o laboratorio, según convenga al ritmo de la asignatura.
 	\end{itemize}
 \end{frame}
 
@@ -222,10 +236,10 @@
     E06 & Especificación de la API REST    & 10\% \\ \hline
     E07 & Implementación del Controlador HTTP   &   10\% \\ \hline
     E08 & Implementación de la Capa de Servicio &  10\% \\ \hline
-    E09 & Implementación del Router SPA & 10\% \\
-    E10 & Implementación de Páginas Dinámicas & 10\% \\
-    E11 & Implementación de Componentes Gráficos & 10\% \\
-    E12 & Implementación del Control de Accesos & 10\% \\
+    E09 & Implementación del Router SPA & 10\% \\ \hline
+    E10 & Implementación de Páginas Dinámicas & 10\% \\ \hline
+    E11 & Implementación de Componentes Gráficos & 10\% \\ \hline
+    E12 & Implementación del Control de Accesos & 10\% \\ 
     \hline \hline
 	\end{tabular}
     \end{center}
@@ -262,12 +276,15 @@ Eric J. Evans.
 \newblock {\em {Domain-Driven Design}}.
 \newblock Pearson, 2003.
 
-%% Meter algo de SPA
+\bibitem{}
+Emmit Scott.
+\newblock {\em {SPA Design and Architecture: Understanding Single Page Web Applications}}.
+\newblock  Manning Publications, 2015.
+
 %% Meter algo de REST
+%% Meter algo de Spring
 
 \end{thebibliography}
 \end{frame}
-
-%% Meter bibliografía tecnológica.
 
 \end{document} 
