@@ -1,81 +1,10 @@
-\documentclass[a4paper,slidestop,xcolor=pst,blue]{beamer}
-%\documentclass[a4paper,slidestop,xcolor=pst,dvips,blue]{beamer}
+\documentclass[a4paper,t,xcolor=pst,dvips,colortheme]{beamer}
 
-\newcommand{\imp}[1]{{\small{\sf #1}}}
-
-\usepackage{beamerthemesplit}
-\usepackage[latin1]{inputenc}
-\usepackage[spanish]{babel}
-\usepackage{graphicx}
-\usepackage{pstricks} % PSTricks package
-\usepackage{setspace}
-\usepackage{multirow}
-\usepackage{listings}
-\usepackage{pgfpages}
-\usepackage{hyperref}
-\usepackage{etoolbox}
-\usepackage{epstopdf}
-
-\makeatletter
-\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
-\makeatother
-
-\setbeamercovered{dynamic}
-\setcounter{tocdepth}{2}
-\setbeamercolor{frametitle}{fg=black,bg=white}
-\setbeamercolor{section in toc shaded}{fg=black}
-\setbeamercolor{section in toc}{fg=red}
-\setbeamercolor{subsection in toc shaded}{fg=black}
-\setbeamercolor{subsection in toc}{fg=red}
-\setbeamerfont{section in toc}{size=\small}
-\setbeamerfont{subsection in toc}{size=\small}
-\setbeamertemplate{section in toc shaded}[default][99]
-\setbeamertemplate{subsection in toc shaded}[default][99]
-
-
-\setbeamertemplate{frametitle}{
-	\begin{centering}
-		\insertframetitle
-		\par
-	\end{centering}
-}
-
-\AtBeginSection[]
-{\begin{frame}[c]
-  \frametitle{Índice}
-	\tableofcontents[currentsection,
-        sectionstyle=show/shaded,
-        subsectionstyle=hide]
-\end{frame}}
-
-\AtBeginSubsection[]
-{\begin{frame}[c]
-	\frametitle{Índice}
-	\tableofcontents[
-  		currentsection,
-  		sectionstyle=shaded/shaded,
-  		currentsubsection,
-  		subsectionstyle=show/shaded/hide
-		]
-\end{frame}}
-
-
-% \setbeamercovered{dynamic}
-% \setcounter{tocdepth}{1}
-\setbeamercolor{frametitle}{fg=black,bg=white}
-
-\setbeamertemplate{frametitle}{
-	\begin{centering}
-		\insertframetitle
-		\par
-	\end{centering}
-}
-
-\usetheme[secheader]{Boadilla}
+\input{slidesHeader.tex}
 
 \title[Introducción a las Arq. Empresariales]{Introducción a las Arquitecturas Empresariales}
 
-\author[P. Sánchez]{\alert{Pablo Sánchez}}
+\author[Pablo Sánchez]{\alert{Pablo Sánchez}}
 
 \institute[IIE]{
 		   Dpto. Ingeniería Informática y Electrónica \\
@@ -91,9 +20,12 @@
 \begin{frame}[c]
 	\titlepage
 	\begin{columns}
-		\column{\linewidth}
-	   	\centering
-    \includegraphics[width=.12\textwidth,keepaspectratio=true]{images/uc.eps}
+		\column{0.50\linewidth}
+			\centering
+    		\includegraphics[width=.28\textwidth,keepaspectratio=true]{images/istr.eps}
+		\column{0.50\linewidth}
+			\centering
+			\includegraphics[width=.25\textwidth,keepaspectratio=true]{images/uc.eps}
 	\end{columns}
 \end{frame}
 
@@ -113,15 +45,13 @@
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Comprender qué es un sistema empresarial.
-         \item Comprender el concepto de arquitectura.
+         \item Comprender qué es un \emph{Sistema de Información Empresarial}.
+         \item Comprender el concepto de \emph{Arquitectura Software}.
+         \item Conocer los principales patrones arquitectónicos que aplican a los Sistemas de Información Empresarial.
          \item Comprender cómo se divide un sistema empresarial en capas.
          \item Comprender la función de cada capa de un sistema sw.
-         \item Comprender cómo se pueden independizar módulos mediante inyección de dependencias.
          \item Conocer las tecnologías que se utilizan para implementar las capas de un sistema sw.
-         \item Conocer el concepto de \emph{microservicio}.
-         \item Comprender el concepto de \emph{Domain-Driven Design}.
-         \item Conocer las metodologías utilizadas para desarrollar sistemas empresariales.
+         \item Comprender cómo se pueden independizar módulos sw mediante \emph{inyección de dependencias}.
     \end{enumerate}
 \end{frame}
 
@@ -148,34 +78,15 @@
     \end{thebibliography}
 \end{frame}
 
-
-\begin{frame}[c]
-    \frametitle{Bibliografía}
-    \begin{thebibliography}{1}
-
-        \bibitem[Schwaber and Sutherland, 2011]{Schwaber2011}
-        Schwaber, K. and Sutherland, J. (2011).
-        \newblock {The Scrum Guide - The Definitive Guide to Scrum: The Rules of the Game}.
-
-        \bibitem[Cohn, 2004]{Cohn2004}
-        Cohn, M. (2004).
-        \newblock {\em {User Stories Applied}},
-        \newblock Addison-Wesley.
-
-    \end{thebibliography}
-\end{frame}
-
-\section{Sistemas y Arquitecturas Empresariales}
-
-\subsection{Sistema Empresarial}
+\section{Sistemas de Información Empresarial}
 
 \begin{frame}
-    \frametitle{Sistema Empresarial}
+    \frametitle{Sistema de Información Empresarial}
     \begin{block}{Sistema Empresarial}
         Sistema sw que da soporte a diferentes procesos de negocio de una determinada organización.
     \end{block}
     \uncover<2->{
-    \begin{block}{Características de los Sistemas Empresariales}
+    \begin{block}{Características de los Sistemas de Información Empresariales}
     \begin{enumerate}
         \item<3-> Necesita almacenar datos, y normalmente, en gran volumen.
         \item<4-> Los datos que almacenan representan un activo importante y duradero en el tiempo.
@@ -188,7 +99,9 @@
     }
 \end{frame}
 
-\subsection{Concepto de Arquitectura}
+\section{Arquitecturas Sw}
+
+\subsection{Concepto de Arquitectura Sw}
 
 \begin{frame}[t]
    \frametitle{Fases del Ciclo de Vida Sw}
@@ -238,6 +151,8 @@
 	}
 \end{frame}
 
+\subsection{Definición de Arquitectura Sw}
+
 \begin{frame}[t]
 	\frametitle{Definiciones Arquitectura Sw}
 	\begin{block}{Arquitectura Software~\cite{taylor:2009,pohl:2005}}
@@ -255,22 +170,8 @@
 	}
 \end{frame}
 
-\subsection{Arquitecturas en Capas}
+\subsection{Patrones Arquitectónicos}
 
-\subsubsection{Estilos y Patrones Arquitectónicos}
-
-\begin{frame}[c]
-	\frametitle{Estilos Arquitectónicos}
-	\begin{block}{Estilo Arquitectónico}
-		Un \emph{estilo arquitectónico} es un conjunto con nombre de decisiones de diseño que:
-		\begin{enumerate}[<+->]
-			\item Son aplicables dentro de un contexto determinado;
-			\item Restringen las decisiones arquitectónicas dentro de dicho contexto para un sistema concreto;
-			\item Pone de manifiesto las bondades de cada sistema concreto.
-		\end{enumerate}
-		%% Client-server
-	\end{block}
-\end{frame}
 \begin{frame}[c]
 	\frametitle{Patrones Arquitectónicos}
     \begin{block}{Patrón Arquitectónico}
@@ -278,7 +179,7 @@
 	\end{block}
 \end{frame}
 
-\subsubsection{Arquitecturas en Capas y Cliente-Servidor}
+\subsubsection{Arquitecturas en Capas}
 
 \begin{frame}[c]
     \frametitle{Arquitecturas en Capas - Principio Básico}
@@ -322,35 +223,7 @@
     \end{enumerate}
 \end{frame}
 
-\subsubsection{Código Móvil}
-
-\begin{frame}[c]
-    \frametitle{Código Móvil - Principio Básico}
-    \begin{block}{Arquitecturas con Código Móvil}
-        Un computador (genera y) almacena código y/o datos que se envían a otros computadores para su ejecución.
-    \end{block}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Arquitecturas con Código Móvil - Beneficios}
-    \begin{enumerate}[<+->]
-        \item Permite distribuir y equilibrar la carga de trabajo.
-        \item Permite aumentar la disponibilidad y tolerancia a fallos del sistema.
-        \item Facilitar el mantenimiento y la evolución del sistema.
-        \item Ubicuidad de ciertas funciones del sistema.
-        \item Utilización y composición de recursos bajo demanda.
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Arquitecturas con Código Móvil - Problemas}
-    \begin{enumerate}[<+->]
-        \item Agujeros de seguridad.
-        \item Saturación de las redes de comunicación.
-    \end{enumerate}
-\end{frame}
-
-\subsubsection{Cliente/Servidor}
+\subsubsection{Arquitecturas en Cliente-Servidor}
 
 \begin{frame}[c]
     \frametitle{Arquitecturas Cliente/Servidor - Principio Básico}
@@ -391,8 +264,35 @@
     \end{enumerate}
 \end{frame}
 
+\subsubsection{Patrón Código Móvil}
 
-\subsection{Arquitecturas Empresariales en Capas}
+\begin{frame}[c]
+    \frametitle{Código Móvil - Principio Básico}
+    \begin{block}{Arquitecturas con Código Móvil}
+        Un computador (genera y) almacena código y/o datos que se envían a otros computadores para su ejecución.
+    \end{block}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Arquitecturas con Código Móvil - Beneficios}
+    \begin{enumerate}[<+->]
+        \item Permite distribuir y equilibrar la carga de trabajo.
+        \item Permite aumentar la disponibilidad y tolerancia a fallos del sistema.
+        \item Facilitar el mantenimiento y la evolución del sistema.
+        \item Ubicuidad de ciertas funciones del sistema.
+        \item Utilización y composición de recursos bajo demanda.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Arquitecturas con Código Móvil - Problemas}
+    \begin{enumerate}[<+->]
+        \item Agujeros de seguridad.
+        \item Saturación de las redes de comunicación.
+    \end{enumerate}
+\end{frame}
+
+\section{Arquitecturas en Capas de los Sistemas de Información Empresarial}
 
 \begin{frame}[c]
 	\frametitle{Capas de un Sistema Empresarial}
@@ -426,6 +326,8 @@
 	\end{enumerate}
 \end{frame}
 
+\subsubsection{Capa de Neog}
+
 \begin{frame}[c]
 	\frametitle{Responsabilidades de la Capa de Negocio}
 	\begin{enumerate}[<+->]
@@ -443,7 +345,7 @@
 	\end{enumerate}
 \end{frame}
 
-\subsection{¿Por qué se utilizan tecnologías Web?}
+\subsubsection{¿Por qué se utilizan tecnologías Web?}
 
 \begin{frame}[c]
 	\frametitle{¿Por qué se utilizan tecnologías Web?}
