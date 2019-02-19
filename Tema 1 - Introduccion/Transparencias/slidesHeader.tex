@@ -1,0 +1,58 @@
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{pstricks} % PSTricks package
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{pgfpages}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage{epstopdf}
+
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+\makeatother
+
+\setbeamercovered{dynamic}
+\setcounter{tocdepth}{2}
+\setbeamercolor{frametitle}{fg=black,bg=white}
+\setbeamercolor{section in toc shaded}{fg=black}
+\setbeamercolor{section in toc}{fg=red}
+\setbeamercolor{subsection in toc shaded}{fg=black}
+\setbeamercolor{subsection in toc}{fg=red}
+\setbeamerfont{section in toc}{size=\small}
+\setbeamerfont{subsection in toc}{size=\small}
+\setbeamertemplate{section in toc shaded}[default][99]
+\setbeamertemplate{subsection in toc shaded}[default][99]
+
+\AtBeginSection[]
+{\begin{frame}[c]
+  \frametitle{Índice}
+	\tableofcontents[currentsection,
+        sectionstyle=show/shaded,
+        subsectionstyle=hide]
+\end{frame}}
+
+\AtBeginSubsection[]
+{\begin{frame}[c]
+	\frametitle{Índice}
+	\tableofcontents[
+  		currentsection,
+  		sectionstyle=shaded/shaded,
+  		currentsubsection,
+  		subsectionstyle=show/shaded/hide
+		]
+\end{frame}}
+
+\setbeamercolor{frametitle}{fg=black,bg=white}
+
+\setbeamertemplate{frametitle}{
+	\begin{centering}
+		\insertframetitle
+		\par
+	\end{centering}
+}
+
+\usetheme[secheader]{Boadilla} 
