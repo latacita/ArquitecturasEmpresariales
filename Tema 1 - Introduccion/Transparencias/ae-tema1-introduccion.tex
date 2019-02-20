@@ -2,6 +2,8 @@
 
 \input{slidesHeader.tex}
 
+\usepackage{listings}
+
 \title[Introducción a las Arq. Empresariales]{Introducción a las Arquitecturas Empresariales}
 
 \author[Pablo Sánchez]{\alert{Pablo Sánchez}}
@@ -80,23 +82,25 @@
 
 \section{Sistemas de Información Empresarial}
 
-\begin{frame}
+\begin{frame}[c]
     \frametitle{Sistema de Información Empresarial}
-    \begin{block}{Sistema Empresarial}
-        Sistema sw que da soporte a diferentes procesos de negocio de una determinada organización.
+    %% TODO: Buscar una definición mejor o más estandarizada.
+    \begin{block}{Sistema de Información  Empresarial (SIE)}
+        Un \emph{Sistema de Información Empresarial} es un sistema sw que da soporte a diferentes procesos de negocio de una determinada organización.
     \end{block}
-    \uncover<2->{
-    \begin{block}{Características de los Sistemas de Información Empresariales}
-    \begin{enumerate}
-        \item<3-> Necesita almacenar datos, y normalmente, en gran volumen.
-        \item<4-> Los datos que almacenan representan un activo importante y duradero en el tiempo.
-        \item<5-> Se accede de forma concurrente a los datos. Se precisan \emph{transacciones}.
-        \item<6-> Requieren múltiples y avanzados sistemas de presentación y navegación de datos.
-        \item<7-> Interoperan con otros sistemas empresariales.
-        \item<8-> Los manipulación de los datos debe obedecer a ciertas reglas.
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Características de los SIEs}
+    \begin{enumerate}[<+->]
+        \item Necesita almacenar datos, y normalmente, en gran volumen.
+        \item Los datos que almacenan representan un activo importante y duradero en el tiempo.
+        \item Los gestión de los datos debe obedecer a ciertas \emph{reglas de negocio}.
+        \item Las operaciones ejecutadas necesitan ser \emph{transaccionales}.
+        \item Los datos pueden ser accedidos y manipulados de manera concurrente.
+        \item Utilizan un gran número de interfaces de usuario que pueden requerir de sistemas avanzados de visualización de datos.
+        \item Interoperan con otros Sistemas de Información Empresarial.
     \end{enumerate}
-    \end{block}
-    }
 \end{frame}
 
 \section{Arquitecturas Sw}
@@ -179,7 +183,7 @@
 	\end{block}
 \end{frame}
 
-\subsubsection{Arquitecturas en Capas}
+\subsection{Arquitecturas en Capas}
 
 \begin{frame}[c]
     \frametitle{Arquitecturas en Capas - Principio Básico}
@@ -217,13 +221,13 @@
 \begin{frame}[c]
     \frametitle{Arquitecturas en Capas - Problemas}
     \begin{enumerate}[<+->]
-        \item Rendimientos.
+        \item (Rendimiento).
         \item Esfuerzo requerido para el diseño.
         \item Elementos no fácilmente aislables en capas.
     \end{enumerate}
 \end{frame}
 
-\subsubsection{Arquitecturas en Cliente-Servidor}
+\subsection{Arquitectura Cliente-Servidor}
 
 \begin{frame}[c]
     \frametitle{Arquitecturas Cliente/Servidor - Principio Básico}
@@ -258,13 +262,13 @@
     \frametitle{Arquitecturas Cliente-Servidor - Problemas}
     \begin{enumerate}[<+->]
         \item Efecto estrella de la muerte.
-        \item Disponibilidad del servidor.
-        \item Problemas de escalabilidad y rendimiento.
+        \item Necesidad de tener conexión con el servidor.
+        \item Problemas de escalabilidad y rendimiento del servidor.
         \item Saturación de las redes de comunicación.
     \end{enumerate}
 \end{frame}
 
-\subsubsection{Patrón Código Móvil}
+\subsection{Patrón Código Móvil}
 
 \begin{frame}[c]
     \frametitle{Código Móvil - Principio Básico}
@@ -292,10 +296,39 @@
     \end{enumerate}
 \end{frame}
 
-\section{Arquitecturas en Capas de los Sistemas de Información Empresarial}
+\section[Arquitecturas en Capas de los SIE]{Arquitecturas en Capas de los Sistemas de Información Empresarial}
+
+\subsection{Problema a Resolver}
+
+\begin{frame}[c,fragile]
+	\frametitle{Sistema Monocapa}
+    \begin{lstlisting}[basicstyle=\small]
+<% SQLtxt = "SELECT Producto, Cantidad, Precio
+               FROM articulos"
+   set rs = CreateObject("ADODB.Recordset")
+   rs.Open SQLtxt,"DSN=Mibase" %>
+<table>
+   <% Do While NOT rs.EOF%>
+      <tr>
+        <td><%= rs("Producto")%></td>
+        <td><%= rs("Cantidad")%></td>
+        <td align="right">
+          <%= FormatCurrency(rs("Precio"))%>
+        </td>
+      </tr>
+   <% rs.MoveNext
+      Loop
+      rs.Close %>
+</table>
+    \end{lstlisting}
+\end{frame}
+
+%% Añadir una lista de problemas.
+
+\subsection[Capas de un SIE]{Capas de un Sistema de Información Empresarial}
 
 \begin{frame}[c]
-	\frametitle{Capas de un Sistema Empresarial}
+	\frametitle{Capas de un Sistema de Información Empresarial}
 	\begin{center}
         \includegraphics[width=\linewidth,keepaspectratio=true]{images/enterpriseLayers/enterpriseLayers.eps}
 	\end{center}
@@ -306,12 +339,29 @@
 	\begin{enumerate}[<+->]
         \item Permitir a los usuarios interactuar con el sistema.
         \item Introducir datos en el sistema (validándolos previamente).
-        \item Visualizar los datos de manera amigable al usuario.
-        \item Facilitar operaciones simples (filtros y redistribuciones) sobre los datos.
+        \item Visualizar los datos de salida de manera amigable al usuario.
+        \item Facilitar operaciones simples (filtros, ordenaciones y cambios de formato) sobre los datos.
         \item Facilitar la navegación por el sistema.
         \item Mejorar la experiencia de usuario (UX). %% Hellmans
-        \item Mantener la comunicación con el servidor.
+        \item Gestionar la comunicación con el servidor.
         \item Gestionar situaciones excepcionales.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Responsabilidades de la Capa de Negocio}
+	\begin{enumerate}[<+->]
+        \item Atender las peticiones de los clientes.
+        \item Asegurar el cumplimiento de \alert{reglas de negocio} existentes.
+        \item Asegurar la \alert{transaccionalidad} de las operaciones de negocio.
+        \item Validar las peticiones de los clientes.
+        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
+        \item Facilitar la eficiencia del sistema.
+        \item Controlar el acceso a los datos.
+        \item Gestionar la comunicación con los servicios externos.
+        \item Ejecutar operaciones (periódicas) del sistema.
+        \item Gestionar de manera adecuada casos excepcionales.
+        \item Ayudar a satisfacer los requisitos no funcionales.
 	\end{enumerate}
 \end{frame}
 
@@ -319,60 +369,49 @@
 	\frametitle{Responsabilidades de la Capa de Persistencia}
 	\begin{enumerate}[<+->]
         \item Almacenar los datos de manera no volátil.
-        \item Recuperar datos del almacén persistente,
+        \item Recuperar datos del almacén persistente.
         \item Asegurar la disponibilidad de los datos.
         \item Controlar la integridad de los datos.
         \item Asegurar un acceso eficiente a los datos.
 	\end{enumerate}
 \end{frame}
 
-\subsubsection{Capa de Negocio}
+\subsection[SIEs Web]{Sistemas de Información Empresariales Web}
 
 \begin{frame}[c]
-	\frametitle{Responsabilidades de la Capa de Negocio}
-	\begin{enumerate}[<+->]
-        \item Asegurar que los datos se manipulan de acuerdo con las \alert{reglas de negocio} existentes.
-        \item Asegurar la \alert{transaccionalidad} de las operaciones.
-        \item Atender las peticiones de los clientes.
-        \item Validar las peticiones de los clientes.
-        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
-        \item Facilitar la eficiencia del sistema.
-        \item Ayudar a mejorar la experiencia de usuario.
-        \item Controlar el acceso a los datos.
-        \item Gestionar la comunicación con los servicios externos.
-        \item Ejecutar operaciones periódicas de mantenimiento.
-        \item Gestionar de manera adecuada casos excepcionales.
-	\end{enumerate}
+    \frametitle{Sistema Informático Web}
+    %% TODO: Buscar una definición mejor o más estandarizada.
+    \begin{block}{Sistema Informático Web}
+        Un \emph{Sistema Informático Web} es un sistema cliente servidor donde el cliente está codificado utilizando tecnologías web, como HTML, CSS y Javascript, siendo por tanto accesible desde un navegador web; y/o donde el cliente se comunica con el servidor por medio del protocolo HTTP.
+    \end{block}
 \end{frame}
 
-\subsubsection{¿Por qué se utilizan tecnologías Web?}
-
 \begin{frame}[c]
-	\frametitle{¿Por Qué Tecnologías Web?}
+	\frametitle{¿Por Qué se Utilizan Tecnologías Web?}
     \centering \textbf{Ventajas} \\
     \begin{enumerate}
         \item<2-> Multiplataforma.
         \item<3-> Onmipresencia de la web.
         \item<4-> No precisan permisos especiales a nivel de red.
-        \item<5-> Patrón código móvil.
-        \item<6-> Facilidad de mantenimiento.
-        \item<7-> Fuerte estandarización.
-        \item<8-> Facilidad de uso.
-        \item<9-> Madurez de las herramientas.
+        \item<5-> Facilidad de mantenimiento (código móvil).
+        \item<6-> Fuerte estandarización.
+        %% Balanceadores de carga
+        \item<7-> Favorecen la \emph{recognizability}, reduciendo su curva de aprendizaje.
+        \item<8-> Madurez de las herramientas.
     \end{enumerate}
-    \uncover<10->{
+    \uncover<9->{
         \centering \textbf{Inconvenientes} \\
         \begin{enumerate}
-        \item Seguridad.
-        %% Comentar el problema de los ciberataques rusos y las tostadores americanas.
-        %% Añadir a moodle la imagen: http://i.imgur.com/GGiKG9z.jpg
-        %% https://goo.gl/ypz4VD
-        \item Tecnologías desarrolladas para el intercambio de hipertexto.
+            \item<10-> Seguridad.
+            %% https://goo.gl/ypz4VD
+            \item<11-> Tecnologías originalmente desarrolladas para \emph{hipertexto}.
+            \item<12-> Tecnologías lentas.
+            \item<13-> Tecnologías dependientes de terceros.
         \end{enumerate}
     }
 \end{frame}
 
-\subsection{Tecnologías de Implementación para Arquitecturas Empresariales}
+\subsection[Tecnologías SIE]{Tecnologías de Implementación para Arquitecturas Empresariales}
 
 \begin{frame}[c]
 	\frametitle{Tecnologías de Implementación ES}
@@ -388,13 +427,164 @@
 	\begin{enumerate}[<+->]
         \item Front-end en el cliente y back-end en uno o más servidores.
         \item Dominio y persistencia pueden ir en el mismo servidor (\emph{two tier}) o en servidores separados (three tiers).
-        \item Trabajo con conexión puede requerir parte de la capa de dominio (y persistencia) en el cliente.
         \item Los clientes pueden ser pesados (PCs) o ligeros (Smartphones, tablets).
+        \item Trabajo sin conexión puede requerir parte de la capa de dominio (y persistencia) en el cliente.
         \item La capa de presentación puede ser de código fijo (app, desktop) o móvil (HTML + Javascript).
 	\end{enumerate}
 \end{frame}
 
-\section{Inyección de Dependencias}
+\section{Inversión e Inyección de Dependencias}
+
+\subsection{Principio de Inversión de Dependencias}
+
+\begin{frame}[c]
+	\frametitle{Principio de Inversión de Dependencias}
+    \begin{block}{Principio de Inversión de Dependencias (IoD)}
+        Las clases de un sistema software deberían depender de abstracciones estables y no de implementaciones concretas.
+    \end{block}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Problema a Resolver I}
+	\begin{center}
+        \includegraphics[width=\linewidth,keepaspectratio=true]{images/IoD/IoD.eps}
+	\end{center}
+\end{frame}
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[il][\textcolor{pgrey}]{$$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\begin{frame}[c,fragile]
+	\frametitle{Problema a Resolver II}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public class OrderHandler {
+
+  // Depende de la clase abstracta
+  protected NotificationSender sender;
+
+  public OrderHandler() {
+    //Al instanciarlo queda ligado a una clase concreta.
+    this.sender = new SmsNotificationSender();
+  } // Constructor
+  ...
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Inversión por Constructor}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inversión de Dependencias por Constructor}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public class OrderHandler {
+
+  protected NotificationSender sender;
+	
+  public OrderHandler(NotificationSender aSender) {
+	this.sender =  aSender;
+  } // Constructor
+  ...
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inversión de Dependencias por Constructor}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public static void main(String[] args) {
+  NotificationSender ns = new SmsNotificationSender();
+  OrderHandler oh = new OrderHandler(ns);
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Inversión por Setter}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inversión de Dependencias por \emph{Setter}}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public class OrderHandler {
+
+  protected NotificationSender sender;
+	
+  public OrderHandler() {}
+	
+  public void setSender(NotificationSender aSender) {
+    this.sender = aSender;
+  }
+  ...
+}
+\end{lstlisting}
+\end{frame}
+
+\subsection{Inyección de Dependencias}
+
+\begin{frame}[c]
+	\frametitle{Problema a Resolver}
+	\begin{center}
+        \includegraphics[width=\linewidth,keepaspectratio=true]{images/iod/DependencyInjection.eps}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Problema a Resolver}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public static void main(String[] args) {
+    // Para crear A
+    C c1 = new C_X();
+    D d1 = new D_X(c1);
+    C c2 = new C_X();
+    B b1 = new B_X(c2);
+    A a = new A_X(b1,d1);
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Solución - Inyector de Dependencias}
+    \begin{itemize}[<+->]
+        \item En un fichero de configuración, se especifican las subclases concretas a usar por cada clase abstracta.
+        \item Se marcan de algún modo las dependencias a inyectar. 
+        \item Se crean objetos \alert{sin parámetros} a través de una facilidad externa denominada \emph{inyector de dependencias}.
+        \item El inyector se encarga de crear los parámetros necesarios instanciando las subclases adecuadas conforme al fichero de configuración.
+    \end{itemize}
+\end{frame}
+
+%\subsection{Inyección de Dependencias en Spring}
+%
+%\begin{frame}[c]
+%    TODO
+%\end{frame}
+
+%\begin{frame}[c]
+%	\frametitle{Solución}
+%	\begin{center}
+%        // Gist Annotation
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%	\frametitle{Solución}
+%	\begin{center}
+%        // Gist XML
+%	\end{center}
+%\end{frame}
 
 \section{Sumario y Referencias}
 
@@ -411,7 +601,7 @@
 	\frametitle{Referencias}
     \nocite{}
 	\bibliographystyle{apalike}
-    \bibliography{arqEmp}
+    \bibliography{ae-tema1}
 \end{frame}
 
 \end{document}
