@@ -4,7 +4,7 @@
 
 \usepackage{listings}
 
-\title[Introducción a las Arq. Empresariales]{Introducción a las Arquitecturas Empresariales}
+\title[Arquitecturas SIE]{Introducción a las Arquitecturas de los Sistemas de Información Empresarial}
 
 \author[Pablo Sánchez]{\alert{Pablo Sánchez}}
 
@@ -47,12 +47,12 @@
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Comprender qué es un \emph{Sistema de Información Empresarial}.
+         \item Comprender qué es un \emph{Sistema de Información Empresarial (SIE)}.
          \item Comprender el concepto de \emph{Arquitectura Software}.
-         \item Conocer los principales patrones arquitectónicos que aplican a los Sistemas de Información Empresarial.
-         \item Comprender cómo se divide un sistema empresarial en capas.
-         \item Comprender la función de cada capa de un sistema sw.
-         \item Conocer las tecnologías que se utilizan para implementar las capas de un sistema sw.
+         \item Conocer los principales patrones arquitectónicos que aplican a los SIEs.
+         \item Comprender cómo se divide un SIE en capas.
+         \item Comprender la función de cada capa de un SIE.
+         \item Conocer las tecnologías que se utilizan para implementar las capas de un SIE.
          \item Comprender cómo se pueden independizar módulos sw mediante \emph{inyección de dependencias}.
     \end{enumerate}
 \end{frame}
@@ -103,9 +103,9 @@
     \end{enumerate}
 \end{frame}
 
-\section{Arquitecturas Sw}
+\section[Arquitecturas Sw]{Arquitecturas Sofware}
 
-\subsection{Concepto de Arquitectura Sw}
+\subsection{Concepto de Arquitectura Software}
 
 \begin{frame}[t]
    \frametitle{Fases del Ciclo de Vida Sw}
@@ -160,7 +160,7 @@
 \begin{frame}[t]
 	\frametitle{Definiciones Arquitectura Sw}
 	\begin{block}{Arquitectura Software~\cite{taylor:2009,pohl:2005}}
-		La arquitectura de un sistema sw es el conjunto de las principales decisiones de diseñoo realizadas sobre el sistema. Toda arquitectura sw tiene una \emph{estructura} y una \emph{textura}.
+		La arquitectura de un sistema sw es el conjunto de las principales decisiones de diseño realizadas sobre el sistema. Toda arquitectura sw tiene una \emph{estructura} y una \emph{textura}.
 	\end{block}
 	\uncover<2->{
 		\begin{block}{Textura Arquitectónica~\cite{jazayeri:2000,pohl:2005}}
@@ -186,7 +186,7 @@
 \subsection{Arquitecturas en Capas}
 
 \begin{frame}[c]
-    \frametitle{Arquitecturas en Capas - Principio Básico}
+    \frametitle{Arquitecturas en Capas - Principios Básicos}
     \begin{block}{Arquitecturas en Capas}
         \begin{itemize}[<+->]
             \item Un sistema se descompone en un conjunto de capas.
@@ -281,10 +281,10 @@
     \frametitle{Arquitecturas con Código Móvil - Beneficios}
     \begin{enumerate}[<+->]
         \item Permite distribuir y equilibrar la carga de trabajo.
+        \item Utilización y composición de recursos bajo demanda.
         \item Permite aumentar la disponibilidad y tolerancia a fallos del sistema.
         \item Facilitar el mantenimiento y la evolución del sistema.
         \item Ubicuidad de ciertas funciones del sistema.
-        \item Utilización y composición de recursos bajo demanda.
     \end{enumerate}
 \end{frame}
 
@@ -414,7 +414,7 @@
 \subsection[Tecnologías SIE]{Tecnologías de Implementación para Arquitecturas Empresariales}
 
 \begin{frame}[c]
-	\frametitle{Tecnologías de Implementación ES}
+	\frametitle{Tecnologías de Implementación SIEs}
 	\begin{center}
         \includegraphics[width=\linewidth,keepaspectratio=true]{images/enterpriseLayers/technologies.eps}
 	\end{center}
@@ -560,17 +560,28 @@ public static void main(String[] args) {
 	\frametitle{Solución - Inyector de Dependencias}
     \begin{itemize}[<+->]
         \item En un fichero de configuración, se especifican las subclases concretas a usar por cada clase abstracta.
-        \item Se marcan de algún modo las dependencias a inyectar. 
+        \item Se marcan de algún modo las dependencias a inyectar.
         \item Se crean objetos \alert{sin parámetros} a través de una facilidad externa denominada \emph{inyector de dependencias}.
         \item El inyector se encarga de crear los parámetros necesarios instanciando las subclases adecuadas conforme al fichero de configuración.
     \end{itemize}
 \end{frame}
 
-%\subsection{Inyección de Dependencias en Spring}
-%
-%\begin{frame}[c]
-%    TODO
-%\end{frame}
+\subsection{Inyección de Dependencias en Spring}
+
+\begin{frame}[c]
+	\frametitle{Inyección de Dependencias en Spring}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public static void main(String[] args) {
+    // Para crear A
+    C c1 = new C_X();
+    D d1 = new D_X(c1);
+    C c2 = new C_X();
+    B b1 = new B_X(c2);
+    A a = new A_X(b1,d1);
+}
+\end{lstlisting}
+\end{frame}
+\end{frame}
 
 %\begin{frame}[c]
 %	\frametitle{Solución}
