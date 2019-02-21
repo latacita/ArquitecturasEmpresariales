@@ -1,8 +1,7 @@
-\documentclass[a4paper,t,xcolor=pst,dvips,colortheme]{beamer}
+\documentclass[handout,a4paper,t,xcolor=pst,dvips,colortheme]{beamer}
 
 \input{slidesHeader.tex}
-
-\usepackage{listings}
+\input{customListings.tex}
 
 \title[Arquitecturas SIE]{Introducción a las Arquitecturas de los Sistemas de Información Empresarial}
 
@@ -395,7 +394,6 @@
         \item<4-> No precisan permisos especiales a nivel de red.
         \item<5-> Facilidad de mantenimiento (código móvil).
         \item<6-> Fuerte estandarización.
-        %% Balanceadores de carga
         \item<7-> Favorecen la \emph{recognizability}, reduciendo su curva de aprendizaje.
         \item<8-> Madurez de las herramientas.
     \end{enumerate}
@@ -450,25 +448,6 @@
         \includegraphics[width=\linewidth,keepaspectratio=true]{images/IoD/IoD.eps}
 	\end{center}
 \end{frame}
-
-\definecolor{pblue}{rgb}{0.13,0.13,1}
-\definecolor{pgreen}{rgb}{0,0.5,0}
-\definecolor{pred}{rgb}{0.9,0,0}
-\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
-
-\lstset{language=Java,
-  showspaces=false,
-  showtabs=false,
-  breaklines=true,
-  showstringspaces=false,
-  breakatwhitespace=true,
-  commentstyle=\color{pgreen},
-  keywordstyle=\color{pblue},
-  stringstyle=\color{pred},
-  basicstyle=\ttfamily,
-  moredelim=[il][\textcolor{pgrey}]{$$},
-  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
-}
 
 \begin{frame}[c,fragile]
 	\frametitle{Problema a Resolver II}
@@ -679,7 +658,7 @@ public class IoD_DemoConfig {
 
 \begin{frame}[c,fragile]
 	\frametitle{Inyección Basada en Configuración XML I}
-\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+\begin{lstlisting}[basicstyle=\footnotesize,language=XML]
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
    xmlns="http://www.springframework.org/schema/beans"
@@ -728,4 +707,4 @@ public class Runner implements CommandLineRunner {
     \bibliography{ae-tema1}
 \end{frame}
 
-\end{document}
+\end{document} 
