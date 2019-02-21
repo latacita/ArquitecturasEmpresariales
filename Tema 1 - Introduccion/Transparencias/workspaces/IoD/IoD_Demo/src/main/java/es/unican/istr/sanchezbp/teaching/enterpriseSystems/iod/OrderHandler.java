@@ -4,27 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
 public class OrderHandler {
 
+	@Autowired
 	protected NotificationSender sender;
 	
 	public OrderHandler() {
 	}
 	
-	@Autowired
-	@Qualifier("EmailNotifications")
-	public void setSender(NotificationSender aSender) {
-        this.sender = aSender;
-    }
-	
-	public void processOrder( ) {
-		User u = new User();
-		if (sender == null) {
-			System.out.println("Sender a null");
-		} else { 
-			this.sender.sendMessage("Orden creada",u);
-		}
+	public void processOrder(Order o) {
+		this.sender.sendMessage("Order accepted",o.getUser());
 	}
 	
 }

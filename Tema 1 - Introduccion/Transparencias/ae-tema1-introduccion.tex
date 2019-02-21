@@ -546,12 +546,12 @@ public class OrderHandler {
 	\frametitle{Problema a Resolver}
 \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
 public static void main(String[] args) {
-    // Para crear A
-    C c1 = new C_X();
-    D d1 = new D_X(c1);
-    C c2 = new C_X();
-    B b1 = new B_X(c2);
-    A a = new A_X(b1,d1);
+  // Para crear A me hace falta ...
+  C c1 = new C_X();
+  D d1 = new D_X(c1);
+  C c2 = new C_X();
+  B b1 = new B_X(c2);
+  A a = new A_X(b1,d1);
 }
 \end{lstlisting}
 \end{frame}
@@ -568,45 +568,158 @@ public static void main(String[] args) {
 
 \subsection{Inyección de Dependencias en Spring}
 
-\begin{frame}[c]
-	\frametitle{Inyección de Dependencias en Spring}
+\subsubsection{Inyección Simple}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Simple - Definición}
 \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
-public static void main(String[] args) {
-    // Para crear A
-    C c1 = new C_X();
-    D d1 = new D_X(c1);
-    C c2 = new C_X();
-    B b1 = new B_X(c2);
-    A a = new A_X(b1,d1);
+@Component
+public class OrderHandler {
+
+  @Autowired
+  protected NotificationSender sender;
+	
+  public OrderHandler() {}
+	
+  public void processOrder(Order o) {
+    this.sender.sendMessage("Order accepted",o.getUser());
+  }
 }
 \end{lstlisting}
 \end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Simple - Creación}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public class Runner {
+
+  @Autowired
+  protected ApplicationContext context;
+
+  @Override
+  public void run(String... arg0) throws Exception {
+    	
+    oh = context.getBean(OrderHandler.class);
+    ...		
+	oh.processOrder(o);
+  }
+}\end{lstlisting}
 \end{frame}
 
-%\begin{frame}[c]
-%	\frametitle{Solución}
-%	\begin{center}
-%        // Gist Annotation
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}[c]
-%	\frametitle{Solución}
-%	\begin{center}
-%        // Gist XML
-%	\end{center}
-%\end{frame}
+\subsubsection{Inyección Basada en Cualificadores}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Cualificadores I}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@Component
+@Qualifier("EmailNotifications")
+public class EmailNotificationSender extends NotificationSender {
+
+  @Override
+  public void sendMessage(String message, User u) {}
+	
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Cualificadores II}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@Component
+public class OrderHandler {
+
+  @Autowired
+  @Qualifier("EmailNotifications")
+  protected NotificationSender sender;
+	
+  public OrderHandler() {}
+	
+  public void processOrder(Order o) {
+    this.sender.sendMessage("Order accepted",o.getUser());
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsubsection{Inyección Basada en Anotaciones de Configuración}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Anotaciones de Configuración I}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@Component
+public class OrderHandler {
+
+  @Autowired
+  protected NotificationSender sender;
+	
+  public OrderHandler() {}
+	
+  public void processOrder(Order o) {
+    this.sender.sendMessage("Order accepted",o.getUser());
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Anotaciones de Configuración II}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@Configuration
+public class IoD_DemoConfig {
+	
+  @Bean
+  public NotificationSender sender() {
+    return new SmsNotificationSender();
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+\subsubsection{Inyección Basada en Configuración XML}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Configuración XML I}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+   xmlns="http://www.springframework.org/schema/beans"
+   ...>
+   <bean class="[...].iod.OrderHandler" autowire="byName">
+   </bean>
+   <bean id="sender"
+         class="[...].iod.EmailNotificationSender">
+   </bean>
+</beans>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Inyección Basada en Configuración XML II}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@SpringBootApplication
+@ImportResource("classpath:ApplicationContext.xml")
+public class Runner implements CommandLineRunner {
+\end{lstlisting}
+\end{frame}
 
 \section{Sumario y Referencias}
 
 \begin{frame}[c]
     \frametitle{¿Qué Tengo que Saber de Todo Esto?}
     \begin{enumerate}[<+->]
-        \item TODO
+        \item Comprender el concepto de \emph{Sistema de Información Empresarial}.
+        \item Comprender el concepto de \emph{Arquitectura Sw}.
+        \item Conocer los principios, ventajas e inconvenientes de las arquitecturas en capas, cliente-servidor y de código móvil.
+        \item Comprender qué es un sistema sw web, sus ventajas e inconvenientes.
+        \item Comprender por qué se divide un SIE en capas.
+        \item Conocer algunas de las tecnologías para la implementación de un SIE.
+        \item Comprender cómo se distribuyen las capas de un SIE.
+        \item Comprender qué es la \emph{inversión de dependencias}.
+        \item Comprender qué es la \emph{inyección de dependencias}.
+        \item Ser capaz de invertir dependencias \emph{por constructor} y \emph{por setter}.
+        \item Conocer cómo se inyectan dependencias en Spring.
     \end{enumerate}
 \end{frame}
-
-\subsection{Referencias}
 
 \begin{frame}
 	\frametitle{Referencias}
