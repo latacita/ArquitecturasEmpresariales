@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("SmsNotifications")
 public class SmsNotificationSender extends NotificationSender {
 
 	@Override
 	public void sendMessage(String message, User u) {
-		System.out.println(message + "[Sent by SMS]");
+		System.out.println(message + " [Sent by SMS]");
 	}
 
 }

@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
-public class Runner implements CommandLineRunner{
+@ImportResource("classpath:ApplicationContext.xml")
+public class Runner implements CommandLineRunner {
  
-    // @Autowired
-    // OrderHandler oh;
-     
+    @Autowired
+    private OrderHandler oh;
+
     public static void main(String[] args) {
         SpringApplication.run(Runner.class, args);
     }
@@ -18,12 +20,16 @@ public class Runner implements CommandLineRunner{
     @Override
     public void run(String... arg0) throws Exception {
     	
-        
-		System.out.println("Puta bean creada");
+		System.out.println("Application started.");
+		System.out.println("");
 		
-		oh.processOrder();
+		User u = new User();
+		Order o = new Order(u); 
 		
-		System.out.println("Aplicación correctamente arrancada");
+		oh.processOrder(o);
+		
+		System.out.println("");
+		System.out.println("Application finished.");
          
     }
 }
