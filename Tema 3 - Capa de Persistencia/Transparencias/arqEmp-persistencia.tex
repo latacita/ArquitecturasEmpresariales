@@ -342,95 +342,86 @@
 
 \section{Patrones de Acceso a Datos}
 
-\subsection{Objetos de Acceso a Datos}
-
 \subsubsection{Data Access Object}
-
-\subsubsection{Inheritance Mappers}
 
 \subsubsection{Metadata Mapping}
 
-\subsubsection{Repositories}
-
 \subsection{Patrones Auxiliares}
-
-\subsubsection{Query Object}
 
 \subsubsection{Lazy Load}
 
 \subsubsection{Identity Map}
 
-%% Persistence Context
+\subsubsection{Query Object}
 
-\subsubsection{Unit of Work}
+%\subsubsection{Unit of Work}
+%
+%\begin{frame}[c]
+%    \frametitle{Unit of Work - Problema}
+%    \begin{block}{Problema}
+%        Dentro de una misma \emph{transacción de negocio} se podrían realizar múltiples cambios en diversos objetos de dominio, por lo que estos cambios han de realizarse de manera transaccional.
+%        \begin{emumerate}
+%            \item<2-> Para poder gestionar la transacción, necesito saber con exactitud que ha cambiado, lo cual puede ser no trivial en ciertos casos (e.g., observadores).
+%            \item<3-> Si cada cambio se refleja automáticamente en el sistema de persistencia, se generan demasiadas comunicaciones de pequeño tamaño, alguna de las cuales podría ser incluso no necesaria .
+%            \item<4-> Necesito saber qué datos se han utilizado a lo largo de la transacción para poder determinar si dicha transacción es válida o no antes de confirmarla y cerrarla.
+%        \end{emumerate}
+%    \end{block}
+%    %% Añadir una transparencia con un bloque de código.
+%\end{frame}
 
-\begin{frame}[c]
-    \frametitle{Unit of Work - Problema}
-    \begin{block}{Problema}
-        Dentro de una misma \emph{transacción de negocio} se podrían realizar múltiples cambios en diversos objetos de dominio, por lo que estos cambios han de realizarse de manera transaccional.
-        \begin{emumerate}
-            \item<2-> Para poder gestionar la transacción, necesito saber con exactitud que ha cambiado, lo cual puede ser no trivial en ciertos casos (e.g., observadores).
-            \item<3-> Si cada cambio se refleja automáticamente en el sistema de persistencia, se generan demasiadas comunicaciones de pequeño tamaño, alguna de las cuales podría ser incluso no necesaria .
-            \item<4-> Necesito saber qué datos se han utilizado a lo largo de la transacción para poder determinar si dicha transacción es válida o no antes de confirmarla y cerrarla.
-        \end{emumerate}
-    \end{block}
-    %% Añadir una transparencia con un bloque de código.
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Unit of Work - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           \item<1-> Crear una clase denominada \emph{Unit of Work} donde se vayan registrando todos los cambios que se realizan dentro de una \emph{transacción de negocio}.
+%           \item<2-> Hacer que los objetos de dominio cuando cambien se registren dentro de la unidad de trabajo como cambiados.
+%           \item<3-> Hacer que los objetos de dominio utilizados dentro de una transacción se almacenen dentro de la unidad de trabajo como leídos.
+%           \item<4-> Añadir métodos a la unidad de trabajo para validar y cerrar la transacción.
+%       \end{enumerate}
+%    \end{block}
+%
+%    %% Añadir imagen UML de Unit of Work.
+%\end{frame}
 
-\begin{frame}[c]
-    \frametitle{Unit of Work - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           \item<1-> Crear una clase denominada \emph{Unit of Work} donde se vayan registrando todos los cambios que se realizan dentro de una \emph{transacción de negocio}.
-           \item<2-> Hacer que los objetos de dominio cuando cambien se registren dentro de la unidad de trabajo como cambiados.
-           \item<3-> Hacer que los objetos de dominio utilizados dentro de una transacción se almacenen dentro de la unidad de trabajo como leídos.
-           \item<4-> Añadir métodos a la unidad de trabajo para validar y cerrar la transacción.
-       \end{enumerate}
-    \end{block}
-
-    %% Añadir imagen UML de Unit of Work.
-\end{frame}
-
-\section{Patrones de Control de la Concurrencia}
-
-\subsection{Pessimistic Lock}
-
-\begin{frame}[c]
-    \frametitle{Pessimistic Lock - Problema}
-    \begin{block}{Problema}
-        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
-    \end{block}
-    %% Poner escenario ilustrando el problema
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Pessimistic Lock - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           Cada transacción bloquea los datos que necesita de manera que otras transacciones no puedan hacer uso de ellos.
-       \end{enumerate}
-    \end{block}
-\end{frame}
-
-\subsection{Optimistic Lock}
-
-\begin{frame}[c]
-    \frametitle{Optimistic Lock - Problema}
-    \begin{block}{Problema}
-        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
-    \end{block}
-    %% Poner escenario ilustrando el problema
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Optimistic - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           Permito lecturas concurrentes y antes de guardar los datos compruebo que los datos que he utilizado no han sido modificados por otra transacción. Si hubiesen sido modificados, aborto la transacción.
-       \end{enumerate}
-    \end{block}
-\end{frame}
-
+%\section{Patrones de Control de la Concurrencia}
+%
+%\subsection{Pessimistic Lock}
+%
+%\begin{frame}[c]
+%    \frametitle{Pessimistic Lock - Problema}
+%    \begin{block}{Problema}
+%        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+%    \end{block}
+%    %% Poner escenario ilustrando el problema
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Pessimistic Lock - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           Cada transacción bloquea los datos que necesita de manera que otras transacciones no puedan hacer uso de ellos.
+%       \end{enumerate}
+%    \end{block}
+%\end{frame}
+%
+%\subsection{Optimistic Lock}
+%
+%\begin{frame}[c]
+%    \frametitle{Optimistic Lock - Problema}
+%    \begin{block}{Problema}
+%        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+%    \end{block}
+%    %% Poner escenario ilustrando el problema
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Optimistic - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           Permito lecturas concurrentes y antes de guardar los datos compruebo que los datos que he utilizado no han sido modificados por otra transacción. Si hubiesen sido modificados, aborto la transacción.
+%       \end{enumerate}
+%    \end{block}
+%\end{frame}
 
 \section{Java Persistence API y Spring Data}
 
