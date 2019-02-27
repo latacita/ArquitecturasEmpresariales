@@ -42,18 +42,40 @@
 
 \section{Introducción}
 
-\subsection{Objetivos y Bibliografía}
+\begin{frame}
+    \frametitle{Capa de Persistencia}
+    \only<1|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+        }
+    }
+    \only<2|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+        }
+    }
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Responsabilidades de la Capa de Persistencia}
+	\begin{enumerate}[<+->]
+        \item Almacenar los datos de manera no volátil.
+        \item Recuperar datos del almacén persistente.
+        \item Asegurar la disponibilidad de los datos.
+        \item Controlar la integridad de los datos.
+        \item Asegurar un acceso eficiente a los datos.
+	\end{enumerate}
+\end{frame}
 
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
          \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
-         \item Comprender el funcionamiento de los puentes de persistencia de objetos.
-         \item Conocer los patrones de persistencia estructurales.
-         \item Conocer los patrones de acceso a datos.
-         \item Conocer los patrones de control de la concurrencia.
-         \item Ser capaz de utilizar JPA para generar esquemas relacionales.
-         \item Ser capaz de utilizar repositorios para acceder a datos persistentes.
+         \item Comprender el objetivo de los puentes objeto-(relacional).
+         \item Comprender los principios de los patrones de persistencia estructurales.
+         \item Comprender el funcionamiento de los patrones de acceso a datos.
+         \item Ser capaz de utilizar \emph{JPA} para generar esquemas relacionales.
+         \item Ser capaz de utilizar repositorios \emph{Spring} para acceder a datos.
     \end{enumerate}
 \end{frame}
 
@@ -77,55 +99,26 @@
         \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
         \newblock Manning
 
-        %% JPA
-
         %% Spring Data
 
     \end{thebibliography}
 \end{frame}
 
-\subsection{Contexto: Capa de Persistencia}
-
-\begin{frame}
-    \frametitle{Capa de Persistencia}
-    \only<1|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
-        }
-    }
-    \only<2|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-        }
-    }
-\end{frame}
-
-\begin{frame}[c]
-	\frametitle{Responsabilidades de la Capa de Persistencia}
-	\begin{enumerate}[<+->]
-        \item Almacenar los datos de manera no volátil.
-        \item Recuperar datos del almacén persistente,
-        \item Asegurar la disponibilidad de los datos.
-        \item Controlar la integridad de los datos.
-        \item Asegurar un acceso eficiente a los datos.
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Tecnologías de Persistencia}
-    \begin{description}[<+->]
-        \item[Relacional] Madurez, robustez y propiedades ACID.
-        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
-        \item[XML/JSON] Simplicidad.
-    \end{description}
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Tecnologías de Persistencia}
+%    \begin{description}[<+->]
+%        \item[Relacional] Madurez, robustez y propiedades ACID.
+%        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
+%        \item[XML/JSON] Simplicidad.
+%    \end{description}
+%\end{frame}
 
 \section{Puentes de Persistencia de Objetos}
 
 \subsection{Impedancia Objeto - Persistencia}
 
 \begin{frame}[c]
-    \frametitle{Impedancia Objeto - Persistencia}
+    \frametitle{Impedancia Objeto - (Relacional)}
     \begin{block}{Impedancia Objetual}
     La \emph{impedancia objetual} se refiere al desacoplamiento que puede existir en los conceptos del paradigma orientado a objetos y el paradigma utilizado por el almacén de persistencia.
     \end{block}
@@ -152,12 +145,12 @@
     \end{center}
 \end{frame}
 
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Granularidad}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
-    \end{center}
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Granularidad}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
+%    \end{center}
+%\end{frame}
 
 \begin{frame}[c]
     \frametitle{Impedancia OR: Atributos Multivaluados}
@@ -208,7 +201,7 @@
     \end{center}
 \end{frame}
 
-\subsection{Esquema Puentes Objeto-Persistencia}
+\subsection{Puentes Objeto-(Relacional)}
 
 \begin{frame}
     \frametitle{Puentes de Persistencia de Objetos}
