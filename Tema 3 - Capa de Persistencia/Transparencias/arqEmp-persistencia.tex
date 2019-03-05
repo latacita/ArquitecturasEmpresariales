@@ -17,334 +17,391 @@
 
 \begin{document}
 
-\begin{frame}[c]
-	\titlepage
-	\begin{columns}
-		\column{0.50\linewidth}
-			\centering
-    		\includegraphics[width=.28\textwidth,keepaspectratio=true]{images/istr.eps}
-		\column{0.50\linewidth}
-			\centering
-			\includegraphics[width=.25\textwidth,keepaspectratio=true]{images/uc.eps}
-	\end{columns}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{\alert{Advertencia}}
-    \begin{center}
-        Todo el material contenido en este documento no constituye en modo alguno una obra de referencia o apuntes oficiales mediante el cual se puedan preparar las pruebas evaluables necesarias para superar la asignatura. \ \\
-        \ \\
-        Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisi{\'o}n del contenido sobre el cual versar{\'a}n las mencionadas pruebas evaluables.  \ \\
-        \ \\
-        Dicho de forma m{\'a}s clara, \alert{estas transparencias no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura.}
-    \end{center}
-\end{frame}
-
-\section{Introducción}
-
-\begin{frame}
-    \frametitle{Capa de Persistencia}
-    \only<1|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
-        }
-    }
-    \only<2|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-        }
-    }
-\end{frame}
-
-\begin{frame}[c]
-	\frametitle{Responsabilidades de la Capa de Persistencia}
-	\begin{enumerate}[<+->]
-        \item Almacenar los datos de manera no volátil.
-        \item Recuperar datos del almacén persistente.
-        \item Asegurar la disponibilidad de los datos.
-        \item Controlar la integridad de los datos.
-        \item Asegurar un acceso eficiente a los datos.
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Objetivos del Tema}
-    \begin{enumerate}[<+->]
-         \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
-         \item Comprender el objetivo de los puentes objeto-(relacional).
-         \item Comprender los principios de los patrones de persistencia estructurales.
-         \item Comprender el funcionamiento de los patrones de acceso a datos.
-         \item Ser capaz de utilizar \emph{JPA} para generar esquemas relacionales.
-         \item Ser capaz de utilizar repositorios \emph{Spring} para acceder a datos.
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Bibliografía}
-    \begin{thebibliography}{1}
-
-        \bibitem[Fowler, 2002]{Fowler2002}
-        Fowler, M. (2002).
-        \newblock {\em {Patterns of Enterprise Application Architecture}}.
-        \newblock Addison-Wesley.
-
-        \bibitem[Esposito and Saltarello, 2014]{Esposito2014}
-        Esposito, D. y Saltarello, A. (2014).
-        \newblock {\em {Microsoft .NET - Architecting Applications for the
-          Enterprise}}. 2ª Ed..
-        \newblock Microsoft Press
-
-        \bibitem[Bauer, 2015]{Bauer2015}
-        Bauer, C., King. G. y Gregory G. (2015).
-        \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
-        \newblock Manning
-
-        %% Spring Data
-
-    \end{thebibliography}
-\end{frame}
-
 %\begin{frame}[c]
-%    \frametitle{Tecnologías de Persistencia}
-%    \begin{description}[<+->]
-%        \item[Relacional] Madurez, robustez y propiedades ACID.
-%        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
-%        \item[XML/JSON] Simplicidad.
-%    \end{description}
+%	\titlepage
+%	\begin{columns}
+%		\column{0.50\linewidth}
+%			\centering
+%    		\includegraphics[width=.28\textwidth,keepaspectratio=true]{images/istr.eps}
+%		\column{0.50\linewidth}
+%			\centering
+%			\includegraphics[width=.25\textwidth,keepaspectratio=true]{images/uc.eps}
+%	\end{columns}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{\alert{Advertencia}}
+%    \begin{center}
+%        Todo el material contenido en este documento no constituye en modo alguno una obra de referencia o apuntes oficiales mediante el cual se puedan preparar las pruebas evaluables necesarias para superar la asignatura. \ \\
+%        \ \\
+%        Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisi{\'o}n del contenido sobre el cual versar{\'a}n las mencionadas pruebas evaluables.  \ \\
+%        \ \\
+%        Dicho de forma m{\'a}s clara, \alert{estas transparencias no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura.}
+%    \end{center}
 %\end{frame}
 
-\section{Puentes de Persistencia de Objetos}
+%\section{Introducción}
+%
+%\begin{frame}
+%    \frametitle{Capa de Persistencia}
+%    \only<1|handout:2>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+%        }
+%    }
+%    \only<2|handout:2>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+%        }
+%    }
+%\end{frame}
+%
+%\begin{frame}[c]
+%	\frametitle{Responsabilidades de la Capa de Persistencia}
+%	\begin{enumerate}[<+->]
+%        \item Almacenar los datos de manera no volátil.
+%        \item Recuperar datos del almacén persistente.
+%        \item Asegurar la disponibilidad de los datos.
+%        \item Controlar la integridad de los datos.
+%        \item Asegurar un acceso eficiente a los datos.
+%	\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Objetivos del Tema}
+%    \begin{enumerate}[<+->]
+%         \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
+%         \item Comprender el objetivo de los puentes objeto-(relacional).
+%         \item Comprender los principios de los patrones de persistencia estructurales.
+%         \item Comprender el funcionamiento de los patrones de acceso a datos.
+%         \item Ser capaz de utilizar \emph{JPA} para generar esquemas relacionales.
+%         \item Ser capaz de utilizar repositorios \emph{Spring} para acceder a datos.
+%    \end{enumerate}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Bibliografía}
+%    \begin{thebibliography}{1}
+%
+%        \bibitem[Fowler, 2002]{Fowler2002}
+%        Fowler, M. (2002).
+%        \newblock {\em {Patterns of Enterprise Application Architecture}}.
+%        \newblock Addison-Wesley.
+%
+%        \bibitem[Esposito and Saltarello, 2014]{Esposito2014}
+%        Esposito, D. y Saltarello, A. (2014).
+%        \newblock {\em {Microsoft .NET - Architecting Applications for the
+%          Enterprise}}. 2ª Ed..
+%        \newblock Microsoft Press
+%
+%        \bibitem[Bauer, 2015]{Bauer2015}
+%        Bauer, C., King. G. y Gregory G. (2015).
+%        \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
+%        \newblock Manning
+%
+%        %% Spring Data
+%
+%    \end{thebibliography}
+%\end{frame}
+%
+%%\begin{frame}[c]
+%%    \frametitle{Tecnologías de Persistencia}
+%%    \begin{description}[<+->]
+%%        \item[Relacional] Madurez, robustez y propiedades ACID.
+%%        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
+%%        \item[XML/JSON] Simplicidad.
+%%    \end{description}
+%%\end{frame}
+%
+%\section{Puentes de Persistencia de Objetos}
+%
+%\subsection{Impedancia Objeto - Persistencia}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia Objeto - (Relacional)}
+%    \begin{block}{Impedancia Objetual}
+%    La \emph{impedancia objetual} se refiere al desacoplamiento que puede existir en los conceptos del paradigma orientado a objetos y el paradigma utilizado por el almacén de persistencia.
+%    \end{block}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia Objeto - Relacional}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch00.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia Objeto - Relacional}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch01.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Claves Primarias}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch09.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Atributos Multivaluados}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch02.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Atributos Multivaluados}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch03.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Herencia}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch04.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Navegabilidad Asociaciones}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch05.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Navegabilidad Asociaciones}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch06.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Asociaciones Muchos a Muchos}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch07.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Asociaciones Muchos a Muchos}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
+%    \end{center}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Impedancia OR: Granularidad}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
+%    \end{center}
+%\end{frame}
+%
+%\subsection{Puentes Objeto-(Relacional)}
+%
+%\begin{frame}
+%    \frametitle{Puentes de Persistencia de Objetos}
+%    \only<1|handout:3>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/ooMismatch/orm00.eps}
+%        }
+%    }
+%    \only<2|handout:3>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/ooMismatch/orm01.eps}
+%        }
+%    }
+%    \only<3|handout:3>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/ooMismatch/orm02.eps}
+%        }
+%    }
+%    \only<4|handout:3>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/ooMismatch/orm03.eps}
+%        }
+%    }
+%\end{frame}
+%
+%\section{Patrones Estructurales}
+%
+%\subsection{Class to Table}
+%
+%\begin{frame}[c]
+%    \frametitle{Class to Table}
+%    \begin{block}{Problema}
+%        \begin{enumerate}
+%            \item ¿Cómo transformo una clase a relacional?
+%        \end{enumerate}
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos multivaluados ni asociaciones con otras clases:
+%            \begin{enumerate}
+%                \item<3-> Crear una tabla con el mismo nombre de la clase.
+%                \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
+%                \item<5-> Asignar como tipo de la columna el tipo que corresponda a cada atributo.
+%            \end{enumerate}
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Class to Table}
+%    \rput[lt](3.5,0){
+%            \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
+%    }
+%    \only<2->{
+%        \rput[lt](3,-4){
+%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+%        }
+%    }
+%\end{frame}
+%
+%\subsection{Identity Field}
+%
+%\begin{frame}[c]
+%    \frametitle{Identity Field}
+%    \begin{block}{Problema}
+%        \begin{enumerate}
+%            \item<1-> ¿Cómo consigo que cada objeto de una clase tenga asociada una clave primaria que pueda utilizar para almacenarlo en una tabla de una base de datos relacional?
+%            \item<2-> ¿Cómo consigo mantener la correspondencia entre cada objeto de una clase y su correspondiente representación relacional cuando los objetos no tienen clave natural?
+%        \end{enumerate}
+%    \end{block}
+%    \uncover<3->{
+%        \begin{block}{Solución}
+%            \begin{enumerate}
+%                \item<4-> Incorporar un nuevo atributo, representando una clave artificial, para aquellos objetos que no poseen una clave natural, o cuya clave natural se considere inadecuada para el modelo relacional.
+%                \item<5-> Para las claves artificiales, elegir una estrategia de generación.
+%            \end{enumerate}
+%        \end{block}
+%    }
+%    %% To be discussed:
+%    %% - Natural vs Artifical Key
+%    %% - Single vs Compound Key
+%    %% - Key Type
+%    %% - Table Unique vs Database Unique
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Generación de Claves Artificales}
+%    \begin{enumerate}
+%        \item<1-> Columna autoincrementada
+%            \begin{itemize}
+%                \item<2-> Clave no disponible hasta finalizar la transacción.
+%                \item<3-> Impide \emph{escrituras en batch}
+%            \end{itemize}
+%        \item<4-> Sequence
+%            \begin{itemize}
+%                \item<5-> No disponible en todos los gestores.
+%            \end{itemize}
+%        \item<6-> GUID.
+%            \begin{itemize}
+%                \item<7-> Demasiado grandes y complejos.
+%            \end{itemize}
+%        \item<8-> Generada por la aplicación (ORM).
+%    \end{enumerate}
+%\end{frame}
+%
 
-\subsection{Impedancia Objeto - Persistencia}
+\subsection{Foreign Key Mapping}
 
 \begin{frame}[c]
-    \frametitle{Impedancia Objeto - (Relacional)}
-    \begin{block}{Impedancia Objetual}
-    La \emph{impedancia objetual} se refiere al desacoplamiento que puede existir en los conceptos del paradigma orientado a objetos y el paradigma utilizado por el almacén de persistencia.
-    \end{block}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia Objeto - Relacional}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch00.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia Objeto - Relacional}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch01.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Claves Primarias}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch09.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Atributos Multivaluados}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch02.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Atributos Multivaluados}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch03.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Herencia}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch04.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Navegabilidad Asociaciones}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch05.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Navegabilidad Asociaciones}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch06.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Asociaciones Muchos a Muchos}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch07.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Asociaciones Muchos a Muchos}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Granularidad}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
-    \end{center}
-\end{frame}
-
-\subsection{Puentes Objeto-(Relacional)}
-
-\begin{frame}
-    \frametitle{Puentes de Persistencia de Objetos}
-    \only<1|handout:3>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/ooMismatch/orm00.eps}
-        }
-    }
-    \only<2|handout:3>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/ooMismatch/orm01.eps}
-        }
-    }
-    \only<3|handout:3>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/ooMismatch/orm02.eps}
-        }
-    }
-    \only<4|handout:3>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/ooMismatch/orm03.eps}
-        }
-    }
-\end{frame}
-
-\section{Patrones Estructurales}
-
-\subsubsection{Class to Table}
-
-\begin{frame}[c]
-    \frametitle{Class to Table}
+    \frametitle{Foreign Key Mapping}
     \begin{block}{Problema}
-        \begin{enumerate}
-            \item ¿Cómo transformo una clase a relacional?
-        \end{enumerate}
+        ¿Cómo transformo una asociación entre dos clases $A$ y $B$ al modelo relacional?
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos multivaluados ni asociaciones con otras clases:
-            \begin{enumerate}
-                \item<3-> Crear una tabla con el mismo nombre de la clase.
-                \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
-                \item<5-> Asignar como tipo de la columna el tipo que corresponda a cada atributo.
-            \end{enumerate}
+            Si una clase $A$ posee un extremo de asociación referenciando una clase $B$
+            con multiplicidad máxima uno, puedo añadir en la tabla correspondiente a la clase $A$ una clave externa a la tabla de la clase $B$.
         \end{block}
     }
 \end{frame}
 
 \begin{frame}
-    \frametitle{Class to Table}
-    \rput[lt](3.5,0){
-            \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
+    \frametitle{Foreign Key Mapping}
+    \rput[lt](1.5,0,5){
+            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
     }
     \only<2->{
-        \rput[lt](3,-4){
-                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+        \rput[lt](2.25,-3.5){
+                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
         }
     }
 \end{frame}
 
-\subsection{Identity Field}
+\subsection{Association Table Mapping}
 
 \begin{frame}[c]
-    \frametitle{Identity Field}
+    \frametitle{Association Table Mapping}
     \begin{block}{Problema}
-        \begin{enumerate}
-            \item<1-> ¿Cómo consigo que cada objeto de una clase tenga asociada una clave primaria que pueda utilizar para almacenarlo en una tabla de una base de datos relacional?
-            \item<2-> ¿Cómo consigo mantener la correspondencia entre cada objeto de una clase y su correspondiente representación relacional cuando los objetos no tienen clave natural?
-        \end{enumerate}
+        ¿Cómo transformo una asociación entre clases al modelo relacional?
     \end{block}
-    \uncover<3->{
+    \uncover<2->{
         \begin{block}{Solución}
             \begin{enumerate}
-                \item<4-> Incorporar un nuevo atributo, representando una clave artificial, para aquellos objetos que no poseen una clave natural, o cuya clave natural se considere inadecuada para el modelo relacional.
-                \item<5-> Para las claves artificiales, elegir una estrategia de generación.
-            \end{enumerate}
-        \end{block}
-    }
-    %% To be discussed:
-    %% - Natural vs Artifical Key
-    %% - Single vs Compound Key
-    %% - Key Type
-    %% - Table Unique vs Database Unique
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Generación de Claves Artificales}
-    \begin{enumerate}
-        \item<1-> Columna autoincrementada
-            \begin{itemize}
-                \item<2-> Clave no disponible hasta finalizar la transacción.
-                \item<3-> Impide \emph{escrituras en batch}
-            \end{itemize}
-        \item<4-> Sequence
-            \begin{itemize}
-                \item<5-> No disponible en todos los gestores.
-            \end{itemize}
-        \item<6-> GUID.
-            \begin{itemize}
-                \item<7-> Demasiado grandes y complejos.
-            \end{itemize}
-        \item<8-> Generada por la aplicación (ORM).
-    \end{enumerate}
-\end{frame}
-
-\subsubsection{Embedded Value}
-
-\begin{frame}[c]
-    \frametitle{Embedded Value}
-    \begin{block}{Problema}
-        \begin{enumerate}
-            ¿Cómo mapeo \emph{value objects} de manera eficiente?
-        \end{enumerate}
-    \end{block}
-    \uncover<3->{
-        \begin{block}{Solución}
-            Si una clase $C$ tiene una asociación de multiplicidad máximana $1$ con un \emph{value object } $V$, puedo simplemente añadir los campos de $V$ a la clase $C$ y luego mapear $C$ como una clase simple.
+                \item<2-> Si ambos extremos de asociación tiene multiplicidad superior a uno, crear una tabla intermedia $A\_B$ que almacene la relación entre ambas clases.
+                \item<3-> La tabla intermedia almacenará como datos las claves primarias asociadas a las clases $A$ y $B$. 
+                \item<4-> Cada una de estas claves primarias almacenadas será una clave externa a su correspondiente tabla.
+                \item<5-> La clave primaria de la tabla intermedia será la unión de las claves primarias de las tablas relacionadas.
+             \end{enumerate}
         \end{block}
     }
 \end{frame}
 
 \begin{frame}
-    \frametitle{Embedded Value}
-    \only<1:handout:1>{ 
-        \rput[lt](3.5,0){
-%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
-        }
+    \frametitle{Association Table Mapping}
+    \rput[lt](1.5,0,5){
+            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
     }
-    \only<2-:handout:0>{ 
-        \rput[lt](3.5,0){
-%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
-        }
-    }
-    \only<3->{
-        \rput[lt](3,-4){
-%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+    \only<2->{
+        \rput[lt](2.25,-3.5){
+                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
         }
     }
 \end{frame}
 
-\subsubsection{Foreign Key Mapping}
 
-\subsubsection{Association Table Mapping}
+\subsection{Association Table Mapping}
+
+%\subsection{Embedded Value}
+%
+%\begin{frame}[c]
+%    \frametitle{Embedded Value}
+%    \begin{block}{Problema}
+%        ¿Cómo mapeo asociaciones con \emph{value objects} de manera eficiente?
+%    \end{block}
+%    \uncover<3->{
+%        \begin{block}{Solución}
+%            Si una clase $C$ tiene una asociación de multiplicidad máxima $1$ con un \emph{value object } $V$, puedo simplemente añadir los campos de $V$ a la clase $C$ y luego mapear $C$ como una clase simple.
+%        \end{block}
+%    }
+%\end{frame}
+
+\begin{frame}
+    \frametitle{Embedded Value}
+    \only<1|handout:1>{
+        \rput[lt](3.25,0){
+                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue00.eps}
+        }
+    }
+    \only<2-|handout:0>{
+        \rput[lt](3.2,0){
+                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue01.eps}
+        }
+    }
+    \only<3-|handout:1>{
+        \rput[lt](1,-4){
+                \includegraphics[width=0.75\linewidth]{images/structure/embeddedValue02.eps}
+        }
+    }
+\end{frame}
+
 
 \subsection{Inheritance Mapping}
 
