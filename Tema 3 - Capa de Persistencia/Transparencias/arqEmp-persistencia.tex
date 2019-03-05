@@ -145,13 +145,6 @@
     \end{center}
 \end{frame}
 
-%\begin{frame}[c]
-%    \frametitle{Impedancia OR: Granularidad}
-%    \begin{center}
-%        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
-%    \end{center}
-%\end{frame}
-
 \begin{frame}[c]
     \frametitle{Impedancia OR: Atributos Multivaluados}
     \begin{center}
@@ -201,6 +194,13 @@
     \end{center}
 \end{frame}
 
+\begin{frame}[c]
+    \frametitle{Impedancia OR: Granularidad}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
+    \end{center}
+\end{frame}
+
 \subsection{Puentes Objeto-(Relacional)}
 
 \begin{frame}
@@ -229,8 +229,6 @@
 
 \section{Patrones Estructurales}
 
-\subsection{Conceptos Básicos}
-
 \subsubsection{Class to Table}
 
 \begin{frame}[c]
@@ -242,7 +240,7 @@
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos:
+            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos multivaluados ni asociaciones con otras clases:
             \begin{enumerate}
                 \item<3-> Crear una tabla con el mismo nombre de la clase.
                 \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
@@ -264,35 +262,91 @@
     }
 \end{frame}
 
-
-\subsubsection{Identity Field}
+\subsection{Identity Field}
 
 \begin{frame}[c]
     \frametitle{Identity Field}
     \begin{block}{Problema}
         \begin{enumerate}
-            \item ¿Cómo obtengo una clave primaria para cada objeto que necesito guardar en la base de datos relacional?
+            \item<1-> ¿Cómo consigo que cada objeto de una clase tenga asociada una clave primaria que pueda utilizar para almacenarlo en una tabla de una base de datos relacional?
+            \item<2-> ¿Cómo consigo mantener la correspondencia entre cada objeto de una clase y su correspondiente representación relacional cuando los objetos no tienen clave natural?
         \end{enumerate}
     \end{block}
-    \uncover<2->{
+    \uncover<3->{
         \begin{block}{Solución}
             \begin{enumerate}
-                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase.
-                \item<3-> Añadir un nuevo atributo que ejerza de clave primaria.
+                \item<4-> Incorporar un nuevo atributo, representando una clave artificial, para aquellos objetos que no poseen una clave natural, o cuya clave natural se considere inadecuada para el modelo relacional.
+                \item<5-> Para las claves artificiales, elegir una estrategia de generación.
             \end{enumerate}
+        \end{block}
+    }
+    %% To be discussed:
+    %% - Natural vs Artifical Key
+    %% - Single vs Compound Key
+    %% - Key Type
+    %% - Table Unique vs Database Unique
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Generación de Claves Artificales}
+    \begin{enumerate}
+        \item<1-> Columna autoincrementada
+            \begin{itemize}
+                \item<2-> Clave no disponible hasta finalizar la transacción.
+                \item<3-> Impide \emph{escrituras en batch}
+            \end{itemize}
+        \item<4-> Sequence
+            \begin{itemize}
+                \item<5-> No disponible en todos los gestores.
+            \end{itemize}
+        \item<6-> GUID.
+            \begin{itemize}
+                \item<7-> Demasiado grandes y complejos.
+            \end{itemize}
+        \item<8-> Generada por la aplicación (ORM).
+    \end{enumerate}
+\end{frame}
+
+\subsubsection{Embedded Value}
+
+\begin{frame}[c]
+    \frametitle{Embedded Value}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            ¿Cómo mapeo \emph{value objects} de manera eficiente?
+        \end{enumerate}
+    \end{block}
+    \uncover<3->{
+        \begin{block}{Solución}
+            Si una clase $C$ tiene una asociación de multiplicidad máximana $1$ con un \emph{value object } $V$, puedo simplemente añadir los campos de $V$ a la clase $C$ y luego mapear $C$ como una clase simple.
         \end{block}
     }
 \end{frame}
 
-\subsection{Transformación de Asociaciones}
-
-\subsubsection{Embedded Value}
+\begin{frame}
+    \frametitle{Embedded Value}
+    \only<1:handout:1>{ 
+        \rput[lt](3.5,0){
+%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
+        }
+    }
+    \only<2-:handout:0>{ 
+        \rput[lt](3.5,0){
+%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table00.eps}
+        }
+    }
+    \only<3->{
+        \rput[lt](3,-4){
+%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+        }
+    }
+\end{frame}
 
 \subsubsection{Foreign Key Mapping}
 
 \subsubsection{Association Table Mapping}
 
-\subsection{Transformación de Herencias}
+\subsection{Inheritance Mapping}
 
 \subsubsection{Single Table Inheritance}
 
