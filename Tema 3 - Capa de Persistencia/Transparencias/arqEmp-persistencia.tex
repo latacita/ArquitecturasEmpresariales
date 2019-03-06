@@ -399,32 +399,32 @@
 %    }
 %\end{frame}
 
-\subsection{Serialised Lob}
-
-\begin{frame}[c]
-    \frametitle{Serialised Blob}
-    \begin{block}{Problema}
-        ¿Cómo mapeo asociaciones con \emph{value objects} y/o \emph{entities} internas a un \emph{aggregate} de manera eficiente?
-    \end{block}
-    \uncover<3->{
-        \begin{block}{Solución}
-            Guardar todo un grafo de objetos en una única columna de tipo \emph{LOB}.
-        \end{block}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Serialised Blob}
-    \rput[lt](1.50,0){
-        \includegraphics[width=0.75\linewidth]{images/structure/serializedBlob00.eps}
-    }
-    \only<2->{
-        \rput[lt](4.5,-3){
-                \includegraphics[width=0.18\linewidth]{images/structure/serializedBlob01.eps}
-        }
-    }
-    %% BLOB vs CLOB
-\end{frame}
+%\subsection{Serialised Lob}
+%
+%\begin{frame}[c]
+%    \frametitle{Serialised Blob}
+%    \begin{block}{Problema}
+%        ¿Cómo mapeo asociaciones con \emph{value objects} y/o \emph{entities} internas a un \emph{aggregate} de manera eficiente?
+%    \end{block}
+%    \uncover<3->{
+%        \begin{block}{Solución}
+%            Guardar todo un grafo de objetos en una única columna de tipo \emph{LOB}.
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Serialised Blob}
+%    \rput[lt](1.50,0){
+%        \includegraphics[width=0.75\linewidth]{images/structure/serializedBlob00.eps}
+%    }
+%    \only<2->{
+%        \rput[lt](4.5,-3){
+%                \includegraphics[width=0.18\linewidth]{images/structure/serializedBlob01.eps}
+%        }
+%    }
+%    %% BLOB vs CLOB
+%\end{frame}
 
 %\subsection{Single Table Inheritance}
 %
@@ -440,8 +440,8 @@
 %            \begin{enumerate}
 %                \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
 %                \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
-%                \item<3-> Transforma la clase resultante a una tabla.
-%                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de la tabla resultante, los atributos que no correspondan a dicha instance simplemente se ignoran.
+%                \item<4-> Transforma la clase resultante a una tabla.
+%                \item<5-> Cuando un objeto de dicha jerarquía se almacena dentro de la tabla resultante, los atributos que no correspondan a dicha instance simplemente se ignoran.
 %            \end{enumerate}
 %        \end{block}
 %    }
@@ -449,21 +449,77 @@
 %
 %\begin{frame}
 %    \frametitle{Single Table Inheritance}
-%    \rput[lt](3.5,0){
-%            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+%    \only<1|handout:1>{
+%        \rput[lt](3.5,0.5){
+%                \includegraphics[width=0.40\linewidth]{images/structure/singleTable00.eps}
+%        }
 %    }
-%%    \only<2->{
-%%%        \rput[lt](3,-4){
-%%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
-%%%        }
-%%    }
+%    \only<2-|handout:0>{
+%        \rput[lt](2.70,0.5){
+%                \includegraphics[width=0.55\linewidth]{images/structure/singleTable02.eps}
+%        }
+%    }
+%    \only<3-|handout:1>{
+%        \rput[lt](0.75,-4){
+%                \includegraphics[width=0.80\linewidth]{images/structure/singleTable01.eps}
+%        }
+%    }
+%    %% Simple
+%    %% Recupera bien todos los objetos de una jearquía (consultas polimórficas).
+%    %% Columnas vacías y valores nulos.
+%    %% Una tabla para todos puede generar demasiado contención y castigar la búsqueda por subclases.
+%    %% Precisa de una clave a nivel de padre.
 %\end{frame}
 
-\subsubsection{Concrete Table Inheritance}
+\subsection{Concrete Table Inheritance}
 
-\subsubsection{Class Table Inheritance}
+\begin{frame}[c]
+    \frametitle{Concrete Table Inheritance}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Hacer descender los atributos de la clases abstractas a las clases concretas.
+                \item<3-> Transformar cada clase resultante a una tabla.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
 
-\subsubsection{Comparación de Transformación de Herencias}
+\begin{frame}
+    \frametitle{Concrete Table Inheritance}
+    \only<1|handout:1>{
+        \rput[lt](2.5,0.5){
+                \includegraphics[width=0.55\linewidth]{images/structure/concreteTable00.eps}
+        }
+    }
+    \only<2-|handout:0>{
+        \rput[lt](2.5,0.5){
+                \includegraphics[width=0.55\linewidth]{images/structure/concreteTable01.eps}
+        }
+    }
+    \only<3-|handout:1>{
+        \rput[lt](3,-4){
+                \includegraphics[width=0.50\linewidth]{images/structure/concreteTable02.eps}
+        }
+    }
+    %% El SGBD podría no controlar la colisión de claves.
+    %% Gestiona mal las asociaciones a nivel de superclase.
+    %% Gestiona mal las consultas polimóficas.
+    %% No posee valores nulos
+    %% Mejora la contención de la base de datos. 
+    %% No penaliza las operaciones a nivel de subclase.
+    %% Hay columnas redundantes que pueden afectar a la evolución de la base de datos
+\end{frame}
+
+
+\subsection{Class Table Inheritance}
+
+\subsection{Comparación de Estrategias de Transformación de Herencias}
 
 \section{Patrones de Acceso a Datos}
 
