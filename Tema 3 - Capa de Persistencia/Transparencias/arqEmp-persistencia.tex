@@ -308,66 +308,63 @@
 %\end{frame}
 %
 
-\subsection{Foreign Key Mapping}
+%\subsection{Foreign Key Mapping}
+%
+%\begin{frame}[c]
+%    \frametitle{Foreign Key Mapping}
+%    \begin{block}{Problema}
+%        ¿Cómo transformo una asociación entre dos clases $A$ y $B$ al modelo relacional?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            Si una clase $A$ posee un extremo de asociación referenciando una clase $B$
+%            con multiplicidad máxima uno, puedo añadir en la tabla correspondiente a la clase $A$ una clave externa a la tabla de la clase $B$.
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Foreign Key Mapping}
+%    \rput[lt](1.5,0.5){
+%            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
+%    }
+%    \only<2->{
+%        \rput[lt](2.25,-3.5){
+%                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
+%        }
+%    }
+%\end{frame}
 
-\begin{frame}[c]
-    \frametitle{Foreign Key Mapping}
-    \begin{block}{Problema}
-        ¿Cómo transformo una asociación entre dos clases $A$ y $B$ al modelo relacional?
-    \end{block}
-    \uncover<2->{
-        \begin{block}{Solución}
-            Si una clase $A$ posee un extremo de asociación referenciando una clase $B$
-            con multiplicidad máxima uno, puedo añadir en la tabla correspondiente a la clase $A$ una clave externa a la tabla de la clase $B$.
-        \end{block}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Foreign Key Mapping}
-    \rput[lt](1.5,0,5){
-            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
-    }
-    \only<2->{
-        \rput[lt](2.25,-3.5){
-                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
-        }
-    }
-\end{frame}
-
-\subsection{Association Table Mapping}
-
-\begin{frame}[c]
-    \frametitle{Association Table Mapping}
-    \begin{block}{Problema}
-        ¿Cómo transformo una asociación entre clases al modelo relacional?
-    \end{block}
-    \uncover<2->{
-        \begin{block}{Solución}
-            \begin{enumerate}
-                \item<2-> Si ambos extremos de asociación tiene multiplicidad superior a uno, crear una tabla intermedia $A\_B$ que almacene la relación entre ambas clases.
-                \item<3-> La tabla intermedia almacenará como datos las claves primarias asociadas a las clases $A$ y $B$. 
-                \item<4-> Cada una de estas claves primarias almacenadas será una clave externa a su correspondiente tabla.
-                \item<5-> La clave primaria de la tabla intermedia será la unión de las claves primarias de las tablas relacionadas.
-             \end{enumerate}
-        \end{block}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Association Table Mapping}
-    \rput[lt](1.5,0,5){
-            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
-    }
-    \only<2->{
-        \rput[lt](2.25,-3.5){
-                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
-        }
-    }
-\end{frame}
-
-
-\subsection{Association Table Mapping}
+%\subsection{Association Table Mapping}
+%
+%\begin{frame}[c]
+%    \frametitle{Association Table Mapping}
+%    \begin{block}{Problema}
+%        ¿Cómo transformo una asociación entre clases al modelo relacional?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            \begin{enumerate}
+%                \item<2-> Si ambos extremos de asociación tiene multiplicidad superior a uno, crear una tabla intermedia $A\_B$ que almacene la relación entre ambas clases.
+%                \item<3-> La tabla intermedia almacenará como datos las claves primarias asociadas a las clases $A$ y $B$.
+%                \item<4-> Cada una de estas claves primarias almacenadas será una clave externa a su correspondiente tabla.
+%                \item<5-> La clave primaria de la tabla intermedia será la unión de las claves primarias de las tablas relacionadas.
+%             \end{enumerate}
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Association Table Mapping}
+%    \rput[lt](1.25,0.5){
+%            \includegraphics[width=0.80\linewidth]{images/structure/associationTable00.eps}
+%    }
+%    \only<2->{
+%        \rput[lt](0.85,-3){
+%                \includegraphics[width=0.75\linewidth]{images/structure/associationTable01.eps}
+%        }
+%    }
+%\end{frame}
 
 %\subsection{Embedded Value}
 %
@@ -383,60 +380,84 @@
 %    }
 %\end{frame}
 
-\begin{frame}
-    \frametitle{Embedded Value}
-    \only<1|handout:1>{
-        \rput[lt](3.25,0){
-                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue00.eps}
-        }
-    }
-    \only<2-|handout:0>{
-        \rput[lt](3.2,0){
-                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue01.eps}
-        }
-    }
-    \only<3-|handout:1>{
-        \rput[lt](1,-4){
-                \includegraphics[width=0.75\linewidth]{images/structure/embeddedValue02.eps}
-        }
-    }
-\end{frame}
+%\begin{frame}
+%    \frametitle{Embedded Value}
+%    \only<1|handout:1>{
+%        \rput[lt](3.25,0){
+%                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue00.eps}
+%        }
+%    }
+%    \only<2-|handout:0>{
+%        \rput[lt](3.2,0){
+%                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue01.eps}
+%        }
+%    }
+%    \only<3-|handout:1>{
+%        \rput[lt](1,-4){
+%                \includegraphics[width=0.75\linewidth]{images/structure/embeddedValue02.eps}
+%        }
+%    }
+%\end{frame}
 
-
-\subsection{Inheritance Mapping}
-
-\subsubsection{Single Table Inheritance}
+\subsection{Serialised Lob}
 
 \begin{frame}[c]
-    \frametitle{Single Table Inheritance}
+    \frametitle{Serialised Blob}
     \begin{block}{Problema}
-        \begin{enumerate}
-            \item ¿Cómo implemento una jerarquía de herencia en un esquema relacional?
-        \end{enumerate}
+        ¿Cómo mapeo asociaciones con \emph{value objects} y/o \emph{entities} internas a un \emph{aggregate} de manera eficiente?
     \end{block}
-    \uncover<2->{
+    \uncover<3->{
         \begin{block}{Solución}
-            \begin{enumerate}
-                \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
-                \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
-                \item<3-> Transforma la clase resultante a una tabla.
-                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de una tabla, los atributos que no correspondan a dicha instance simplemente se ignoran.
-            \end{enumerate}
+            Guardar todo un grafo de objetos en una única columna de tipo \emph{LOB}.
         \end{block}
     }
 \end{frame}
 
 \begin{frame}
-    \frametitle{Single Table Inheritance}
-    \rput[lt](3.5,0){
-            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+    \frametitle{Serialised Blob}
+    \rput[lt](1.50,0){
+        \includegraphics[width=0.75\linewidth]{images/structure/serializedBlob00.eps}
     }
-%    \only<2->{
-%%        \rput[lt](3,-4){
-%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
-%%        }
-%    }
+    \only<2->{
+        \rput[lt](4.5,-3){
+                \includegraphics[width=0.18\linewidth]{images/structure/serializedBlob01.eps}
+        }
+    }
+    %% BLOB vs CLOB
 \end{frame}
+
+%\subsection{Single Table Inheritance}
+%
+%\begin{frame}[c]
+%    \frametitle{Single Table Inheritance}
+%    \begin{block}{Problema}
+%        \begin{enumerate}
+%            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
+%        \end{enumerate}
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            \begin{enumerate}
+%                \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
+%                \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
+%                \item<3-> Transforma la clase resultante a una tabla.
+%                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de la tabla resultante, los atributos que no correspondan a dicha instance simplemente se ignoran.
+%            \end{enumerate}
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Single Table Inheritance}
+%    \rput[lt](3.5,0){
+%            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+%    }
+%%    \only<2->{
+%%%        \rput[lt](3,-4){
+%%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
+%%%        }
+%%    }
+%\end{frame}
 
 \subsubsection{Concrete Table Inheritance}
 
