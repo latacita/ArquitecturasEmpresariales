@@ -46,7 +46,106 @@
 
 \section{Introducción}
 
+\begin{frame}
+    \frametitle{Puentes de Persistencia de Objetos}
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/introduction/orm02.eps}
+        }
+    }
+\end{frame}
 
+\begin{frame}[c]
+    \frametitle{JPA + Spring Data}
+    \begin{block}{JPA}
+        \begin{enumerate}
+            \item \emph{Java Persistence API (JPA)} es una especificación estándar o interfaz de cómo realizar un puente de persistencia en Java.
+            \item<2-> Proporciona dos maneras concretas (anotaciones y fichero externo XML) de especificar un \emph{metadata mapping}.
+            \item<3-> Especifica la interfaz y funcionamiento de una serie de elementos para realizar el acceso a datos (e.g. \emph{PesistenceContext}).
+            \item<4-> Precisan de un ORM que la implemente (e.g. Hibernate, Spring).
+        \end{enumerate}
+    \end{block}
+    \uncover<5->{
+        \begin{block}{Spring Data}
+            Framework que proporciona facilidades para la definición de repositorios compatible con diversas tecnologías y de persistencia, entre ellas JPA.
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Objetivos del Tema}
+    \begin{enumerate}[<+->]
+         \item Ser capaz de transformar un conjunto de POJOs en un esquema relacional usando anotaciones JPA.
+         \item Ser capaz crear repositorios JPA y \emph{Spring}.
+         \item Ser capaz de utilizar repositorios Spring para interactuar con la capa de persistencia.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Bibliografía}
+    \begin{thebibliography}{1}
+
+        \bibitem[Bauer, 2015]{Bauer2015}
+        Bauer, C., King. G. y Gregory G. (2015).
+        \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
+        \newblock Manning
+
+        %% Spring Data
+
+    \end{thebibliography}
+\end{frame}
+
+\section{Anotaciones JPA}
+
+\begin{frame}[c]
+    \frametitle{Entidades y Value Objects}
+    \begin{description}
+        \item[@Entity] Indica que un elemento es una entidad y se transformará a su correspondiente tabla.
+        \item[@Embeddable] Indica que un elemento es un \emph{value object} y por tanto puede ser incrustado dentro de otro objeto.
+    \end{description}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identificación de Entidades}
+    \begin{description}
+        \item[@Id] Especifica que un atributo de la clase ejerce de clave primaria.
+        \item[@GeneratedValue] Indica que se desea que una clave artificial sea autogenerada.
+        \item[@IdClass,@EmbeededId] Permite la creación de claves compuestas por varios campos.
+    \end{description}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Transformación de Asociaciones}
+    \begin{description}
+        \item[@OneToOne]
+        \item[@OneToMany]
+        \item[@ManyToOne]
+        \item[@ManyToMany]
+        \item[@Embedded]
+        \item[@ElementsCollection]
+        \item[mappeddBy]
+    \end{description}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Transformación de Herencias}
+    \begin{description}
+        \item[@@Inheritance(strategy=)]
+        \item[@DiscriminatorValue]
+    \end{description}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Personalización de Elementos}
+    \begin{description}
+        \item[@Table]
+        \item[@Column]
+        \item[@JoinColumn]
+        \item
+    \end{description}
+\end{frame}
+
+
+\section{Spring Repositories}
 
 \section{Sumario}
 
