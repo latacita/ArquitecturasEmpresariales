@@ -450,7 +450,7 @@
 %        \end{block}
 %    }
 %\end{frame}
-%
+
 %\begin{frame}
 %    \frametitle{Single Table Inheritance}
 %    \only<1|handout:1>{
@@ -474,7 +474,7 @@
 %    %% Una tabla para todos puede generar demasiado contención y castigar la búsqueda por subclases.
 %    %% Precisa de una clave a nivel de padre.
 %\end{frame}
-
+%
 %\subsection{Concrete Table Inheritance}
 %
 %\begin{frame}[c]
@@ -520,119 +520,118 @@
 %    %% Hay columnas redundantes que pueden afectar a la evolución de la base de datos
 %\end{frame}
 
-%\subsection{Class Table Inheritance}
-%
-%\begin{frame}[c]
-%    \frametitle{Class Table Inheritance}
-%    \begin{block}{Problema}
-%        \begin{enumerate}
-%            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
-%        \end{enumerate}
-%    \end{block}
-%    \uncover<2->{
-%        \begin{block}{Solución}
-%            \begin{enumerate}
-%                \item<2-> Transformar cada clase en la jerarquía a una tabla.
-%                \item<3-> Mantener las relaciones de herencia mediante relaciones de clave externa.
-%            \end{enumerate}
-%        \end{block}
-%    }
-%\end{frame}
-%
-%\begin{frame}
-%    \frametitle{Class Table Inheritance}
-%    \only<1->{
-%        \rput[lt](2.5,0.5){
-%                \includegraphics[width=0.55\linewidth]{images/structure/concreteTable00.eps}
-%        }
-%    }
-%    \only<2->{
-%        \rput[lt](3,-4){
-%                \includegraphics[width=0.50\linewidth]{images/structure/concreteTable02.eps}
-%        }
-%    }
-%    %% Obligar a hace joins siempre.
-%    %% Gestiona mal las consultas polimóficas.
-%    %% No posee valores nulos
-%    %% No hay columnas redundantes que pueden afectar a la evolución de la base de datos
-%\end{frame}
+\subsection{Class Table Inheritance}
 
-%\subsection{Resumen de Estrategias de Transformación de Herencias}
-%
-%\begin{frame}[c]
-%    \frametitle{Estrategias de Transformación de Herencias}
-%    \begin{center}
-%        \begin{tabular}{||l|c|c|c||}
-%        \hline \hline
-%                                & Single         & Concrete        & Class   \\ \hline
-%        Gestión Valores Nulos   & \xmark         & \cmark          & \cmark  \\ \hline
-%        Consultas Polimórficas  & \cmark         & \xmark          & \xmark  \\ \hline
-%        Consultas Subclases     & \xmark         & \cmark          & \cmark  \\ \hline
-%        Uso de \emph{Joins}     & \cmark         & \cmark          & \xmark  \\ \hline
-%        Contención BBDD         & \xmark         & \cmark          & \cmark  \\ \hline
-%        Evolución Superclase    & \cmark         & \xmark          & \cmark  \\ \hline
-%        Clave Primaria Dispersa & \xmark         & \cmark          & \xmark  \\ \hline
-%        \hline
-%        \end{tabular}
-%    \end{center}
-%\end{frame}
-%
-%\begin{frame}[c]
-%    \frametitle{¿Cuándo Aplicar cada Estrategia?}
-%    \begin{enumerate}
-%        \item<1-> Single Table Inheritance
-%            \begin{itemize}
-%                \item<2-> Jerarquías de herencia donde las subclases básicamente redefinen comportamientos y añaden pocos datos nuevos.
-%                \item<3-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de superclase.
-%            \end{itemize}
-%        \item<4-> Concrete Table Inheritance
-%            \begin{itemize}
-%                \item<5-> Jerarquías de herencia donde las superclases son muy abstractas, no tienen apenas correspondencia a nivel de dominio y básicamente abstraen datos y comportamientos comunes.
-%                \item<6-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de subclase.
-%            \end{itemize}
-%        \item<7-> Class Table Inheritance
-%            \begin{itemize}
-%                \item<8-> No se dan ninguna de las condiciones anteriores con claridad.
-%            \end{itemize}
-%    \end{enumerate}
-%\end{frame}
+\begin{frame}[c]
+    \frametitle{Class Table Inheritance}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Transformar cada clase en la jerarquía a una tabla.
+                \item<3-> Mantener las relaciones de herencia mediante relaciones de clave externa.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Class Table Inheritance}
+    \only<1->{
+        \rput[lt](2.75,0.5){
+                \includegraphics[width=0.50\linewidth]{images/structure/concreteTable00.eps}
+        }
+    }
+    \only<2->{
+        \rput[lt](0.5,-3.5){
+                \includegraphics[width=.9\linewidth]{images/structure/classTableInh01.eps}
+        }
+    }
+    %% Obligar a hace joins siempre.
+    %% Gestiona mal las consultas polimóficas.
+    %% No posee valores nulos
+    %% No hay columnas redundantes que pueden afectar a la evolución de la base de datos
+\end{frame}
+
+\subsection{Resumen de Estrategias de Transformación de Herencias}
+
+\begin{frame}[c]
+    \frametitle{Estrategias de Transformación de Herencias}
+    \begin{center}
+        \begin{tabular}{||l|c|c|c||}
+        \hline \hline
+                                & Single         & Concrete        & Class   \\ \hline
+        Gestión Valores Nulos   & \xmark         & \cmark          & \cmark  \\ \hline
+        Consultas Polimórficas  & \cmark         & \xmark          & \xmark  \\ \hline
+        Consultas Subclases     & \xmark         & \cmark          & \cmark  \\ \hline
+        Uso de \emph{Joins}     & \cmark         & \cmark          & \xmark  \\ \hline
+        Contención BBDD         & \xmark         & \cmark          & \cmark  \\ \hline
+        Evolución Superclase    & \cmark         & \xmark          & \cmark  \\ \hline
+        Clave Primaria Dispersa & \xmark         & \cmark          & \xmark  \\ \hline
+        \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{¿Cuándo Aplicar cada Estrategia?}
+    \begin{enumerate}
+        \item<1-> Single Table Inheritance
+            \begin{itemize}
+                \item<2-> Jerarquías de herencia donde las subclases básicamente redefinen comportamientos y añaden pocos datos nuevos.
+                \item<3-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de superclase.
+            \end{itemize}
+        \item<4-> Concrete Table Inheritance
+            \begin{itemize}
+                \item<5-> Jerarquías de herencia donde las superclases son muy abstractas, no tienen apenas correspondencia a nivel de dominio y básicamente abstraen datos y comportamientos comunes.
+                \item<6-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de subclase.
+            \end{itemize}
+        \item<7-> Class Table Inheritance
+            \begin{itemize}
+                \item<8-> No se dan ninguna de las condiciones anteriores con claridad.
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
 
 \section{Patrones de Acceso a Datos}
 
 \subsection{Data Mappers/Data Access Objects}
 
-\begin{frame}[c]
-    \frametitle{Data Mappers/Data Access Objects}
-    \begin{block}{Problema}
-        ¿Cómo almacenar, recuperar, actualizar y eliminar objetos del almacén persistente manteniendo al modelo de dominio independiente de su forma de almacenamiento?
-        \end{enumerate}
-    \end{block}
-    \uncover<2->{
-        \begin{block}{Solución}
-            Por cada clase $C$ del modelo de dominio, crear una clase $C_Mapper$ que se encargue de gestionar la correspondiente transformación.
-        \end{block}
-    }
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Data Mappers/Data Access Objects}
+%    \begin{block}{Problema}
+%        ¿Cómo almacenar, recuperar, actualizar y eliminar objetos del almacén persistente manteniendo al modelo de dominio independiente de su forma de almacenamiento?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            Por cada clase $C$ del modelo de dominio, crear una clase $C_Mapper$ que se encargue de gestionar la correspondiente transformación.
+%        \end{block}
+%    }
+%\end{frame}
 
-\begin{frame}[c]
-    \frametitle{Data Mappers/Data Access Objects}
-    \begin{center}
-        \includegraphics[width=0.55\linewidth]{images/structure/concreteTable00.eps}
-    \end{center}
-    %% Colecciones ¿qué he añadido o borrado?
-    %% ¿Qué objetos han cambiado?
-    %% ¿Cómo inicializar objetos? Getters y setters.
-    %% Referencias circulares.
-    %% Genericidad
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Data Mappers/Data Access Objects}
+%    \begin{center}
+%        \includegraphics[width=0.55\linewidth]{images/structure/concreteTable00.eps}
+%    \end{center}
+%    %% Colecciones ¿qué he añadido o borrado?
+%    %% ¿Qué objetos han cambiado?
+%    %% ¿Cómo inicializar objetos? Getters y setters.
+%    %% Referencias circulares.
+%    %% Genericidad
+%\end{frame}
 
-\subsection{Metadata Mapping}
+% \subsection{Metadata Mapping}
 
-\subsection{Lazy Load}
+% \subsection{Identity Map}
 
-\subsection{Identity Map}
+% \subsection{Lazy Load}
 
-\subsection{Query Object}
+% \subsection{Query Object}
 
 %\subsubsection{Unit of Work}
 %
@@ -703,46 +702,46 @@
 %    \end{block}
 %\end{frame}
 
-\section{Java Persistence API y Spring Data}
-
-\subsection{Esquema}
-
-\subsection{Anotaciones JPA}
-
-\begin{frame}[c]
-    \frametitle{Anotaciones JPA}
-    \begin{description}
-        \item[@Entity]
-        \item[@Embeddable]
-        \item[@Id]
-        \item[@GeneratedValue]
-        \item[@Embedded]
-        \item[@OneToOne]
-        \item[@OneToMany]
-        \item[@ManyToOne]
-        \item[@ManyToMany]
-        \item[mappeddBy]
-        \item[@Inheritance(strategy=)]
-    \end{description}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Ciclo de Vida de una Entidad JPA}
-    %% Diagrama de las actividades
-    %% Se puede llegar a través de agregados, es decir, como referencia desde
-    %% una entidad, normalmente un agregado
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Ciclo de Vida de una Entidad JPA}
-    %% Detecta transacciones de usuario.
-\end{frame}
+%\section{Java Persistence API y Spring Data}
+%
+%\subsection{Esquema}
+%
+%\subsection{Anotaciones JPA}
+%
+%\begin{frame}[c]
+%    \frametitle{Anotaciones JPA}
+%    \begin{description}
+%        \item[@Entity]
+%        \item[@Embeddable]
+%        \item[@Id]
+%        \item[@GeneratedValue]
+%        \item[@Embedded]
+%        \item[@OneToOne]
+%        \item[@OneToMany]
+%        \item[@ManyToOne]
+%        \item[@ManyToMany]
+%        \item[mappeddBy]
+%        \item[@Inheritance(strategy=)]
+%    \end{description}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Ciclo de Vida de una Entidad JPA}
+%    %% Diagrama de las actividades
+%    %% Se puede llegar a través de agregados, es decir, como referencia desde
+%    %% una entidad, normalmente un agregado
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Ciclo de Vida de una Entidad JPA}
+%    %% Detecta transacciones de usuario.
+%\end{frame}
 
 % \subsection{Validación en JPA}
 
-\subsection{Clases JPA}
-
-\subsection{Spring Data}
+%\subsection{Clases JPA}
+%
+%\subsection{Spring Data}
 
 \section{Sumario y Conclusiones}
 
