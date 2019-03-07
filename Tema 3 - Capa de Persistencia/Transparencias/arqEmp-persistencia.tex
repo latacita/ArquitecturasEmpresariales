@@ -597,55 +597,117 @@
 %    \end{enumerate}
 %\end{frame}
 
-\section{Patrones de Acceso a Datos}
+%\section{Patrones de Acceso a Datos}
+%
+%\subsection{Data Mappers/Data Access Objects}
+%
+%\begin{frame}[c]
+%    \frametitle{Data Mappers/Data Access Objects}
+%    \begin{block}{Problema}
+%        ¿Cómo almacenar, recuperar, actualizar y eliminar objetos del almacén persistente manteniendo al modelo de dominio independiente de su forma de almacenamiento?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            Por cada clase $C$ del modelo de dominio, crear una clase $C_Mapper$ que se encargue de gestionar la correspondiente transformación.
+%        \end{block}
+%    }
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Data Mappers/Data Access Objects}
+%    \begin{center}
+%        \includegraphics[width=0.8\linewidth]{images/behaviour/dataMapper.eps}
+%    \end{center}
+%    %% Colecciones ¿qué he añadido o borrado?
+%    %% Gestión de los agregados.
+%    %% ¿Cómo inicializar objetos? Getters y setters.
+%    %% Genericidad
+%\end{frame}
+%
+%\subsection{Metadata Mapping}
+%
+%\begin{frame}[c]
+%    \frametitle{Metadata Mapping}
+%    \begin{block}{Problema}
+%        ¿Cómo saber cómo se ha realizado la transformación objeto-relacional para poder así implementar \emph{Data Mappers} genéricos?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            Especificar mediante algún tipo de mecanismo adecuado la correspondencia entre elementos del modelo de dominio y el esquema relacional asociado.
+%        \end{block}
+%    }
+%    %% TODO: Poner ejemplo.
+%    %% Reflection: Slow, hard to debug. No recompilations required.
+%    %% XML, SourceCode, Database.
+%\end{frame}
+%
+%\subsection{Identity Map}
+%
+%\begin{frame}[c]
+%    \frametitle{Identity Map}
+%    \begin{block}{Problema}
+%        ¿Cómo puedo evitar cargar múltiples copias de un mismo objeto?
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Solución}
+%            \begin{enumerate}
+%                \item<2-> Crear un sitio donde almacenar los objetos que se carguen desde el almacén de persistencia.
+%                \item<3-> Antes de cargar cualquier objeto, comprobar si está ya cargado en el almacén persistente.
+%            \end{enumerate}
+%        \end{block}
+%    }
+%    %% Un hombre con dos relojes nunca sabe que hora es.
+%    %% Problemas de concurrencia.
+%    %% Problemas de rendimiento: gasto de memoria, llamadas remotas lentas.
+%    %% Sólo requerido para los agregados.
+%\end{frame}
 
-\subsection{Data Mappers/Data Access Objects}
+\subsection{Lazy Load}
 
 \begin{frame}[c]
-    \frametitle{Data Mappers/Data Access Objects}
+    \frametitle{Lazy Load}
     \begin{block}{Problema}
-        ¿Cómo almacenar, recuperar, actualizar y eliminar objetos del almacén persistente manteniendo al modelo de dominio independiente de su forma de almacenamiento?
+        ¿Cómo evito tener que cargar todos los objetos asociados a un objeto $O$ cuando cargo $O$ desde el almacén persistente?
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Por cada clase $C$ del modelo de dominio, crear una clase $C_Mapper$ que se encargue de gestionar la correspondiente transformación.
+            Aplicar el patrón \emph{proxy} de manera que los objetos referenciados por el objeto $O$ sólo se carguen bajo demanda.
         \end{block}
     }
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Data Mappers/Data Access Objects}
+    \frametitle{Lazy Load}
     \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/behaviour/dataMapper.eps}
+        \includegraphics[width=0.9\linewidth]{images/behaviour/lazyLoad.eps}
     \end{center}
-    %% Colecciones ¿qué he añadido o borrado?
-    %% Gestión de los agregados.
-    %% ¿Cómo inicializar objetos? Getters y setters.
-    %% Genericidad
+    %% Todos los accesos se hacen a través de getters
 \end{frame}
 
-\subsection{Metadata Mapping}
+\subsection{Query Object}
 
 \begin{frame}[c]
-    \frametitle{Metadata Mapping}
+    \frametitle{Query Object}
     \begin{block}{Problema}
-        ¿Cómo saber cómo se ha realizado la transformación objeto-relacional para poder así implementar \emph{Data Mappers} genéricos?
+        ¿Cómo realizar búsquedas de objetos arbitrariamente complejas sobre colecciones de datos largas aprovechando las facilidades proporcionadas por el almacén persistente?
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Especificar mediante algún tipo de mecanismo adecuado la correspondencia entre elementos del modelo de dominio y el esquema relacional asociado.
+            Representar las consultas como objetos independientes del almacén persistente y pasar estos objetos a los repositorios de acceso a datos.
         \end{block}
     }
-    %% TODO: Poner ejemplo.
-    %% Reflection: Slow, hard to debug. No recompilations required. 
-    %% XML, SourceCode, Database.
 \end{frame}
 
-% \subsection{Identity Map}
-
-% \subsection{Lazy Load}
-
-% \subsection{Query Object}
+\begin{frame}[c]
+    \frametitle{Lazy Load}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{images/behaviour/lazyLoad.eps}
+    \end{center}
+    %% Todos los accesos se hacen a través de getters
+    %5
+\end{frame}
+ 
+ 
 
 %\subsubsection{Unit of Work}
 %
