@@ -2,7 +2,11 @@
 
 \input{slidesHeader.tex}
 
-\title[Capa de Persistencia]{Capa de Persistencia}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+\title[Capa de Persistencia - Fundamentos]{Capa de Persistencia - Fundamentos }
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -42,18 +46,40 @@
 
 \section{Introducción}
 
-\subsection{Objetivos y Bibliografía}
+\begin{frame}
+    \frametitle{Capa de Persistencia}
+    \only<1|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+        }
+    }
+    \only<2|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+        }
+    }
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Responsabilidades de la Capa de Persistencia}
+	\begin{enumerate}[<+->]
+        \item Almacenar los datos de manera no volátil.
+        \item Recuperar datos del almacén persistente.
+        \item Asegurar la disponibilidad de los datos.
+        \item Controlar la integridad de los datos.
+        \item Asegurar un acceso eficiente a los datos.
+	\end{enumerate}
+\end{frame}
 
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
          \item Comprender en profundidad cuáles son las responsabilidades de la capa de persistencia.
-         \item Comprender el funcionamiento de los puentes de persistencia de objetos.
-         \item Conocer los patrones de persistencia estructurales.
-         \item Conocer los patrones de acceso a datos.
-         \item Conocer los patrones de control de la concurrencia.
-         \item Ser capaz de utilizar JPA para generar esquemas relacionales.
-         \item Ser capaz de utilizar repositorios para acceder a datos persistentes.
+         \item Comprender el objetivo de los puentes objeto-(relacional).
+         \item Comprender los principios de los patrones de persistencia estructurales.
+         \item Comprender el funcionamiento de los patrones de acceso a datos.
+         \item Ser capaz de utilizar \emph{JPA} para generar esquemas relacionales.
+         \item Ser capaz de utilizar repositorios \emph{Spring} para acceder a datos.
     \end{enumerate}
 \end{frame}
 
@@ -77,55 +103,26 @@
         \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
         \newblock Manning
 
-        %% JPA
-
         %% Spring Data
 
     \end{thebibliography}
 \end{frame}
 
-\subsection{Contexto: Capa de Persistencia}
-
-\begin{frame}
-    \frametitle{Capa de Persistencia}
-    \only<1|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
-        }
-    }
-    \only<2|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-        }
-    }
-\end{frame}
-
-\begin{frame}[c]
-	\frametitle{Responsabilidades de la Capa de Persistencia}
-	\begin{enumerate}[<+->]
-        \item Almacenar los datos de manera no volátil.
-        \item Recuperar datos del almacén persistente,
-        \item Asegurar la disponibilidad de los datos.
-        \item Controlar la integridad de los datos.
-        \item Asegurar un acceso eficiente a los datos.
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Tecnologías de Persistencia}
-    \begin{description}[<+->]
-        \item[Relacional] Madurez, robustez y propiedades ACID.
-        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
-        \item[XML/JSON] Simplicidad.
-    \end{description}
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Tecnologías de Persistencia}
+%    \begin{description}[<+->]
+%        \item[Relacional] Madurez, robustez y propiedades ACID.
+%        \item[NoSQL] Escalabilidad y rendimiento sacrificando ACID.
+%        \item[XML/JSON] Simplicidad.
+%    \end{description}
+%\end{frame}
 
 \section{Puentes de Persistencia de Objetos}
 
 \subsection{Impedancia Objeto - Persistencia}
 
 \begin{frame}[c]
-    \frametitle{Impedancia Objeto - Persistencia}
+    \frametitle{Impedancia Objeto - (Relacional)}
     \begin{block}{Impedancia Objetual}
     La \emph{impedancia objetual} se refiere al desacoplamiento que puede existir en los conceptos del paradigma orientado a objetos y el paradigma utilizado por el almacén de persistencia.
     \end{block}
@@ -149,13 +146,6 @@
     \frametitle{Impedancia OR: Claves Primarias}
     \begin{center}
         \includegraphics[width=\linewidth]{images/ooMismatch/ooMismatch09.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Impedancia OR: Granularidad}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
     \end{center}
 \end{frame}
 
@@ -208,26 +198,33 @@
     \end{center}
 \end{frame}
 
-\subsection{Esquema Puentes Objeto-Persistencia}
+\begin{frame}[c]
+    \frametitle{Impedancia OR: Granularidad}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/ooMismatch/ooMismatch08.eps}
+    \end{center}
+\end{frame}
+
+\subsection{Puentes Objeto-(Relacional)}
 
 \begin{frame}
     \frametitle{Puentes de Persistencia de Objetos}
-    \only<1|handout:3>{
+    \only<1|handout:0>{
         \rput[lt](0,0){
             \includegraphics[width=\linewidth]{images/ooMismatch/orm00.eps}
         }
     }
-    \only<2|handout:3>{
+    \only<2|handout:0>{
         \rput[lt](0,0){
             \includegraphics[width=\linewidth]{images/ooMismatch/orm01.eps}
         }
     }
-    \only<3|handout:3>{
+    \only<3|handout:1>{
         \rput[lt](0,0){
             \includegraphics[width=\linewidth]{images/ooMismatch/orm02.eps}
         }
     }
-    \only<4|handout:3>{
+    \only<4|handout:0>{
         \rput[lt](0,0){
             \includegraphics[width=\linewidth]{images/ooMismatch/orm03.eps}
         }
@@ -236,9 +233,7 @@
 
 \section{Patrones Estructurales}
 
-\subsection{Conceptos Básicos}
-
-\subsubsection{Class to Table}
+\subsection{Class to Table}
 
 \begin{frame}[c]
     \frametitle{Class to Table}
@@ -249,7 +244,7 @@
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos compuestos:
+            Si la clase es una \emph{entidad}, no está afectada por herencia, y no tiene atributos multivaluados ni asociaciones con otras clases:
             \begin{enumerate}
                 \item<3-> Crear una tabla con el mismo nombre de la clase.
                 \item<4-> Crear una columna en dicha tabla por cada atributo de la clase.
@@ -271,43 +266,177 @@
     }
 \end{frame}
 
-
-\subsubsection{Identity Field}
+\subsection{Identity Field}
 
 \begin{frame}[c]
     \frametitle{Identity Field}
     \begin{block}{Problema}
         \begin{enumerate}
-            \item ¿Cómo obtengo una clave primaria para cada objeto que necesito guardar en la base de datos relacional?
+            \item<1-> ¿Cómo consigo que cada objeto de una clase tenga asociada una clave primaria que pueda utilizar para almacenarlo en una tabla de una base de datos relacional?
+            \item<2-> ¿Cómo consigo mantener la correspondencia entre cada objeto de una clase y su correspondiente representación relacional cuando los objetos no tienen clave natural?
         \end{enumerate}
+    \end{block}
+    \uncover<3->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<4-> Incorporar un nuevo atributo, representando una clave artificial, para aquellos objetos que no poseen una clave natural, o cuya clave natural se considere inadecuada para el modelo relacional.
+                \item<5-> Para las claves artificiales, elegir una estrategia de generación.
+            \end{enumerate}
+        \end{block}
+    }
+    %% To be discussed:
+    %% - Natural vs Artifical Key
+    %% - Single vs Compound Key
+    %% - Key Type
+    %% - Table Unique vs Database Unique
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Generación de Claves Artificales}
+    \begin{enumerate}
+        \item<1-> Columna autoincrementada
+            \begin{itemize}
+                \item<2-> Clave no disponible hasta finalizar la transacción.
+                \item<3-> Impide \emph{escrituras en batch}
+            \end{itemize}
+        \item<4-> Sequence
+            \begin{itemize}
+                \item<5-> No disponible en todos los gestores.
+            \end{itemize}
+        \item<6-> GUID.
+            \begin{itemize}
+                \item<7-> Demasiado grandes y complejos.
+            \end{itemize}
+        \item<8-> Generada por la aplicación (ORM).
+    \end{enumerate}
+\end{frame}
+
+
+\subsection{Foreign Key Mapping}
+
+\begin{frame}[c]
+    \frametitle{Foreign Key Mapping}
+    \begin{block}{Problema}
+        ¿Cómo transformo una asociación entre dos clases $A$ y $B$ al modelo relacional?
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            \begin{enumerate}
-                \item<2-> Utilizar un atributo (o atributos) existente como clave primaria para los objetos de dicha clase.
-                \item<3-> Añadir un nuevo atributo que ejerza de clave primaria.
-            \end{enumerate}
+            Si una clase $A$ posee un extremo de asociación referenciando una clase $B$
+            con multiplicidad máxima uno, puedo añadir en la tabla correspondiente a la clase $A$ una clave externa a la tabla de la clase $B$.
         \end{block}
     }
 \end{frame}
 
-\subsection{Transformación de Asociaciones}
+\begin{frame}
+    \frametitle{Foreign Key Mapping}
+    \rput[lt](1.5,0.5){
+            \includegraphics[width=0.75\linewidth]{images/structure/foreignKey00.eps}
+    }
+    \only<2->{
+        \rput[lt](2.25,-3.5){
+                \includegraphics[width=0.60\linewidth]{images/structure/foreignKey01.eps}
+        }
+    }
+\end{frame}
 
-\subsubsection{Embedded Value}
+\subsection{Association Table Mapping}
 
-\subsubsection{Foreign Key Mapping}
+\begin{frame}[c]
+    \frametitle{Association Table Mapping}
+    \begin{block}{Problema}
+        ¿Cómo transformo una asociación entre clases al modelo relacional?
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Si ambos extremos de asociación tiene multiplicidad superior a uno, crear una tabla intermedia $A\_B$ que almacene la relación entre ambas clases.
+                \item<3-> La tabla intermedia almacenará como datos las claves primarias asociadas a las clases $A$ y $B$.
+                \item<4-> Cada una de estas claves primarias almacenadas será una clave externa a su correspondiente tabla.
+                \item<5-> La clave primaria de la tabla intermedia será la unión de las claves primarias de las tablas relacionadas.
+             \end{enumerate}
+        \end{block}
+    }
+\end{frame}
 
-\subsubsection{Association Table Mapping}
+\begin{frame}
+    \frametitle{Association Table Mapping}
+    \rput[lt](1.25,0.5){
+            \includegraphics[width=0.80\linewidth]{images/structure/associationTable00.eps}
+    }
+    \only<2->{
+        \rput[lt](0.85,-3){
+                \includegraphics[width=0.75\linewidth]{images/structure/associationTable01.eps}
+        }
+    }
+\end{frame}
 
-\subsection{Transformación de Herencias}
+\subsection{Embedded Value}
 
-\subsubsection{Single Table Inheritance}
+\begin{frame}[c]
+    \frametitle{Embedded Value}
+    \begin{block}{Problema}
+        ¿Cómo mapeo asociaciones con \emph{value objects} de manera eficiente?
+    \end{block}
+    \uncover<3->{
+        \begin{block}{Solución}
+            Si una clase $C$ tiene una asociación de multiplicidad máxima $1$ con un \emph{value object } $V$, puedo simplemente añadir los campos de $V$ a la clase $C$ y luego mapear $C$ como una clase simple.
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Embedded Value}
+    \only<1|handout:1>{
+        \rput[lt](3.25,0){
+                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue00.eps}
+        }
+    }
+    \only<2-|handout:0>{
+        \rput[lt](3.2,0){
+                \includegraphics[width=0.50\linewidth]{images/structure/embeddedValue01.eps}
+        }
+    }
+    \only<3-|handout:1>{
+        \rput[lt](1,-4){
+                \includegraphics[width=0.75\linewidth]{images/structure/embeddedValue02.eps}
+        }
+    }
+\end{frame}
+
+\subsection{Serialised LOB}
+
+\begin{frame}[c]
+    \frametitle{Serialised LOB}
+    \begin{block}{Problema}
+        ¿Cómo mapeo asociaciones con \emph{value objects} y/o \emph{entities} internas a un \emph{aggregate} de manera eficiente?
+    \end{block}
+    \uncover<3->{
+        \begin{block}{Solución}
+            Guardar todo un grafo de objetos en una única columna de tipo \emph{LOB}.
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Serialised LOB}
+    \rput[lt](1.50,0){
+        \includegraphics[width=0.75\linewidth]{images/structure/serializedBlob00.eps}
+    }
+    \only<2->{
+        \rput[lt](4.5,-3){
+                \includegraphics[width=0.18\linewidth]{images/structure/serializedBlob01.eps}
+        }
+    }
+    %% BLOB vs CLOB
+\end{frame}
+
+\subsection{Single Table Inheritance}
 
 \begin{frame}[c]
     \frametitle{Single Table Inheritance}
     \begin{block}{Problema}
         \begin{enumerate}
-            \item ¿Cómo implemento una jerarquía de herencia en un esquema relacional?
+            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
         \end{enumerate}
     \end{block}
     \uncover<2->{
@@ -315,8 +444,8 @@
             \begin{enumerate}
                 \item<2-> Comprimir la jerarquía en una sola clase, incorporando los atributos de las clases hijas a la raíz de la jerarquía.
                 \item<3-> Añadir un atributo que indique de qué tipo concreto es cada instancia de la nueva clase resultante.
-                \item<3-> Transforma la clase resultante a una tabla.
-                \item<4-> Cuando un objeto de dicha jerarquía se almacena dentro de una tabla, los atributos que no correspondan a dicha instance simplemente se ignoran.
+                \item<4-> Transforma la clase resultante a una tabla.
+                \item<5-> Cuando un objeto de dicha jerarquía se almacena dentro de la tabla resultante, los atributos que no correspondan a dicha instance simplemente se ignoran.
             \end{enumerate}
         \end{block}
     }
@@ -324,155 +453,371 @@
 
 \begin{frame}
     \frametitle{Single Table Inheritance}
-    \rput[lt](3.5,0){
-            \includegraphics[width=0.50\linewidth]{images/structure/singleTable00.eps}
+    \only<1|handout:1>{
+        \rput[lt](3.5,0.5){
+                \includegraphics[width=0.40\linewidth]{images/structure/singleTable00.eps}
+        }
     }
-%    \only<2->{
-%%        \rput[lt](3,-4){
-%%                \includegraphics[width=0.50\linewidth]{images/structure/class2Table01.eps}
-%%        }
-%    }
+    \only<2-|handout:0>{
+        \rput[lt](2.70,0.5){
+                \includegraphics[width=0.55\linewidth]{images/structure/singleTable02.eps}
+        }
+    }
+    \only<3-|handout:1>{
+        \rput[lt](0.75,-4){
+                \includegraphics[width=0.80\linewidth]{images/structure/singleTable01.eps}
+        }
+    }
+    %% Simple
+    %% Recupera bien todos los objetos de una jearquía (consultas polimórficas).
+    %% Columnas vacías y valores nulos.
+    %% Una tabla para todos puede generar demasiado contención y castigar la búsqueda por subclases.
+    %% Precisa de una clave a nivel de padre.
 \end{frame}
 
-\subsubsection{Concrete Table Inheritance}
+\subsection{Concrete Table Inheritance}
 
-\subsubsection{Class Table Inheritance}
+\begin{frame}[c]
+    \frametitle{Concrete Table Inheritance}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Hacer descender los atributos de la clases abstractas a las clases concretas.
+                \item<3-> Transformar cada clase resultante a una tabla.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
 
-\subsubsection{Comparación de Transformación de Herencias}
+\begin{frame}
+    \frametitle{Concrete Table Inheritance}
+    \only<1|handout:1>{
+        \rput[lt](2.5,0.5){
+                \includegraphics[width=0.55\linewidth]{images/structure/concreteTable00.eps}
+        }
+    }
+    \only<2-|handout:0>{
+        \rput[lt](2.5,0.5){
+                \includegraphics[width=0.55\linewidth]{images/structure/concreteTable01.eps}
+        }
+    }
+    \only<3-|handout:1>{
+        \rput[lt](3,-4){
+                \includegraphics[width=0.50\linewidth]{images/structure/concreteTable02.eps}
+        }
+    }
+    %% El SGBD podría no controlar la colisión de claves.
+    %% Gestiona mal las asociaciones a nivel de superclase.
+    %% Gestiona mal las consultas polimórficas.
+    %% No posee valores nulos
+    %% Mejora la contención de la base de datos.
+    %% No penaliza las operaciones a nivel de subclase.
+    %% Hay columnas redundantes que pueden afectar a la evolución de la base de datos
+\end{frame}
+
+\subsection{Class Table Inheritance}
+
+\begin{frame}[c]
+    \frametitle{Class Table Inheritance}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item ¿Cómo transformo una jerarquía de herencia en un esquema relacional?
+        \end{enumerate}
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Transformar cada clase en la jerarquía a una tabla.
+                \item<3-> Mantener las relaciones de herencia mediante relaciones de clave externa.
+            \end{enumerate}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{Class Table Inheritance}
+    \only<1->{
+        \rput[lt](2.75,0.5){
+                \includegraphics[width=0.50\linewidth]{images/structure/concreteTable00.eps}
+        }
+    }
+    \only<2->{
+        \rput[lt](0.5,-3.5){
+                \includegraphics[width=.9\linewidth]{images/structure/classTableInh01.eps}
+        }
+    }
+    %% Obligar a hace joins siempre.
+    %% Gestiona mal las consultas polimóficas.
+    %% No posee valores nulos
+    %% No hay columnas redundantes que pueden afectar a la evolución de la base de datos
+\end{frame}
+
+\subsection{Resumen de Estrategias de Transformación de Herencias}
+
+\begin{frame}[c]
+    \frametitle{Estrategias de Transformación de Herencias}
+    \begin{center}
+        \begin{tabular}{||l|c|c|c||}
+        \hline \hline
+                                & Single         & Concrete        & Class   \\ \hline
+        Gestión Valores Nulos   & \xmark         & \cmark          & \cmark  \\ \hline
+        Consultas Polimórficas  & \cmark         & \xmark          & \xmark  \\ \hline
+        Consultas Subclases     & \xmark         & \cmark          & \cmark  \\ \hline
+        Uso de \emph{Joins}     & \cmark         & \cmark          & \xmark  \\ \hline
+        Contención BBDD         & \xmark         & \cmark          & \cmark  \\ \hline
+        Evolución Superclase    & \cmark         & \xmark          & \cmark  \\ \hline
+        Clave Primaria Dispersa & \xmark         & \cmark          & \xmark  \\ \hline
+        \hline
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{¿Cuándo Aplicar cada Estrategia?}
+    \begin{enumerate}
+        \item<1-> Single Table Inheritance
+            \begin{itemize}
+                \item<2-> Jerarquías de herencia donde las subclases básicamente redefinen comportamientos y añaden pocos datos nuevos.
+                \item<3-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de superclase.
+            \end{itemize}
+        \item<4-> Concrete Table Inheritance
+            \begin{itemize}
+                \item<5-> Jerarquías de herencia donde las superclases son muy abstractas, no tienen apenas correspondencia a nivel de dominio y básicamente abstraen datos y comportamientos comunes.
+                \item<6-> La mayoría de las asociaciones entre clases y búsquedas se realizan a nivel de subclase.
+            \end{itemize}
+        \item<7-> Class Table Inheritance
+            \begin{itemize}
+                \item<8-> No se dan ninguna de las condiciones anteriores con claridad.
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
 
 \section{Patrones de Acceso a Datos}
 
-\subsection{Objetos de Acceso a Datos}
-
-\subsubsection{Data Access Object}
-
-\subsubsection{Inheritance Mappers}
-
-\subsubsection{Metadata Mapping}
-
-\subsubsection{Repositories}
-
-\subsection{Patrones Auxiliares}
-
-\subsubsection{Query Object}
-
-\subsubsection{Lazy Load}
-
-\subsubsection{Identity Map}
-
-%% Persistence Context
-
-\subsubsection{Unit of Work}
+\subsection{Data Mappers/Data Access Objects}
 
 \begin{frame}[c]
-    \frametitle{Unit of Work - Problema}
+    \frametitle{Data Mappers/Data Access Objects}
     \begin{block}{Problema}
-        Dentro de una misma \emph{transacción de negocio} se podrían realizar múltiples cambios en diversos objetos de dominio, por lo que estos cambios han de realizarse de manera transaccional.
-        \begin{emumerate}
-            \item<2-> Para poder gestionar la transacción, necesito saber con exactitud que ha cambiado, lo cual puede ser no trivial en ciertos casos (e.g., observadores).
-            \item<3-> Si cada cambio se refleja automáticamente en el sistema de persistencia, se generan demasiadas comunicaciones de pequeño tamaño, alguna de las cuales podría ser incluso no necesaria .
-            \item<4-> Necesito saber qué datos se han utilizado a lo largo de la transacción para poder determinar si dicha transacción es válida o no antes de confirmarla y cerrarla.
-        \end{emumerate}
+        ¿Cómo almacenar, recuperar, actualizar y eliminar objetos del almacén persistente manteniendo al modelo de dominio independiente de su forma de almacenamiento?
     \end{block}
-    %% Añadir una transparencia con un bloque de código.
+    \uncover<2->{
+        \begin{block}{Solución}
+            Por cada clase $C$ del modelo de dominio, crear una clase $C_Mapper$ que se encargue de gestionar la correspondiente transformación.
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Unit of Work - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           \item<1-> Crear una clase denominada \emph{Unit of Work} donde se vayan registrando todos los cambios que se realizan dentro de una \emph{transacción de negocio}.
-           \item<2-> Hacer que los objetos de dominio cuando cambien se registren dentro de la unidad de trabajo como cambiados.
-           \item<3-> Hacer que los objetos de dominio utilizados dentro de una transacción se almacenen dentro de la unidad de trabajo como leídos.
-           \item<4-> Añadir métodos a la unidad de trabajo para validar y cerrar la transacción.
-       \end{enumerate}
-    \end{block}
-
-    %% Añadir imagen UML de Unit of Work.
+    \frametitle{Data Mappers/Data Access Objects}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/behaviour/dataMapper.eps}
+    \end{center}
+    %% Colecciones ¿qué he añadido o borrado?
+    %% Gestión de los agregados.
+    %% ¿Cómo inicializar objetos? Getters y setters.
+    %% Genericidad
 \end{frame}
 
-\section{Patrones de Control de la Concurrencia}
-
-\subsection{Pessimistic Lock}
+\subsection{Metadata Mapping}
 
 \begin{frame}[c]
-    \frametitle{Pessimistic Lock - Problema}
+    \frametitle{Metadata Mapping}
     \begin{block}{Problema}
-        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+        ¿Cómo saber cómo se ha realizado la transformación objeto-relacional para poder así implementar \emph{Data Mappers} genéricos?
     \end{block}
-    %% Poner escenario ilustrando el problema
+    \uncover<2->{
+        \begin{block}{Solución}
+            Especificar mediante algún tipo de mecanismo adecuado la correspondencia entre elementos del modelo de dominio y el esquema relacional asociado.
+        \end{block}
+    }
+    %% TODO: Poner ejemplo.
+    %% Reflection: Slow, hard to debug. No recompilations required.
+    %% XML, SourceCode, Database.
 \end{frame}
 
-\begin{frame}[c]
-    \frametitle{Pessimistic Lock - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           Cada transacción bloquea los datos que necesita de manera que otras transacciones no puedan hacer uso de ellos.
-       \end{enumerate}
-    \end{block}
-\end{frame}
-
-\subsection{Optimistic Lock}
+\subsection{Identity Map}
 
 \begin{frame}[c]
-    \frametitle{Optimistic Lock - Problema}
+    \frametitle{Identity Map}
     \begin{block}{Problema}
-        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+        ¿Cómo puedo evitar cargar múltiples copias de un mismo objeto?
     \end{block}
-    %% Poner escenario ilustrando el problema
+    \uncover<2->{
+        \begin{block}{Solución}
+            \begin{enumerate}
+                \item<2-> Crear un sitio donde almacenar los objetos que se carguen desde el almacén de persistencia.
+                \item<3-> Antes de cargar cualquier objeto, comprobar si está ya cargado en el almacén persistente.
+            \end{enumerate}
+        \end{block}
+    }
+    %% Un hombre con dos relojes nunca sabe que hora es.
+    %% Problemas de concurrencia.
+    %% Problemas de rendimiento: gasto de memoria, llamadas remotas lentas.
+    %% Sólo requerido para los agregados.
 \end{frame}
 
+\subsection{Lazy Load}
+
 \begin{frame}[c]
-    \frametitle{Optimistic - Solución}
-    \begin{block}{Solución}
-        \begin{enumerate}
-           Permito lecturas concurrentes y antes de guardar los datos compruebo que los datos que he utilizado no han sido modificados por otra transacción. Si hubiesen sido modificados, aborto la transacción.
-       \end{enumerate}
+    \frametitle{Lazy Load}
+    \begin{block}{Problema}
+        ¿Cómo evito tener que cargar todos los objetos asociados a un objeto $O$ cuando cargo $O$ desde el almacén persistente?
     \end{block}
-\end{frame}
-
-
-\section{Java Persistence API y Spring Data}
-
-\subsection{Esquema}
-
-\subsection{Anotaciones JPA}
-
-\begin{frame}[c]
-    \frametitle{Anotaciones JPA}
-    \begin{description}
-        \item[@Entity]
-        \item[@Embeddable]
-        \item[@Id]
-        \item[@GeneratedValue]
-        \item[@Embedded]
-        \item[@OneToOne]
-        \item[@OneToMany]
-        \item[@ManyToOne]
-        \item[@ManyToMany]
-        \item[mappeddBy]
-        \item[@Inheritance(strategy=)]
-    \end{description}
+    \uncover<2->{
+        \begin{block}{Solución}
+            Aplicar el patrón \emph{proxy} de manera que los objetos referenciados por el objeto $O$ sólo se carguen bajo demanda.
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Ciclo de Vida de una Entidad JPA}
-    %% Diagrama de las actividades
-    %% Se puede llegar a través de agregados, es decir, como referencia desde
-    %% una entidad, normalmente un agregado
+    \frametitle{Lazy Load}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{images/behaviour/lazyLoad.eps}
+    \end{center}
+    %% Todos los accesos se hacen a través de getters
 \end{frame}
 
+\subsection{Query Object}
+
 \begin{frame}[c]
-    \frametitle{Ciclo de Vida de una Entidad JPA}
-    %% Detecta transacciones de usuario.
+    \frametitle{Query Object}
+    \begin{block}{Problema}
+        ¿Cómo realizar búsquedas de objetos arbitrariamente complejas sobre colecciones de datos largas aprovechando las facilidades proporcionadas por el almacén persistente?
+    \end{block}
+    \uncover<2->{
+        \begin{block}{Solución}
+            Representar las consultas como objetos independientes del almacén persistente y pasar estos objetos a los repositorios de acceso a datos.
+        \end{block}
+    }
 \end{frame}
+
+%\subsubsection{Unit of Work}
+%
+%\begin{frame}[c]
+%    \frametitle{Unit of Work - Problema}
+%    \begin{block}{Problema}
+%        Dentro de una misma \emph{transacción de negocio} se podrían realizar múltiples cambios en diversos objetos de dominio, por lo que estos cambios han de realizarse de manera transaccional.
+%        \begin{emumerate}
+%            \item<2-> Para poder gestionar la transacción, necesito saber con exactitud que ha cambiado, lo cual puede ser no trivial en ciertos casos (e.g., observadores).
+%            \item<3-> Si cada cambio se refleja automáticamente en el sistema de persistencia, se generan demasiadas comunicaciones de pequeño tamaño, alguna de las cuales podría ser incluso no necesaria .
+%            \item<4-> Necesito saber qué datos se han utilizado a lo largo de la transacción para poder determinar si dicha transacción es válida o no antes de confirmarla y cerrarla.
+%        \end{emumerate}
+%    \end{block}
+%    %% Añadir una transparencia con un bloque de código.
+%\end{frame}
+
+%\begin{frame}[c]
+%    \frametitle{Unit of Work - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           \item<1-> Crear una clase denominada \emph{Unit of Work} donde se vayan registrando todos los cambios que se realizan dentro de una \emph{transacción de negocio}.
+%           \item<2-> Hacer que los objetos de dominio cuando cambien se registren dentro de la unidad de trabajo como cambiados.
+%           \item<3-> Hacer que los objetos de dominio utilizados dentro de una transacción se almacenen dentro de la unidad de trabajo como leídos.
+%           \item<4-> Añadir métodos a la unidad de trabajo para validar y cerrar la transacción.
+%       \end{enumerate}
+%    \end{block}
+%
+%    %% Añadir imagen UML de Unit of Work.
+%\end{frame}
+
+%\section{Patrones de Control de la Concurrencia}
+%
+%\subsection{Pessimistic Lock}
+%
+%\begin{frame}[c]
+%    \frametitle{Pessimistic Lock - Problema}
+%    \begin{block}{Problema}
+%        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+%    \end{block}
+%    %% Poner escenario ilustrando el problema
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Pessimistic Lock - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           Cada transacción bloquea los datos que necesita de manera que otras transacciones no puedan hacer uso de ellos.
+%       \end{enumerate}
+%    \end{block}
+%\end{frame}
+%
+%\subsection{Optimistic Lock}
+%
+%\begin{frame}[c]
+%    \frametitle{Optimistic Lock - Problema}
+%    \begin{block}{Problema}
+%        Cómo evitar conflictos cuando se accede a un mismo conjunto de datos de manera concurrente.
+%    \end{block}
+%    %% Poner escenario ilustrando el problema
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Optimistic - Solución}
+%    \begin{block}{Solución}
+%        \begin{enumerate}
+%           Permito lecturas concurrentes y antes de guardar los datos compruebo que los datos que he utilizado no han sido modificados por otra transacción. Si hubiesen sido modificados, aborto la transacción.
+%       \end{enumerate}
+%    \end{block}
+%\end{frame}
+
+%\section{Java Persistence API y Spring Data}
+%
+%\subsection{Esquema}
+%
+%\subsection{Anotaciones JPA}
+%
+%\begin{frame}[c]
+%    \frametitle{Anotaciones JPA}
+%    \begin{description}
+%        \item[@Entity]
+%        \item[@Embeddable]
+%        \item[@Id]
+%        \item[@GeneratedValue]
+%        \item[@Embedded]
+%        \item[@OneToOne]
+%        \item[@OneToMany]
+%        \item[@ManyToOne]
+%        \item[@ManyToMany]
+%        \item[mappeddBy]
+%        \item[@Inheritance(strategy=)]
+%    \end{description}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Ciclo de Vida de una Entidad JPA}
+%    %% Diagrama de las actividades
+%    %% Se puede llegar a través de agregados, es decir, como referencia desde
+%    %% una entidad, normalmente un agregado
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Ciclo de Vida de una Entidad JPA}
+%    %% Detecta transacciones de usuario.
+%\end{frame}
 
 % \subsection{Validación en JPA}
 
-\subsection{Clases JPA}
+%\subsection{Clases JPA}
+%
+%\subsection{Spring Data}
 
-\subsection{Spring Data}
+\section{Sumario}
 
-\section{Sumario y Conclusiones}
+\begin{frame}[c]
+    \frametitle{¿Qué tengo que saber de todo ésto?}
+    \begin{enumerate}[<+->]
+        \item Entender el problema del desacoplamiento objeto-(relacional).
+        \item Comprender el objetivo y estructura de un puente-objeto relacional.
+        \item Ser capaz de hacer una transformación de un modelo de dominio en un esquema relacional.
+        \item Comprender cómo funcionan los patrones que permiten independizar un modelo de dominio de su forma de persistencia.
+    \end{enumerate}
+\end{frame}
 
 \end{document}
