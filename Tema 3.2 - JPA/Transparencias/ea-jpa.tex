@@ -2,9 +2,7 @@
 
 \input{slidesHeader.tex}
 
-
-\usepackage{tabularx}
-\newcommand{\ann}[1]{\color{blue}{\texttt{#1}}}
+\newcommand{\ann}[1]{\color{blue}\texttt{#1}\color{black}}
 
 \title[JPA + Spring Data]{Capa de Persistencia \\ \ \\ Java Persistence API (JPA) + Spring Data}
 
@@ -163,7 +161,7 @@
     \begin{tabular}{lp{0.70\linewidth}}
         \ann{cascade}  & Define qué operaciones deben propagarse a la clase referenciada. \\
         \ann{mappedBy} & En una asociación bidireccional, especifica el extremo que hará de clave externo. \\
-        \ann{fetch}    & Indica si la referencia se carga bajo demanda \texttt{LAZY} o no (\texttt{EAGER}). \\
+        \ann{fetch}    & Indica si la referencia se carga bajo demanda (\ann{LAZY}) o no (\ann{EAGER}). \\
     \end{tabular}
 \end{frame}
 
@@ -172,55 +170,60 @@
 \begin{frame}[c]
     \frametitle{Identity Field}
     \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@Id} & El atributo marcado será la clave primaria. \\ 
+        \ann{@Id} & El atributo marcado será la clave primaria. \\
         \ann{@GeneratedValue} & El atributo será una clave autogenerada. \\
-        \multicolumn{1}{r}{\texttt{strategy}} & 
-                Especifica la estrategia de generación. \\
+        \multicolumn{1}{l}{\ann{(strategy=...)}} & Especifica la estrategia de generación. \\
+        \multicolumn{1}{r}{\texttt{AUTO}}     & Se deja a decisión del ORM la elección. \\
+        \multicolumn{1}{r}{\texttt{IDENTITY}} & Generada por el gestor de pesistencia. \\
+        \multicolumn{1}{r}{\texttt{SEQUENCE}} & Usa una \emph{secuencia} del gestor de persistencia. \\
+        \multicolumn{1}{r}{\texttt{TABLE}}    & Generada por el propio ORM. \\
         \ann{@IdClass}    & \\
         \ann{@EmbeededId} & Permiten crear claves primarias compuestas.\\
     \end{tabular}
 \end{frame}
 
+\subsection{Herencia}
+
 \begin{frame}[c]
-    \frametitle{Identity Field - Estrategias de Generación}
+    \frametitle{Transformación de Herencias}
     \begin{tabular}{lp{0.70\linewidth}}
-        \ann{AUTO}     & Se deja a decisión del ORM la elección. \\
-        \ann{IDENTITY} & Generada por el gestor de pesistencia. \\
-        \ann{SEQUENCE} & Usa una \emph{secuencia} del gestor de persistencia. \\
-        \ann{TABLE}    & Generada por el propio ORM.
+        \ann{@Inheritance}                       &  Una clase es raíz de un árbol de herencia.          \\
+        \multicolumn{1}{l}{\ann{(strategy=...)}} & Especifica cómo se transforma un árbol de herencia.  \\
+        \multicolumn{1}{r}{\texttt{SINGLE\_TABLE}}    & Aplica \emph{Single Table Inheritance}    \\
+        \multicolumn{1}{r}{\texttt{JOINED}}          & Aplica \emph{Class Table Inheritance}     \\
+        \multicolumn{1}{r}{\texttt{TABLE\_PER\_CLASS}} & Aplica \emph{Concrete Table Inheritance}  \\
     \end{tabular}
 \end{frame}
 
-\subsection{Herencias}
+\subsection{Personalización y Optimización}
 
-%\begin{frame}[c]
-%    \frametitle{Transformación de Herencias}
-%    \begin{description}
-%        \item[@@Inheritance(strategy=)]
-%        \item[@DiscriminatorValue]
-%    \end{description}
-%\end{frame}
-%
-%\begin{frame}[c]
-%    \frametitle{Personalización de Elementos}
-%    \begin{description}
-%        \item[@Table]
-%        \item[@Column]
-%        \item[@JoinColumn]
-%        \item
-%    \end{description}
-%\end{frame}
+\begin{frame}[c]
+    \frametitle{Opciones de Personalización y Optimización}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{@Table}      & Personaliza las tablas ligadas a una \ann{@Entity}. \\
+        \ann{@Column}     & Personaliza las columnas ligadas a un atributo. \\
+        \ann{@JoinColumn} & Personaliza las claves fóraneas en \emph{Foreign Key} \\ 
+        \ann{@JoinTable } & Personaliza las tabla intermedia en \emph{Association Table}. \\
+        \ann{@Unique}     & \\
+        \multicolumn{1}{r}{\ann{Constraint}} & Especifica restricciones de unicidad adicionales. \\
+        \ann{@Discriminator} &  \\
+        \multicolumn{1}{r}{\ann{Column}} & Personaliza la columna \emph{tipo} en \emph{Single Table}. \\
+        \ann{@Discriminator} &  \\
+        \multicolumn{1}{r}{\ann{Value}} & Personaliza los valores de \emph{tipo} en \emph{Single Table}. \\
+    \end{tabular}
+\end{frame}
 
 %\section{Spring Repositories}
 %
-%\section{Sumario}
-%
-%\begin{frame}[c]
-%    \frametitle{¿Qué tengo que saber de todo ésto?}
-%    \begin{enumerate}[<+->]
-%        \item Ser capaz de utilizar anotaciones JPA para especificar correspondencias objeto-relacional.
-%        \item Comprender cómo funcionan los repositorios \emph{Spring}.
-%    \end{enumerate}
-%\end{frame}
+\section{Sumario}
+
+\begin{frame}[c]
+    \frametitle{¿Qué tengo que saber de todo ésto?}
+    \begin{enumerate}[<+->]
+        \item Ser capaz de utilizar anotaciones JPA para especificar una correspondencia objeto-relacional.
+        \item Ser capaz de definir repositorios \emph{JPA} en \emph{Spring}.
+        \item Ser capaz de utilizar repositorios \emph{JPA} en \emph{Spring}.
+    \end{enumerate}
+\end{frame}
 
 \end{document}
