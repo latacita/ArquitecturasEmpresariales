@@ -2,6 +2,10 @@
 
 \input{slidesHeader.tex}
 
+
+\usepackage{tabularx}
+\newcommand{\ann}[1]{\color{blue}{\texttt{#1}}}
+
 \title[JPA + Spring Data]{Capa de Persistencia \\ \ \\ Java Persistence API (JPA) + Spring Data}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
@@ -91,6 +95,8 @@
 
 \section{Transformación Estructural}
 
+\subsection{Metadata Mapping}
+
 \begin{frame}[c]
     \frametitle{Metadata mapping}
     \begin{enumerate}[<+->]
@@ -108,13 +114,17 @@
     \end{enumerate}
 \end{frame}
 
+\subsection{Entidades y Value Objects}
+
 \begin{frame}[c]
     \frametitle{Entidades y Value Objects}
-    \begin{description}[<+->]
-        \item[@Entity] Indica que un elemento es una entidad y se transformará a su correspondiente tabla.
-        \item[@Embeddable] Indica que un elemento es un \emph{value object} y por tanto puede ser incrustado dentro de otro objeto.
-    \end{description}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{@Entity}     & La clase es una entidad y se transformará a una tabla. \\
+        \ann{@Embeddable} & La clase es un \emph{value object} y será incrustada en otra.
+    \end{tabular}
 \end{frame}
+
+\subsection{Referencias y Colecciones}
 
 \begin{frame}[c]
     \frametitle{Transformación de Propiedades}
@@ -124,7 +134,7 @@
                 \item<2-> Se anotan los atributos a transformar.
                 \item<3-> La carga y el almacenamiento se hace basado en reflexión.
             \end{itemize}
-        \item<3-> Basada en getters.
+        \item<3-> Basada en \emph{getters}.
             \begin{itemize}
                 \item<4-> Se anotan los \emph{getters} de los atributos a transformar.
                 \item<5-> La carga y almacenamiento se hace basada en \emph{getters} y \emph{setters}.
@@ -133,34 +143,56 @@
     \end{enumerate}
 \end{frame}
 
+\begin{frame}[c]
+    \frametitle{Transformación de Asociaciones}
+    \begin{tabular}{ll}
+        \ann{@OneToOne}   & Una referencia simple pertenece a una asociación 1-1. \\
+        \ann{@ManyToOne}  & Una referencia simple pertenece a una asociación 1-n. \\
+        \ann{@Embedded}   & Una referencia simple será incrustada. \\
+        \ann{@OneToMany}  & Una colección pertenece a una asociación 1-n. \\
+        \ann{@ManyToMany} & Una colección pertenece a una asociación 1-1. \\
+        \ann{@Element}    &  \\
+        \multicolumn{1}{r}{\ann{Collection}} & Un colección es de \emph{value objects}. \\
+        \ann{@Lob}        & Una referencia se tratará como un LOB. \\
+        \ann{@MapKey}     & Permite controlar mejor la transformación de un mapa. \\
+    \end{tabular}
+\end{frame}
 
+\begin{frame}[c]
+    \frametitle{Transformación de Asociaciones - Detalles}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{cascade}  & Define qué operaciones deben propagarse a la clase referenciada. \\
+        \ann{mappedBy} & En una asociación bidireccional, especifica el extremo que hará de clave externo. \\
+        \ann{fetch}    & Indica si la referencia se carga bajo demanda \texttt{LAZY} o no (\texttt{EAGER}). \\
+    \end{tabular}
+\end{frame}
 
-%
-%\begin{frame}[c]
-%    \frametitle{Transformación de Asociaciones}
-%    \begin{description}
-%        \item[@OneToOne]
-%        \item[@OneToMany]
-%        \item[@ManyToOne]
-%        \item[@ManyToMany]
-%        \item[@Embedded]
-%        \item[@ElementsCollection]
-%        \item[mappeddBy]
-%    \end{description}
-%\end{frame}
+\subsection{Identity Field}
 
 \begin{frame}[c]
     \frametitle{Identity Field}
-    \begin{description}
-        \item<1->[@Id] El atributo marcado ejerce de clave primaria.
-        \item<2->[@GeneratedValue] Se desea que una clave artificial sea autogenerada.
-            \begin{description}
-                \item<3->[strategy] Especifica la estrategia de generación: \texttt{AUTO}, \texttt{IDENTITY}, \texttt{SEQUENCE}, \texttt{TABLE}.
-            \end{description}
-        \item<4->[@IdClass,@EmbeededId] Permite la creación de claves compuestas por varios atributos.
-    \end{description}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{@Id} & El atributo marcado será la clave primaria. \\ 
+        \ann{@GeneratedValue} & El atributo será una clave autogenerada. \\
+        \multicolumn{1}{r}{\texttt{strategy}} & 
+                Especifica la estrategia de generación. \\
+        \ann{@IdClass}    & \\
+        \ann{@EmbeededId} & Permiten crear claves primarias compuestas.\\
+    \end{tabular}
 \end{frame}
-   
+
+\begin{frame}[c]
+    \frametitle{Identity Field - Estrategias de Generación}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{AUTO}     & Se deja a decisión del ORM la elección. \\
+        \ann{IDENTITY} & Generada por el gestor de pesistencia. \\
+        \ann{SEQUENCE} & Usa una \emph{secuencia} del gestor de persistencia. \\
+        \ann{TABLE}    & Generada por el propio ORM.
+    \end{tabular}
+\end{frame}
+
+\subsection{Herencias}
+
 %\begin{frame}[c]
 %    \frametitle{Transformación de Herencias}
 %    \begin{description}
