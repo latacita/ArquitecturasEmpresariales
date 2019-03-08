@@ -2,11 +2,7 @@
 
 \input{slidesHeader.tex}
 
-\usepackage{pifont}
-\newcommand{\cmark}{\ding{51}}
-\newcommand{\xmark}{\ding{55}}
-
-\title[Spring Data + JPA]{Capa de Persistencia \\ \ \\ Spring Data + Java Persistence API (JPA)}
+\title[JPA + Spring Data]{Capa de Persistencia \\ \ \\ Java Persistence API (JPA) + Spring Data}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -48,25 +44,24 @@
 
 \begin{frame}
     \frametitle{Puentes de Persistencia de Objetos}
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/introduction/orm02.eps}
-        }
+    \rput[lt](0,0){
+        \includegraphics[width=\linewidth]{images/intro/orm02.eps}
     }
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{JPA + Spring Data}
     \begin{block}{JPA}
+        \emph{Java Persistence API (JPA)} es una especificación de referencia de un puente de persistencia estándar en Java.
         \begin{enumerate}
-            \item \emph{Java Persistence API (JPA)} es una especificación estándar o interfaz de cómo realizar un puente de persistencia en Java.
-            \item<2-> Proporciona dos maneras concretas (anotaciones y fichero externo XML) de especificar un \emph{metadata mapping}.
-            \item<3-> Especifica la interfaz y funcionamiento de una serie de elementos para realizar el acceso a datos (e.g. \emph{PesistenceContext}).
-            \item<4-> Precisan de un ORM que la implemente (e.g. Hibernate, Spring).
+            \item<2-> Proporciona mecanismos para especificar el \emph{metadata mapping}.
+            \item<3-> Especifica la interfaz y funcionamiento que deben tener una serie de elementos para realizar el acceso a datos (e.g. \emph{EntityManager}).
+            \item<4-> Precisa de un ORM que la implemente (e.g. Hibernate).
         \end{enumerate}
     \end{block}
     \uncover<5->{
         \begin{block}{Spring Data}
-            Framework que proporciona facilidades para la definición de repositorios compatible con diversas tecnologías y de persistencia, entre ellas JPA.
+            Framework que proporciona facilidades para la definición de repositorios compatible con diversas tecnologías de persistencia, entre ellas JPA.
         \end{block}
     }
 \end{frame}
@@ -94,67 +89,106 @@
     \end{thebibliography}
 \end{frame}
 
-\section{Anotaciones JPA}
+\section{Transformación Estructural}
+
+\begin{frame}[c]
+    \frametitle{Metadata mapping}
+    \begin{enumerate}[<+->]
+         \item<1-> Se realiza mediante dos alternativas: anotaciones Java o basada en fichero XML.
+         \item<2-> Anotaciones Java
+             \begin{enumerate}
+                \item<3-> Contaminan los POJOs, haciéndolos menos reutilizables y legibles.
+                \item<4-> No requieren la actualización de ficheros externos cuando el modelo de dominio evoluciona.
+             \end{enumerate}
+         \item<5-> Ficheros XML
+             \begin{enumerate}
+                \item<6-> Permiten tener POJOs más limpios y reutilizables.
+                \item<7-> Requieren ser actualizados cuando el modelo de dominio cambia,
+             \end{enumerate}
+    \end{enumerate}
+\end{frame}
 
 \begin{frame}[c]
     \frametitle{Entidades y Value Objects}
-    \begin{description}
+    \begin{description}[<+->]
         \item[@Entity] Indica que un elemento es una entidad y se transformará a su correspondiente tabla.
         \item[@Embeddable] Indica que un elemento es un \emph{value object} y por tanto puede ser incrustado dentro de otro objeto.
     \end{description}
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{Identificación de Entidades}
-    \begin{description}
-        \item[@Id] Especifica que un atributo de la clase ejerce de clave primaria.
-        \item[@GeneratedValue] Indica que se desea que una clave artificial sea autogenerada.
-        \item[@IdClass,@EmbeededId] Permite la creación de claves compuestas por varios campos.
-    \end{description}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Transformación de Asociaciones}
-    \begin{description}
-        \item[@OneToOne]
-        \item[@OneToMany]
-        \item[@ManyToOne]
-        \item[@ManyToMany]
-        \item[@Embedded]
-        \item[@ElementsCollection]
-        \item[mappeddBy]
-    \end{description}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Transformación de Herencias}
-    \begin{description}
-        \item[@@Inheritance(strategy=)]
-        \item[@DiscriminatorValue]
-    \end{description}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Personalización de Elementos}
-    \begin{description}
-        \item[@Table]
-        \item[@Column]
-        \item[@JoinColumn]
-        \item
-    \end{description}
-\end{frame}
-
-
-\section{Spring Repositories}
-
-\section{Sumario}
-
-\begin{frame}[c]
-    \frametitle{¿Qué tengo que saber de todo ésto?}
+    \frametitle{Transformación de Propiedades}
     \begin{enumerate}[<+->]
-        \item Ser capaz de utilizar anotaciones JPA para especificar correspondencias objeto-relacional.
-        \item Comprender cómo funcionan los repositorios \emph{Spring}.
+        \item<1-> Basada en campos.
+            \begin{itemize}
+                \item<2-> Se anotan los atributos a transformar.
+                \item<3-> La carga y el almacenamiento se hace basado en reflexión.
+            \end{itemize}
+        \item<3-> Basada en getters.
+            \begin{itemize}
+                \item<4-> Se anotan los \emph{getters} de los atributos a transformar.
+                \item<5-> La carga y almacenamiento se hace basada en \emph{getters} y \emph{setters}.
+                \item<6-> Require de \emph{getters} y \emph{setters} públicos para todos los atributos.
+            \end{itemize}
     \end{enumerate}
 \end{frame}
+
+
+
+%
+%\begin{frame}[c]
+%    \frametitle{Transformación de Asociaciones}
+%    \begin{description}
+%        \item[@OneToOne]
+%        \item[@OneToMany]
+%        \item[@ManyToOne]
+%        \item[@ManyToMany]
+%        \item[@Embedded]
+%        \item[@ElementsCollection]
+%        \item[mappeddBy]
+%    \end{description}
+%\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identity Field}
+    \begin{description}
+        \item<1->[@Id] El atributo marcado ejerce de clave primaria.
+        \item<2->[@GeneratedValue] Se desea que una clave artificial sea autogenerada.
+            \begin{description}
+                \item<3->[strategy] Especifica la estrategia de generación: \texttt{AUTO}, \texttt{IDENTITY}, \texttt{SEQUENCE}, \texttt{TABLE}.
+            \end{description}
+        \item<4->[@IdClass,@EmbeededId] Permite la creación de claves compuestas por varios atributos.
+    \end{description}
+\end{frame}
+   
+%\begin{frame}[c]
+%    \frametitle{Transformación de Herencias}
+%    \begin{description}
+%        \item[@@Inheritance(strategy=)]
+%        \item[@DiscriminatorValue]
+%    \end{description}
+%\end{frame}
+%
+%\begin{frame}[c]
+%    \frametitle{Personalización de Elementos}
+%    \begin{description}
+%        \item[@Table]
+%        \item[@Column]
+%        \item[@JoinColumn]
+%        \item
+%    \end{description}
+%\end{frame}
+
+%\section{Spring Repositories}
+%
+%\section{Sumario}
+%
+%\begin{frame}[c]
+%    \frametitle{¿Qué tengo que saber de todo ésto?}
+%    \begin{enumerate}[<+->]
+%        \item Ser capaz de utilizar anotaciones JPA para especificar correspondencias objeto-relacional.
+%        \item Comprender cómo funcionan los repositorios \emph{Spring}.
+%    \end{enumerate}
+%\end{frame}
 
 \end{document}
