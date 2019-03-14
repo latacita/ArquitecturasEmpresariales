@@ -1,6 +1,7 @@
 \documentclass[a4paper,slidestop,xcolor=pst,blue]{beamer}
 
 \input{slidesHeader.tex}
+\input{customListings.tex}
 
 \newcommand{\ann}[1]{\color{blue}\texttt{#1}\color{black}}
 
@@ -86,8 +87,10 @@
         \newblock {\em {Java Persistence with Hibernate}}. 2ª Ed.
         \newblock Manning
 
-        %% Spring Data
-
+        \bibitem[Bauer, 2015]{Bauer2015}
+        Gierke, O., Darimont, T., Strobl, C., Paluch, M. y Bryant, J. (2019).
+        \newblock {\em {Spring Data JPA - Reference Documentation}}.
+        \url{https://goo.gl/Fhjdlu}
     \end{thebibliography}
 \end{frame}
 
@@ -202,7 +205,7 @@
     \begin{tabular}{lp{0.70\linewidth}}
         \ann{@Table}      & Personaliza las tablas ligadas a una \ann{@Entity}. \\
         \ann{@Column}     & Personaliza las columnas ligadas a un atributo. \\
-        \ann{@JoinColumn} & Personaliza las claves fóraneas en \emph{Foreign Key} \\ 
+        \ann{@JoinColumn} & Personaliza las claves fóraneas en \emph{Foreign Key} \\
         \ann{@JoinTable } & Personaliza las tabla intermedia en \emph{Association Table}. \\
         \ann{@Unique}     & \\
         \multicolumn{1}{r}{\ann{Constraint}} & Especifica restricciones de unicidad adicionales. \\
@@ -213,8 +216,131 @@
     \end{tabular}
 \end{frame}
 
-%\section{Spring Repositories}
+\section{Spring Repositories}
+
+\subsection{Introducción}
+
+\begin{frame}[c]
+    \frametitle{Spring Repositories}
+    \begin{enumerate}[<+->]
+        \item Facilidad que permite la generación automática de repositorios a partir de la extensión de una interfaz de alto nivel.
+        \item Soporte implícito para las operaciones básicas comunes.
+        \item Soporte avanzado para operaciones más específicas.
+        \item Facilidades de personalización avanzada.
+        \item Soporte para paginación, ordenado, \emph{streams} y métodos asíncronos.
+        \item Soporte para \emph{query by example}.
+        \item Soporte para \emph{data transfer objects}.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Jerarquía de los Spring Repositories}
+    \begin{center}
+        \includegraphics[width=.8\linewidth]{images/spring/SpringData.eps}
+    \end{center}
+\end{frame}
+
+\subsection{Interfaces de los Repositorios}
+
+\begin{frame}[c,fragile]
+    \frametitle{Repositorios CRUD}
+    \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface CrudRepository<T, ID extends Serializable>
+  extends Repository<T, ID> {
+
+  <S extends T> S save(S entity);
+
+  Optional<T> findById(ID primaryKey);
+
+  Iterable<T> findAll();
+
+  long count();
+
+  void delete(T entity);
+
+  boolean existsById(ID primaryKey);}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Repositorios Page and Sorting}
+    \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface PagingAndSortingRepository<T, ID extends Serializable>
+  extends CrudRepository<T, ID> {
+
+    Iterable<T> findAll(Sort sort);
+
+    Page<T> findAll(Pageable pageable);
+}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Repositorios JPA}
+    \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface JpaRepository<T, ID extends Serializable> extends
+  PagingAndSortingRepository<T, ID> {
+
+    List<T> findAll();
+
+    List<T> findAll(Sort sort);
+
+    List<T> save(Iterable<? extends T> entities);
+
+    void flush();
+
+    T saveAndFlush(T entity);
+
+    void deleteInBatch(Iterable<T> entities);
+}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Crear un Spring Repository}
+\begin{lstlisting}[basicstyle=\small,language=Java]
+public interface ViajeRepository extends JpaRepository<Viaje,Long>{}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Inyectar un Spring Repository JPA}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public class ViajeService {
+	
+  @Autowired
+  protected ViajeRepository vr;	
+
+  public boolean cerrarViaje(Long id) throws ViajeNotFound {
+		
+    Viaje v = vr.findById(id).orElseThrow(ViajeNotFound::new);
+		
+  }
+}
+\end{lstlisting}
+
+\end{frame}
+
+\subsection{Consultas Avanzadas}
+
+\begin{frame}
+    \frametitle{Métodos Personalizados por Cabecera}
+\end{frame}
+
+
+
+%% Query Methods
+%% Custom queries
+%% Prefixes: find…By, read…By, query…By, count…By, and get…By
+%The expressions are usually property traversals combined with operators that can be concatenated. You can combine property expressions with AND and OR. You also get support for operators such as Between, LessThan, GreaterThan, and Like for the property expressions. The supported operators can vary by datastore, so consult the appropriate part of your reference documentation.
 %
+%The method parser supports setting an IgnoreCase flag for individual properties (for example, findByLastnameIgnoreCase(…)) or for all properties of a type that supports ignoring case (usually String instances — for example, findByLastnameAndFirstnameAllIgnoreCase(…)). Whether ignoring cases is supported may vary by store, so consult the relevant sections in the reference documentation for the store-specific query method.
+%
+%You can apply static ordering by appending an OrderBy clause to the query method that references a property and by providing a sorting direction (Asc or Desc). To create a query method that supports dynamic sorting, see “Special parameter handling”.
+
+%% Populators
+
 \section{Sumario}
 
 \begin{frame}[c]
