@@ -319,18 +319,42 @@ public class ViajeService {
   }
 }
 \end{lstlisting}
-
 \end{frame}
 
 \subsection{Consultas Avanzadas}
 
-\begin{frame}
-    \frametitle{Métodos Personalizados por Cabecera}
+\begin{frame}[c]
+    \frametitle{Creación de Operaciones Personalizadas}
+    \begin{enumerate}[<+->]
+        \item Definidas a través de los nombres de los métodos.
+        \item Definidas a través de expresiones JPQL (Java Persistence Query Language).
+        \item Definidas a través de \emph{especificaciones}.
+        \item Definidas a través de \emph{Query By Example}.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Personalización mediante Nombres de Métodos}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Personalización mediante Nombres de Métodos}
+    \begin{center}
+    \begin{tabular}{l|l}
+    Keyword             & Ejemplo                             \\\hline
+    \ann{And, Or}       & \texttt{findByOriginAndDestino}     \\
+    \ann{Like}          & \texttt{findByOriginLike}           \\
+    \ann{IgnoreCase}    & \texttt{findByOriginLikeIgnoreCase} \\
+    \ann{Between}       & \texttt{findByFechaBetween}       \\
+    \ann{LessThan}      & \texttt{findByPrecioLessThan}     \\
+    \ann{After, Before} & \texttt{findByFechaBefore}        \\
+    \ann{Not}           & \texttt{findByFechaBetweenAndNot} \\
+    \ann{OrderBy(Desc)} & \texttt{findByPriceOrderByAsc}    \\
+    \end{tabular}
+    \end{center}
 \end{frame}
 
 
-
-%% Query Methods
 %% Custom queries
 %% Prefixes: find…By, read…By, query…By, count…By, and get…By
 %The expressions are usually property traversals combined with operators that can be concatenated. You can combine property expressions with AND and OR. You also get support for operators such as Between, LessThan, GreaterThan, and Like for the property expressions. The supported operators can vary by datastore, so consult the appropriate part of your reference documentation.
