@@ -335,35 +335,70 @@ public class ViajeService {
 
 \begin{frame}[c,fragile]
     \frametitle{Personalización mediante Nombres de Métodos}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface UsuarioRepository extends JpaRepository<Usuario,String> {
+	
+	Usuario findByEmail(String email);
+	
+	Set<Usuario> findByFechaAltaAfter(Date fecha);
+
+}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[c,fragile]
     \frametitle{Personalización mediante Nombres de Métodos}
     \begin{center}
     \begin{tabular}{l|l}
-    Keyword             & Ejemplo                             \\\hline
-    \ann{And, Or}       & \texttt{findByOriginAndDestino}     \\
-    \ann{Like}          & \texttt{findByOriginLike}           \\
-    \ann{IgnoreCase}    & \texttt{findByOriginLikeIgnoreCase} \\
-    \ann{Between}       & \texttt{findByFechaBetween}       \\
-    \ann{LessThan}      & \texttt{findByPrecioLessThan}     \\
-    \ann{After, Before} & \texttt{findByFechaBefore}        \\
-    \ann{Not}           & \texttt{findByFechaBetweenAndNot} \\
-    \ann{OrderBy(Desc)} & \texttt{findByPriceOrderByAsc}    \\
+    Keyword              & Ejemplo                               \\\hline
+    \ann{findBy,countBy} & \texttt{findByEmail}                  \\
+    \ann{And, Or}        & \texttt{findByOriginCiudadAndDestino} \\
+    \ann{Like}           & \texttt{findByOriginCiudadLike}       \\
+    \ann{IgnoreCase}     & \texttt{findByOriginCiudadLikeIgnoreCase}   \\
+    \ann{Between}        & \texttt{findByFechaBetween}           \\
+    \ann{LessThan}       & \texttt{findByPrecioLessThan}         \\
+    \ann{After, Before}  & \texttt{findByFechaBefore}            \\
+    \ann{Not}            & \texttt{findByFechaBetweenAndNot}     \\
+    \ann{OrderBy(Desc)}  & \texttt{findByPriceOrderByAsc}        \\
     \end{tabular}
     \end{center}
 \end{frame}
 
+\begin{frame}[c,fragile]
+    \frametitle{Personalización mediante Nombres de Métodos}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface ViajeRepository 
+                   extends JpaRepository<Viaje,Long> 
+{
+  public Set<Viaje> 
+     findByOrigenCiudadAndDestinoCiudad(
+          String ciudadOrigen, 
+          String ciudadDestino);
+	
+  public Set<Viaje> 
+     findByOrigen_CiudadAndFechaBeforeOrderByPrecio(
+          String ciudad, 
+          Date fecha);
+}
+\end{lstlisting}
+\end{frame}
 
-%% Custom queries
-%% Prefixes: find…By, read…By, query…By, count…By, and get…By
-%The expressions are usually property traversals combined with operators that can be concatenated. You can combine property expressions with AND and OR. You also get support for operators such as Between, LessThan, GreaterThan, and Like for the property expressions. The supported operators can vary by datastore, so consult the appropriate part of your reference documentation.
-%
-%The method parser supports setting an IgnoreCase flag for individual properties (for example, findByLastnameIgnoreCase(…)) or for all properties of a type that supports ignoring case (usually String instances — for example, findByLastnameAndFirstnameAllIgnoreCase(…)). Whether ignoring cases is supported may vary by store, so consult the relevant sections in the reference documentation for the store-specific query method.
-%
-%You can apply static ordering by appending an OrderBy clause to the query method that references a property and by providing a sorting direction (Asc or Desc). To create a query method that supports dynamic sorting, see “Special parameter handling”.
 
-%% Populators
+\begin{frame}[c,fragile]
+    \frametitle{Personalización mediante JPQL}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+public interface ViajeRepository 
+                   extends JpaRepository<Viaje,Long> {
+	
+	@Query("SELECT v FROM Viaje v 
+                    WHERE v.origen.ciudad = ?1 
+                      AND v.destino.ciudad = ?2")
+	public Set<Viaje> findByOrigenAndDestino(
+                                      String origen, 
+                                      String destino);
+}
+\end{lstlisting}
+\end{frame}
 
 \section{Sumario}
 
