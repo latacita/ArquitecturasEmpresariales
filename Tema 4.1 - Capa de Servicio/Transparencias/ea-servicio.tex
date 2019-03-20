@@ -49,18 +49,18 @@
             \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
         }
     }
-%    \only<2|handout:2>{
-%        \rput[lt](0,0){
-%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-%        }
-%    }
+    \only<2|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+        }
+    }
 \end{frame}
 
 \begin{frame}[c]
 	\frametitle{Responsabilidades de la Capa de Servicio}
 	\begin{enumerate}[<+->]
         \item Atender las peticiones HTTP de los clientes, delegando en el modelo de dominio.
-        \item Asegurar la \alert{transaccionalidad} de las operaciones de negocio.
+        \item Asegurar la transaccionalidad de las operaciones de negocio.
         \item Validar las peticiones de los clientes.
         \item Recuperar y almacenar datos del almacén o almacenes persistentes.
         \item Facilitar la eficiencia del sistema.
@@ -75,11 +75,10 @@
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
          \item Comprender en profundidad cuáles son las responsabilidades de la capa de servicio.
-         \item Comprender cómo funcionan las arquitecturas REST y cuáles son sus ventajas.
          \item Comprender cómo funciona el protocolo HTTP.
-         \item Comprender cómo se relaciona un controlador REST con la capa de servicio.
+         \item Comprender los principios de las arquitecturas REST.
          \item Saber diseñar una API REST.
-         \item Ser capaz de usar los patrones de diseño para diseñar una capa de servicio.
+         \item Ser capaz de usar los patrones de diseño propios del diseño de una capa de servicio.
     \end{enumerate}
 \end{frame}
 
@@ -112,16 +111,11 @@
 
 \begin{frame}
     \frametitle{Controlador HTTP}
-    \only<1|handout:2>{
+    \only<2|handout:2>{
         \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
         }
     }
-%    \only<2|handout:2>{
-%        \rput[lt](0,0){
-%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-%        }
-%    }
 \end{frame}
 
 \begin{frame}[c]
@@ -198,13 +192,13 @@
 \begin{frame}[c]
 	\frametitle{Recursos REST}
     \begin{block}{Recurso REST}
-        Un \emph{recurso REST} es cualquier pieza de información a la que sea posible darle un nombre, que será el \emph{identificador del recurso}.   
+        Un \emph{recurso REST} es cualquier pieza de información a la que sea posible darle un nombre, que será el \emph{identificador del recurso}.
     \end{block}
     \uncover<2->{
         \begin{block}{Recurso REST}
             Una \emph{representación de recurso} es un conjunto de información que contiene datos, metadatos y, opcionalmente, metadatos sobre los metadatos.
         \end{block}
-    }        
+    }
 \end{frame}
 
 \begin{frame}[c]
@@ -212,7 +206,7 @@
     \begin{enumerate}
         \item Contiene datos de control (qué se debe hacer con el recurso).
         \item Contiene datos (asociados al control).
-        \item Los datos pueden estar disponibles en varios formatos, abierto a negociación. 
+        \item Los datos pueden estar disponibles en varios formatos, abierto a negociación.
     \end{enumerate}
 \end{frame}
 
@@ -220,7 +214,7 @@
 
 %% (1) No necesita mantener estado.
 %% (2) Facilita el procesamiento en paralelo.
-%% (3) Permite interpretar la petición de manera aislada y realojar servicios. 
+%% (3) Permite interpretar la petición de manera aislada y realojar servicios.
 %% (4) Permite la construcción de caches intermedias.
 
 \section{Patrones de Servicio}
