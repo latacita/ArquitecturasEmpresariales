@@ -105,7 +105,31 @@
     \end{thebibliography}
 \end{frame}
 
-\section{Arquitecturas y Controladores REST}
+\section{Protocolo HTTP}
+
+\subsection{Introducción}
+
+\begin{frame}
+    \frametitle{Controlador HTTP}
+    \only<1|handout:2>{
+        \rput[lt](0,0){
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
+        }
+    }
+%    \only<2|handout:2>{
+%        \rput[lt](0,0){
+%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+%        }
+%    }
+\end{frame}
+
+\subsection{Paquete HTTP}
+
+\subsection{Verbos HTTP}
+
+\subsection{Respuestas HTTP}
+
+\section{Arquitecturas REST}
 
 \subsection{Introducción}
 
@@ -152,15 +176,15 @@
         %% Enlaces
         \item Minimizar latencias.
         %% Escalabilidad
-        \item Trata de minimizar comunicaciones a nivel de red
+        \item Trata de minimizar comunicaciones a nivel de red.
         %% Altas cargas de usarios
-        \item Maximiza la escalabilidad de los componentes
+        \item Maximiza la escalabilidad de los componentes.
         %%
-        \item Mazimiza la independencia de los componentes
+        \item Maximiza la independencia de los componentes.
 
         \item Permite cachear resultados e interacciones.
-        \item Permite la sustitución dinámica de componentes
-        \item Procesamiento de acciones por intermediarios
+        \item Permite la sustitución dinámica de componentes.
+        \item Procesamiento de acciones por intermediarios.
     \end{enumerate}
 \end{frame}
 
@@ -183,7 +207,6 @@
         %% Favorece la visibilidad
         \item Interfaces uniformes entre componentes.
         \item Código bajo demanda.
-        \item Representación adaptable.
     \end{enumerate}
 \end{frame}
 
@@ -195,8 +218,8 @@
         Un \emph{recurso REST} es cualquier pieza de información a la que sea posible darle un nombre, que será el \emph{identificador del recurso}.
     \end{block}
     \uncover<2->{
-        \begin{block}{Recurso REST}
-            Una \emph{representación de recurso} es un conjunto de información que contiene datos, metadatos y, opcionalmente, metadatos sobre los metadatos.
+        \begin{block}{Representación de un Recurso REST}
+            Una \emph{representación de recurso} es un conjunto de información que contiene datos, metadatos y, opcionalmente, metadatos sobre los metadatos. La representación de un recurso REST puede ser variable.
         \end{block}
     }
 \end{frame}
@@ -210,12 +233,44 @@
     \end{enumerate}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Componentes REST}
+    
+%% User agent
+%% Origin-server
+%% Proxy
+%% Gateway 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conectores REST}
 %% Connector Stateless
 
 %% (1) No necesita mantener estado.
 %% (2) Facilita el procesamiento en paralelo.
 %% (3) Permite interpretar la petición de manera aislada y realojar servicios.
 %% (4) Permite la construcción de caches intermedias.
+
+%% client connector
+%% server connector
+%% cache 
+%% resolver
+%% tunnel
+
+\end{frame}
+
+\subsection{HATEOAS}
+
+\section{REST sobre HTTP}
+
+\subsection{Nombrado de Recursos}
+
+\subsection{Datos de Control}
+
+\subsection{Representación} 
+
+\subsection{Niveles de Adopción}
 
 \section{Patrones de Servicio}
 
