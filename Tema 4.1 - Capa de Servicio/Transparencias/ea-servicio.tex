@@ -42,15 +42,15 @@
 
 \section{Introducción}
 
-\begin{frame}
+\begin{frame}[t]
     \frametitle{Capa de Servicio}
-    \only<1|handout:2>{
-        \rput[lt](0,0){
+    \only<1|handout:0>{
+        \rput[lt](-0.2,0){
             \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
         }
     }
-    \only<2|handout:2>{
-        \rput[lt](0,0){
+    \only<2|handout:1>{
+        \rput[lt](-0.2,0){
             \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
         }
     }
@@ -105,30 +105,6 @@
     \end{thebibliography}
 \end{frame}
 
-\section{Protocolo HTTP}
-
-\subsection{Introducción}
-
-\begin{frame}
-    \frametitle{Controlador HTTP}
-    \only<1|handout:2>{
-        \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures00.eps}
-        }
-    }
-%    \only<2|handout:2>{
-%        \rput[lt](0,0){
-%            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
-%        }
-%    }
-\end{frame}
-
-\subsection{Paquete HTTP}
-
-\subsection{Verbos HTTP}
-
-\subsection{Respuestas HTTP}
-
 \section{Arquitecturas REST}
 
 \subsection{Introducción}
@@ -137,7 +113,7 @@
     \frametitle{Controlador HTTP}
     \only<2|handout:2>{
         \rput[lt](0,0){
-            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures01.eps}
+            \includegraphics[width=\linewidth]{images/intro/enterpriseArchitectures02.eps}
         }
     }
 \end{frame}
@@ -157,9 +133,6 @@
 
 \begin{frame}[c]
 	\frametitle{Arquitectura REST}
-	\begin{block}{Sistema Hipermedia}
-        Un \emph{sistema hipermedia} fusiona información de control de la aplicación con la presentación de la información.
-	\end{block}
     \uncover<2->{
     	\begin{block}{REST \emph{(REpresentational State Transfer)}
             \begin{enumerate}[<+->]
@@ -168,6 +141,12 @@
                 \item La representación de cada estado se transfiere al usuario.
     	\end{block}
     }
+    \uncover<2->{
+    	\begin{block}{Sistema Hipermedia}
+            Un \emph{sistema hipermedia} fusiona información de control con la presentación de la información de una aplicación. La información se puede presentar utilizando diversos formatos, tales como texto, gráficos, audio o vídeo.
+    	\end{block}
+    }
+
 \end{frame}
 
 \begin{frame}[c]
@@ -187,104 +166,221 @@
         \item Procesamiento de acciones por intermediarios.
     \end{enumerate}
 \end{frame}
+%
+%\begin{frame}[c]
+%	\frametitle{Estilos Arquitectura REST}
+%    \begin{enumerate}[<+->]
+%        %% Presentación vs Almacenamiento y Procesamiento.
+%        %% Portabilidad
+%        %% Reemplazabilidad dinámica de comportamiento.
+%        \item Cliente-Servidor.
+%        %% El servidor no debe almacenar nada sobre el estado de los clientes.
+%        %% Cada petición del cliente debe tener toda la información necesaria para interpretarla.
+%        %% Favorece la escalabilidad.
+%        %% Favorece reliability (puedo volver a un estado anterior)
+%        %% Favore procesamiento por terceros.
+%        \item Stateless.
+%        %% Favorece el rendimiento
+%        \item Respuestas cacheables.
+%        %% Favorece la evolución
+%        %% Favorece la visibilidad
+%        \item Interfaces uniformes entre componentes.
+%        \item Código bajo demanda.
+%    \end{enumerate}
+%\end{frame}
+%
+%\subsection{Recursos REST}
+%
+%\begin{frame}[c]
+%	\frametitle{Recursos REST}
+%    \begin{block}{Recurso REST}
+%        Un \emph{recurso REST} es cualquier pieza de información a la que sea posible darle un nombre, que será el \emph{identificador del recurso}.
+%    \end{block}
+%    \uncover<2->{
+%        \begin{block}{Representación de un Recurso REST}
+%            Una \emph{representación de recurso} es un conjunto de información que contiene datos, metadatos y, opcionalmente, metadatos sobre los metadatos. La representación de un recurso REST puede ser variable.
+%        \end{block}
+%    }
+%\end{frame}
+
+%\begin{frame}[c]
+%    \frametitle{Tipos de Recursos REST}
+%    \begin{description}[<+->]
+%        \item[Documentos] Instancias individuales de un concepto (e.g., un viaje concreto).
+%        \item[Colecciones] Repositorios de recursos manejados por el servidor (e.g., todos los viajes).
+%        \item[Store] Repositorio de recursos manejado por el cliente.
+%        \item[Controller] Abstrae una función o procedimiento.
+%    \end{enumerate}
+%\end{frame}
+%
+%\begin{frame}[c]
+%	\frametitle{Representación de un Recurso REST}
+%    \begin{enumerate}
+%        \item Contiene datos de control (qué se debe hacer con el recurso).
+%        \item Contiene datos (asociados al control).
+%        \item Los datos pueden estar disponibles en varios formatos, abierto a negociación.
+%    \end{enumerate}
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Componentes REST}
+%
+%%% User agent
+%%% Origin-server
+%%% Proxy
+%%% Gateway
+%
+%\end{frame}
+%
+%\begin{frame}
+%    \frametitle{Conectores REST}
+%%% Connector Stateless
+%
+%%% (1) No necesita mantener estado.
+%%% (2) Facilita el procesamiento en paralelo.
+%%% (3) Permite interpretar la petición de manera aislada y realojar servicios.
+%%% (4) Permite la construcción de caches intermedias.
+%
+%%% client connector
+%%% server connector
+%%% cache
+%%% resolver
+%%% tunnel
+%
+%\end{frame}
+%
+%\subsection{HATEOAS}
+
+\section{Protocolo HTTP}
+
+\subsection{Introducción}
 
 \begin{frame}[c]
-	\frametitle{Estilos Arquitectura REST}
-    \begin{enumerate}[<+->]
-        %% Presentación vs Almacenamiento y Procesamiento.
-        %% Portabilidad
-        %% Reemplazabilidad dinámica de comportamiento.
-        \item Cliente-Servidor.
-        %% El servidor no debe almacenar nada sobre el estado de los clientes.
-        %% Cada petición del cliente debe tener toda la información necesaria para interpretarla.
-        %% Favorece la escalabilidad.
-        %% Favorece reliability (puedo volver a un estado anterior)
-        %% Favore procesamiento por terceros.
-        \item Stateless.
-        %% Favorece el rendimiento
-        \item Respuestas cacheables.
-        %% Favorece la evolución
-        %% Favorece la visibilidad
-        \item Interfaces uniformes entre componentes.
-        \item Código bajo demanda.
-    \end{enumerate}
+    \frametitle{Protocolo HTTP}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
+    \end{center}
 \end{frame}
 
-\subsection{Recursos REST}
-
 \begin{frame}[c]
-	\frametitle{Recursos REST}
-    \begin{block}{Recurso REST}
-        Un \emph{recurso REST} es cualquier pieza de información a la que sea posible darle un nombre, que será el \emph{identificador del recurso}.
+    \frametitle{Protocolo HTTP}
+    \begin{block}{Protocolo HTTP)
+        \emph{HTTP (Hypertext Transfer Protocol)} es un protocolo a nivel de aplicación diseñado para su utilización en \emph{sistemas de información hipermedia} distribuidos y colaborativos.
     \end{block}
-    \uncover<2->{
-        \begin{block}{Representación de un Recurso REST}
-            Una \emph{representación de recurso} es un conjunto de información que contiene datos, metadatos y, opcionalmente, metadatos sobre los metadatos. La representación de un recurso REST puede ser variable.
-        \end{block}
-    }
 \end{frame}
 
 \begin{frame}[c]
-	\frametitle{Representación de un Recurso REST}
-    \begin{enumerate}
-        \item Contiene datos de control (qué se debe hacer con el recurso).
-        \item Contiene datos (asociados al control).
-        \item Los datos pueden estar disponibles en varios formatos, abierto a negociación.
-    \end{enumerate}
+    \frametitle{Características HTTP}
+    %% request-response client-server model
+    %% clients request something about a resource and returns a response
+    %% messages (request and responses) and contains control information.
+    %% clients are user-agents
+    %% great cache support
+    %% Recursos identificados mediante URLs
+    %% Soporta varios mecanismos de autenticación.
 \end{frame}
 
-\begin{frame}
-    \frametitle{Componentes REST}
-    
-%% User agent
-%% Origin-server
-%% Proxy
-%% Gateway 
-
-\end{frame}
-
-\begin{frame}
-    \frametitle{Conectores REST}
-%% Connector Stateless
-
-%% (1) No necesita mantener estado.
-%% (2) Facilita el procesamiento en paralelo.
-%% (3) Permite interpretar la petición de manera aislada y realojar servicios.
-%% (4) Permite la construcción de caches intermedias.
-
-%% client connector
-%% server connector
-%% cache 
-%% resolver
-%% tunnel
-
-\end{frame}
-
-\subsection{HATEOAS}
-
-\section{REST sobre HTTP}
-
-\subsection{Nombrado de Recursos}
-
-\subsection{Datos de Control}
-
-\subsection{Representación} 
-
-\subsection{Niveles de Adopción}
-
-\section{Patrones de Servicio}
-
-\subsection{Unit of Work}
-
-\subsection{Data Transfer Object}
-
-\section{Sumario}
+\subsection{Paquetes HTTP}
 
 \begin{frame}[c]
-    \frametitle{¿Qué tengo que saber de todo ésto?}
+    \frametitle{HTTP Request}
+    %% Request Line : Verbo HTTP + URL
+    %% Metadata
+    %% Message Body (info)
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{HTTP Response}
+    %% Request Line : Verbo HTTP + URL
+    %% Metadata
+    %% Message Body (info)
+\end{frame}
+
+\section{Creación de una API REST sobre HTTP}
+
+\subsection{Identificación de recursos}
+
+\begin{frame}[c]
+    \frametitle{Creación de una API REST}
     \begin{enumerate}[<+->]
-        \item
+        \item Decidir qué elementos del \emph{domain model} se expondrán como \emph{recursos}.
+        \item Exponer los \emph{aggregate roots} como colecciones. 
+        \item Exponer las partes internas de un \emph{aggregate roots} como elementos subordinados a un aggregate root.
+        \item Exponer las operaciones de negocio que no corresponda a operaciones CRUDs básicas o parametrizadas como controladores, asociados al recurso que corresponda.
+        \item Asignar una URI para cada recurso.
+        \item Decidir qué verbos HTTP son aplicables a cada respuesta.
+        \item Decidir los posibles parámetros de entrada a cada petición.
+        \item Decidir las posibles respuestas a cada petición.
     \end{enumerate}
 \end{frame}
+
+\begin{frame}[c]
+    \frametitle{Identificación de Recursos REST}
+    \begin{enumerate}[<+->]
+        \item Las colecciones de \emph{aggregates roots} se identifican con sustantivos en plural asociados a la raíz de la organización (\texttt{http://carsharing.es/viajes}).
+        \item Las instancias de un \emph{aggregates roots} se identifican añadiendo el identificador de la instancia tras la URI asociado al \emph{aggregate root} 
+            (\texttt{/viajes/{viajeId}}).
+        \item Los partes internas de un \emph{aggregate} se exponen siguiendo las mismas reglas, utilizando la URI del \emph{aggregate root} como prefijo ((\texttt{/viajes/{viajeId}/conductor})).
+        \item La regla anterior se aplica recursivamente a las partes internas de las partes internas de un aggregate (\texttt{/viajes/{viajeId}/conductor/vehiculos/}}).
+        \item Las operaciones no CRUD sobre un recurso se especifican como verbos tras la instancia del recurso al que se aplican (\texttt{/viajes/{viajeId}/cerrar}).
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Guía de Estilo para URIs REST}
+    \begin{enumerate}[<+->]
+        \item Utilizar \texttt{/} para indicar jerarquía o navegación por el modelo de dominio.
+        \item No añadir una \texttt{/} final.
+        \item Usar guiones \texttt{\-} para separar palabras.
+        \item No usar guiones bajos \texttt{\_}.
+        \item Usar sólo minúsculas. 
+        \item No referir ficheros, sino recursos.
+        \item No utilizar URIs para distinguir operaciones CRUD.
+        \item Utilizar parámetros para refinar operaciones CRUD (\viajes?origen=Santander&destino=Bilbao).
+    \end{enumerate}
+\end{frame}
+
+\subsection{Verbos HTTP}
+
+\begin{frame}[c]
+    \frametitle{HTTP Verbs}
+    \begin{tabular}{cc}
+    
+               & \multicolumn{2}{c}{Tipo Recurso}  &             \\          
+               &  Documento      &  Colección      & Idempotente \\ 
+        GET    &  Lectura        &  Lectura        & SI          \\ \hline
+        POST   &  Creación       &  Creación       & No          \\ \hline 
+%        PUT    &
+%        PATCH  &
+%        DELETE &
+%        HEAD   &
+    \end{tabular}
+\end{frame}
+
+
+%\section{REST sobre HTTP}
+%
+%\subsection{Nombrado de Recursos}
+%
+%\subsection{Datos de Control}
+%
+%\subsection{Representación}
+%
+%\subsection{Niveles de Adopción}
+%
+%\section{Patrones de Servicio}
+%
+%\subsection{Unit of Work}
+%
+%\subsection{Data Transfer Object}
+%
+%\section{Sumario}
+%
+%\begin{frame}[c]
+%    \frametitle{¿Qué tengo que saber de todo ésto?}
+%    \begin{enumerate}[<+->]
+%        \item
+%    \end{enumerate}
+%\end{frame}
 
 \end{document}
