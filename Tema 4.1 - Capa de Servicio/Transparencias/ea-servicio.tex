@@ -265,31 +265,16 @@
 
 \begin{frame}[c,fragile]
     \frametitle{HTTP Request}
-\begin{verbatim}
- GET /viajes HTTP/1.1
- Host: www.carsharing.es
- User-Agent: Mozilla/5.0
- Connection: keep-alive
-
- {"origen":"Santander";
-  "destino":"Bilbao"}
-\end{verbatim}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/http/httpRequest.eps}
+    \end{center}
 \end{frame}
 
 \begin{frame}[c,fragile]
     \frametitle{HTTP Response}
-\begin{verbatim}
-HTTP/1.1 200 OK
-Date: Fri, 31 Dec 2003 23:59:59 GMT
-Content-Type: text/html
-Content-Length: 1221
-
-{[{"id":"6799584320";
-   "precio":60.00;
-   "fecha":04; ... },
-   {"id":"6799584320"; ...}
- ]}
-\end{verbatim}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/http/httpResponse.eps}
+    \end{center}
 \end{frame}
 
 \section{Creación de una API REST sobre HTTP}
