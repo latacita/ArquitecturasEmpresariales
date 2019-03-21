@@ -107,27 +107,14 @@
 
 \section{Arquitecturas REST}
 
-\subsection{Introducción}
+\subsection{Arquitecturas REST}
 
 \begin{frame}
-    \frametitle{Controlador}
+    \frametitle{Arquitecturas REST}
     \begin{center}
-        \includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
+        \includegraphics[width=\linewidth]{images/rest/enterpriseArchitectures(rest).eps}
     \end{center}
 \end{frame}
-
-\begin{frame}[c]
-	\frametitle{Responsabilidades del Controlador HTTP}
-	\begin{enumerate}[<+->]
-        \item Atender las peticiones HTTP de los clientes.
-        \item Convertir datos de HTTP al lenguaje que corresponda (\emph{unmarshalling}).
-        \item Validar las peticiones de los clientes.
-        \item Convertir las respuestas a una respuesta HTTP adecuada.
-        \item Convertir los resultados a datos HTTP (\emph{marshalling}).
-	\end{enumerate}
-\end{frame}
-
-\subsection{Arquitectura REST}
 
 \begin{frame}[c]
 	\frametitle{Arquitectura REST}
@@ -267,7 +254,7 @@
     \frametitle{Características HTTP}
     \begin{enumerate}[<+->]
         \item Modelo cliente-servidor, petición-respuesta.
-        \item Los mensajes HTTP contienen códigos de control, metadatos y datos.    
+        \item Los mensajes HTTP contienen códigos de control, metadatos y datos.
         \item Facilita la creación de cachés intermedias.
         \item Identifica recursos mediante URLs
         \item Soporta varios mecanismos de autenticación.
@@ -281,9 +268,9 @@
 \begin{verbatim}
  GET /viajes HTTP/1.1
  Host: www.carsharing.es
- User-Agent: Mozilla/5.0 
+ User-Agent: Mozilla/5.0
  Connection: keep-alive
- 
+
  {"origen":"Santander";
   "destino":"Bilbao"}
 \end{verbatim}
@@ -301,11 +288,29 @@ Content-Length: 1221
    "precio":60.00;
    "fecha":04; ... },
    {"id":"6799584320"; ...}
- ]}  
+ ]}
 \end{verbatim}
 \end{frame}
 
 \section{Creación de una API REST sobre HTTP}
+
+\begin{frame}[c]
+    \frametitle{API REST}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/apiRest/enterpriseArchitectures(api).eps}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Responsabilidades del Controlador HTTP}
+	\begin{enumerate}[<+->]
+        \item Atender las peticiones HTTP de los clientes.
+        \item Convertir datos de HTTP al lenguaje que corresponda (\emph{unmarshalling}).
+        \item Validar las peticiones de los clientes.
+        \item Convertir las respuestas a una respuesta HTTP adecuada.
+        \item Convertir los resultados a datos HTTP (\emph{marshalling}).
+	\end{enumerate}
+\end{frame}
 
 \subsection{Identificación de recursos}
 
@@ -367,12 +372,22 @@ Content-Length: 1221
 \begin{frame}[c]
     \frametitle{Códigos Respuesta HTTP}
     \begin{center}
-        \begin{tabular}{ll|ll|ll}
-            200 & Ok         & 400 & Bad request  & 500 & Internal Server Error \\
-            201 & Created    & 401 & Unauthorized & 501 & Not Implemented       \\
-            202 & Accepted   & 404 & Not Found    &     & \\
-            204 & No content & 405 & Method Not Allowed  & & \\
-                &            & 412 & Precondition Failed & & \\
+        \begin{tabular}{ll}
+            \hline
+            200 & Ok         \\   
+            201 & Created    \\  
+            202 & Accepted   \\  
+            204 & No content \\ 
+            \hline
+            400 & Bad request         \\
+            401 & Unauthorized        \\   
+            404 & Not Found           \\
+            405 & Method Not Allowed  \\
+            412 & Precondition Failed \\
+            \hline
+            500 & Internal Server Error \\
+            501 & Not Implemented       \\
+            \hline            
         \end{tabular}
     \end{center}
 \end{frame}
