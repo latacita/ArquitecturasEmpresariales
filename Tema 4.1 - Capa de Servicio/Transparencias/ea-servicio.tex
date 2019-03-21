@@ -277,6 +277,34 @@
     \end{center}
 \end{frame}
 
+\section{JSON}
+
+\begin{frame}[c]
+    \frametitle{Formato de intercambio JSON}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Formato de intercambio JSON}
+    \begin{block}{JSON}
+        \emph{JSON (JavaScript Object Notation)} es un formato ligero de intercambio de datos fácilmente comprensible por humanos y fácilmente procesable por máquinas.
+    \end{block}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Gramática JSON}
+\begin{verbatim}
+    <json> ::= <object> | <array>
+    <object> ::= {} | 
+                 {(<string>:<value>,)* <string>:<value>}
+    <value>  ::= <string> | <number> | <object> | 
+                 array | true | false | null
+\end{verbatim}
+\end{frame}
+
+
 \section{Creación de una API REST sobre HTTP}
 
 \begin{frame}[c]
@@ -376,6 +404,18 @@
         \end{tabular}
     \end{center}
 \end{frame}
+
+\subsection{HATEOAS}
+
+\begin{frame}[c]
+    \frametitle{HATEOAS sobre JSON}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/apiRest/hateoas.eps}
+    \end{center}
+\end{frame}
+
+
+
 
 \subsection{Niveles de Adopción}
 
