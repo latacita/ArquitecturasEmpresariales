@@ -2,7 +2,7 @@
 
 \input{slidesHeader.tex}
 
-\title[Capa de Servicio - Fundamentos]{Capa de Servicio - Fundamentos }
+\title[Capa de Servicio - Fundamentos]{Capa de Servicio - Fundamentos}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -297,9 +297,9 @@
     \frametitle{Gramática JSON}
 \begin{verbatim}
     <json> ::= <object> | <array>
-    <object> ::= {} | 
+    <object> ::= {} |
                  {(<string>:<value>,)* <string>:<value>}
-    <value>  ::= <string> | <number> | <object> | 
+    <value>  ::= <string> | <number> | <object> |
                  array | true | false | null
 \end{verbatim}
 \end{frame}
@@ -387,20 +387,20 @@
     \begin{center}
         \begin{tabular}{ll}
             \hline
-            200 & Ok         \\   
-            201 & Created    \\  
-            202 & Accepted   \\  
-            204 & No content \\ 
+            200 & Ok         \\
+            201 & Created    \\
+            202 & Accepted   \\
+            204 & No content \\
             \hline
             400 & Bad request         \\
-            401 & Unauthorized        \\   
+            401 & Unauthorized        \\
             404 & Not Found           \\
             405 & Method Not Allowed  \\
             412 & Precondition Failed \\
             \hline
             500 & Internal Server Error \\
             501 & Not Implemented       \\
-            \hline            
+            \hline
         \end{tabular}
     \end{center}
 \end{frame}
@@ -413,9 +413,6 @@
         \includegraphics[width=\linewidth]{images/apiRest/hateoas.eps}
     \end{center}
 \end{frame}
-
-
-
 
 \subsection{Niveles de Adopción}
 
@@ -431,9 +428,38 @@
 
 \section{Patrones de Servicio}
 
+\subsection{Data Transfer Object}
+
+\begin{frame}[c]
+    \frametitle{Data Transfer Object}
+    \begin{block}{Problema}
+        En un sistema distribuido:
+        \begin{enumerate}
+            \item<2-> ¿Cómo consigo transferir un objeto entre computadoras sin tener que serializar en texto todos los objetos del sistema?
+            \item<3-> ¿Cómo consigo reducir el número de llamadas entre computadores para recuperar datos?
+        \end{enumerate}
+    \end{block}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/patterns/dto00.eps}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Data Transfer Object}
+    \begin{block}{Solución}
+        \begin{enumerate}[<+->]
+            \item Crear un conjunto de objetos con la información necesaria para un propósito concreto y que sean \emph{serializables}.
+            \item Crear una clase \emph{Assembler} que recibe una entidad y genere uno de sus posibles DTOs.
+            \item Devolver DTOs en lugar de entidades de dominio.
+        \end{enumerate}
+    \end{block}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/patterns/dto01.eps}
+    \end{center}
+\end{frame}
+
 \subsection{Unit of Work}
 
-\subsection{Data Transfer Object}
 
 \section{Sumario}
 %%
