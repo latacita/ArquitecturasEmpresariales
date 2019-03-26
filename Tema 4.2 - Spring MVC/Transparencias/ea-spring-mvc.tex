@@ -89,42 +89,106 @@
     \end{tabular}
 \end{frame}
 
-%\begin{frame}[c]
-%    \frametitle{Respuestas Http}
-%    \begin{listing}
-%         ResponseEntity<T>  & \\
-%   \end{tabular}
-%\end{frame}
+\begin{frame}[c,fragile]
+    \frametitle{Respuestas HTTP}
+    \begin{lstlisting}[basicstyle=\small,language=Java]
+@GetMapping(value="usuarios/{id}")
+public ResponseEntity<Usuario> 
+        obtenerUsuario(@PathVariable("id") 
+                              String userId) {
+
+   Optional<Usuario> u = ur.findById(userId);
+   ResponseEntity<Usuario> result;
+	
+   if (u.isPresent()) {
+     result = ResponseEntity.ok(u.get());
+   } else {
+     result = ResponseEntity.notFound().build();
+   }
+
+   return result; 	
+}
+\end{lstlisting}
+\end{frame}
 
 \section{Jackson}
+
+\subsection{Anotaciones básicas}
 
 \begin{frame}[c]
     \frametitle{Anotaciones Jackson}
     %% Se mapea todo aquello que tenga getter.
     \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@JsonAutoDetect} & \\
-        \ann{@JsonProperty("codigo")} & \\
-        \ann{@JsonIgnore}        &  \\
-        \ann{@JsonManagedReference} &  \\
-        \ann{@JsonBackReference} &  \\
-        \ann{@JsonUnwrapped} & \\
-        \ann{@JsonValue} & \\
+        \ann{@JsonAutoDetect} & Define qué se serializa (e.g. público) \\
+        \ann{@JsonProperty}   & \\
+        \multicolumn{1}{c}{\ann{(``nombre'')}} & El elemento se mapeará con el nombre indicado. \\
+        \ann{@JsonIgnore}     & El elemento se ignora. \\
+        \ann{@JsonUnwrapped}  & El objeto se mapea como campos del contenedor. \\
+        \ann{@JsonValue}      & Sólo se mapea el valor de este elemento. \\
+        \ann{@JsonManaged}    &  \\
+        \multicolumn{1}{c}{\ann{Reference}} & Padre en referencia bidireccional padre-hijo.  \\
+        \ann{@JsonBack}       &    \\
+        \multicolumn{1}{c}{\ann{Reference}} & Hijo en referencia bidireccional padre-hijo.  \\
     \end{tabular}
 \end{frame}
 
-\begin{frame}[c]
-    \frametitle{Vistas Jackson}
-    %% Se mapea todo aquello que tenga getter.
-    \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@JsonIgnore}        &  \\
-        \ann{@JsonManagedReference} &  \\
-        \ann{@JsonBackReference} &  \\
-        \ann{@JsonUnwrapped} & \\
-    \end{tabular}
+\subsection{Vistas}
+
+\begin{frame}[c,fragile]
+    \frametitle{Vistas Jackson - Definición}
+\begin{lstlisting}[basicstyle=\small,language=Java]
+public class Views {
+  
+  public static class DescripcionViaje {};
+  public static class DescripcionUsuario {}
+
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Vistas Jackson - Selección de Propiedades}
+\begin{lstlisting}[basicstyle=\small,language=Java]
+public class Usuario {
+	
+  @Id
+  @JsonView({Views.DescripcionViaje.class,
+             Views.DescripcionUsuario.class})
+  protected String username;
+  @JsonView({Views.DescripcionUsuario.class})
+  protected String nombre;
+  @JsonView({Views.DescripcionUsuario.class})
+  protected String apellido;
+  @JsonView({Views.DescripcionUsuario.class})
+  protected String email;
+  
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[c,fragile]
+    \frametitle{Vistas Jackson - Controlador Rest}
+\begin{lstlisting}[basicstyle=\small,language=Java]
+@GetMapping("/{viajeId}")
+@JsonView(Views.DescripcionViaje.class)
+public ResponseEntity<Viaje> 
+                getViaje(@PathVariable Long viajeId) {}
+\end{lstlisting}
 \end{frame}
 
 \section{Soporte para Transacciones}
 
+\subsection{Entity Manager}
+
+%% Poner figura
+
+\subsection{Persistence Context}
+
+%% Buscar Info
+
+\subsection{Métodos Transaccionales}
+
+%% #Transactional
 
 \section{Sumario}
 
@@ -134,7 +198,7 @@
         \item Ser capaz de utilizar anotaciones \emph{Spring MVC} para implementar controladores Rest.
         \item Ser capaz de utilizar anotaciones \emph{Jackson} para serializar POJOs a JSON.
         \item Comprender el funcionamiento del \emph{Entity Manager}.
-        \item Ser capaz de utiliza anotaciones para definir transacciones en \emph{Spring}.
+        \item Ser capaz de utilizar anotaciones para definir transacciones en \emph{Spring}.
     \end{enumerate}
 \end{frame}
 
