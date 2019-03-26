@@ -5,7 +5,7 @@
 
 \newcommand{\ann}[1]{\color{blue}\texttt{#1}\color{black}}
 
-\title[JPA + Spring Data]{Capa de Servicios \\ \ \\ Spring Rest Controllers}
+\title[JPA + Spring Data]{Capa de Servicios - Spring Rest Controllers}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -48,30 +48,28 @@
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Ser capaz de transformar un conjunto de POJOs en un esquema relacional usando anotaciones JPA.
-         \item Ser capaz crear repositorios JPA y \emph{Spring}.
-         \item Ser capaz de utilizar repositorios Spring para interactuar con la capa de persistencia.
+         \item Ser capaz de crear controladores REST utilizando \emph{Spring}.
+         \item Ser capaz de especificar cómo serializar POJOs usando \emph{Jackson}.
+         \item Ser capaz de especificar transaccionalidad usando \emph{Spring}.
     \end{enumerate}
 \end{frame}
 
+%\begin{frame}[c]
+%    \frametitle{Bibliografía}
+%    \begin{thebibliography}{1}
+%
+%        \bibitem[Spring, 2019]{Spring2019}
+%        \em {Spring Reference Documentation}.
+%        \newblock{\url{https://goo.gl/AzsbtY}}
+%
+%    \end{thebibliography}
+%\end{frame}
+
 \begin{frame}[c]
-    \frametitle{Bibliografía}
-    \begin{thebibliography}{1}
-
-        \bibitem[Bauer, 2015]{Bauer2015}
-        Gierke, O., Darimont, T., Strobl, C., Paluch, M. y Bryant, J. (2019).
-        \newblock {\em {Spring Data JPA - Reference Documentation}}.
-        \url{https://goo.gl/Fhjdlu}
-
-    \end{thebibliography}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Arquitectura Spring MVC}
-    \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@Entity}     & La clase es una entidad y se transformará a una tabla. \\
-        \ann{@Embeddable} & La clase es un \emph{value object} y será incrustada en otra.
-    \end{tabular}
+    \frametitle{Arquitectura MVC}
+    \begin{center}
+        \includegraphics[width=\linewidth,keepaspectratio=true]{images/mvc/mvc00.eps}
+    \end{center}
 \end{frame}
 
 \section{Spring Rest Controllers}
@@ -79,24 +77,24 @@
 \begin{frame}[c]
     \frametitle{Anotaciones Rest}
     \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@RestController} &  \\
-        \ann{@RequestMapping} &  \\
-        \ann{@GetMapping}     &  \\
-        \ann{@PostMapping}    &  \\
-        \ann{@DeleteMapping}  &  \\
-        \ann{@PutMapping}     &  \\
-        \ann{@PathVariable}     &  \\
-
+        \ann{@RestController} &  La clase contendrá controladores REST. \\
+        \ann{@RequestMapping} &  URI raíz asociada a un \texttt{RestController}. \\
+        \ann{@GetMapping}     &  Controlador GET (de la URI correspondiente).  \\
+        \ann{@PostMapping}    &  Controlador POST (de la URI correspondiente). \\
+        \ann{@PutMapping}     &  Controlador PUT (de la URI correspondiente). \\
+        \ann{@DeleteMapping}  &  Controlador DELETE (de la URI correspondiente). \\
+        \ann{@PathVariable}   &  El parámetro se extrae de una variable de la URI. \\
+        \ann{@RequestParam}   &  Parámetros de la petición HTTP. \\
+        \ann{@RequestBody}    &  Parámetro enviado en el cuerpo de la petición \\
     \end{tabular}
 \end{frame}
 
-\begin{frame}[c]
-    \frametitle{Respuestas Http}
-    \begin{tabular}{lp{0.70\linewidth}}
-%        \ann{@RestController} &  \\
-         ResponseEntity<T>  & \\
-   \end{tabular}
-\end{frame}
+%\begin{frame}[c]
+%    \frametitle{Respuestas Http}
+%    \begin{listing}
+%         ResponseEntity<T>  & \\
+%   \end{tabular}
+%\end{frame}
 
 \section{Jackson}
 
