@@ -466,12 +466,12 @@
     \begin{block}{Problema}
         \begin{enumerate}[<+->]
             \item ¿Cómo atender peticiones HTTP? 
-            \item ¿Cómo encapsular toda la lógica común a la gestión de peticiones HTTP?
+            \item ¿Cómo encapsular la lógica común a la gestión de peticiones HTTP?
         \end{enumerate}
     \end{block}
     \uncover<2->{
         \begin{block}{Solución}
-            Crear una clase donde se deleguen todas las peticiones del servidor web y que:
+            Crear una clase donde se deleguen todas las peticiones HTTP y que:
             \begin{enumerate}
                 \item<3-> Parsea la URL solicitada.
                 \item<4-> Selecciona el controlador asociado a cada URL.
@@ -483,9 +483,14 @@
     }
 \end{frame}
 
+\begin{frame}[c]
+    \frametitle{Front Controller}
+    \begin{center}
+        \includegraphics[width=\linewidth]{images/patterns/mvc00.eps}
+    \end{center}
+\end{frame}
 
 \subsection{Unit of Work}
-
 
 \section{Sumario}
 %%
