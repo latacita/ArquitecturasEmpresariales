@@ -1,4 +1,4 @@
-\documentclass[a4paper,slidestop,xcolor=pst,blue]{beamer}
+\documentclass[handout,a4paper,slidestop,xcolor=pst,blue]{beamer}
 
 \input{slidesHeader.tex}
 \input{customListings.tex}
@@ -350,16 +350,17 @@ public interface UsuarioRepository extends JpaRepository<Usuario,String> {
     \frametitle{Personalización mediante Nombres de Métodos}
     \begin{center}
     \begin{tabular}{l|l}
-    Keyword              & Ejemplo                               \\\hline
-    \ann{findBy,countBy} & \texttt{findByEmail}                  \\
-    \ann{And, Or}        & \texttt{findByOriginCiudadAndDestino} \\
-    \ann{Like}           & \texttt{findByOriginCiudadLike}       \\
-    \ann{IgnoreCase}     & \texttt{findByOriginCiudadLikeIgnoreCase}   \\
+    Keyword              & Ejemplo                                     \\ \hline
+    \ann{findBy,countBy} & \texttt{findByEmail}, \texttt{findByEmail}  \\
+    Navegación           & \texttt{findByOrigenCiudad}                 \\
+    \ann{And, Or}        & \texttt{findByOrigenCiudadAndDestinoCiudad} \\
+    \ann{Like}           & \texttt{findByOrigenCiudadLike}             \\
+    \ann{IgnoreCase}     & \texttt{findByOrigenCiudadLikeIgnoreCase}   \\
     \ann{Between}        & \texttt{findByFechaBetween}           \\
     \ann{LessThan}       & \texttt{findByPrecioLessThan}         \\
     \ann{After, Before}  & \texttt{findByFechaBefore}            \\
-    \ann{Not}            & \texttt{findByFechaBetweenAndNot}     \\
-    \ann{OrderBy(Desc)}  & \texttt{findByPriceOrderByAsc}        \\
+    \ann{Not}            & \texttt{findByConductorNombreNot}     \\
+    \ann{OrderBy(Desc)}  & \texttt{findByPriceOrderByPriceAsc}   \\
     \end{tabular}
     \end{center}
 \end{frame}
@@ -367,17 +368,17 @@ public interface UsuarioRepository extends JpaRepository<Usuario,String> {
 \begin{frame}[c,fragile]
     \frametitle{Personalización mediante Nombres de Métodos}
 \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
-public interface ViajeRepository 
-                   extends JpaRepository<Viaje,Long> 
+public interface ViajeRepository
+                   extends JpaRepository<Viaje,Long>
 {
-  public Set<Viaje> 
+  public Set<Viaje>
      findByOrigenCiudadAndDestinoCiudad(
-          String ciudadOrigen, 
+          String ciudadOrigen,
           String ciudadDestino);
 	
-  public Set<Viaje> 
-     findByOrigen_CiudadAndFechaBeforeOrderByPrecio(
-          String ciudad, 
+  public Set<Viaje>
+     findByOrigenCiudadAndFechaBeforeOrderByPrecio(
+          String ciudad,
           Date fecha);
 }
 \end{lstlisting}
@@ -387,14 +388,14 @@ public interface ViajeRepository
 \begin{frame}[c,fragile]
     \frametitle{Personalización mediante JPQL}
 \begin{lstlisting}[basicstyle=\footnotesize,language=Java]
-public interface ViajeRepository 
+public interface ViajeRepository
                    extends JpaRepository<Viaje,Long> {
 	
-	@Query("SELECT v FROM Viaje v 
-                    WHERE v.origen.ciudad = ?1 
+	@Query("SELECT v FROM Viaje v
+                    WHERE v.origen.ciudad = ?1
                       AND v.destino.ciudad = ?2")
 	public Set<Viaje> findByOrigenAndDestino(
-                                      String origen, 
+                                      String origen,
                                       String destino);
 }
 \end{lstlisting}
