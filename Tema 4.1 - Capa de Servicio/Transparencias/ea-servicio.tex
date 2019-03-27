@@ -57,21 +57,6 @@
 \end{frame}
 
 \begin{frame}[c]
-	\frametitle{Responsabilidades de la Capa de Servicio}
-	\begin{enumerate}[<+->]
-        \item Atender las peticiones HTTP de los clientes, delegando en el modelo de dominio.
-        \item Asegurar la transaccionalidad de las operaciones de negocio.
-        \item Validar las peticiones de los clientes.
-        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
-        \item Facilitar la eficiencia del sistema.
-        \item Controlar el acceso a los datos.
-        \item Gestionar la comunicación con los servicios externos.
-        \item Gestionar de manera adecuada casos excepcionales.
-        \item Ayudar a satisfacer los requisitos no funcionales.
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
          \item Comprender en profundidad cuáles son las responsabilidades de la capa de servicio.
@@ -103,6 +88,21 @@
         \newblock  O'Reilly, 2007.
 
     \end{thebibliography}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Responsabilidades de la Capa de Servicio}
+	\begin{enumerate}[<+->]
+        \item Atender las peticiones HTTP de los clientes, delegando en el modelo de dominio.
+        \item Asegurar la transaccionalidad de las operaciones de negocio.
+        \item Validar las peticiones de los clientes.
+        \item Recuperar y almacenar datos del almacén o almacenes persistentes.
+        \item Facilitar la eficiencia del sistema.
+        \item Controlar el acceso a los datos.
+        \item Gestionar la comunicación con los servicios externos.
+        \item Gestionar de manera adecuada casos excepcionales.
+        \item Ayudar a satisfacer los requisitos no funcionales.
+	\end{enumerate}
 \end{frame}
 
 \section{Arquitecturas REST}
@@ -426,7 +426,7 @@
     \end{enumerate}
 \end{frame}
 
-\section{Patrones de Servicio}
+\section{Patrones de la Capa de Servicio}
 
 \subsection{Data Transfer Object}
 
@@ -458,16 +458,72 @@
     \end{center}
 \end{frame}
 
+\subsection{Procesamiento de Peticiones de Servicio}
+
+\begin{frame}[c]
+    \frametitle{Procesamiento de Peticiones de Servicio}
+    \begin{enumerate}[<+->]
+        \item El servidor web recibe la petición HTTP. 
+        \item El servidor web delega en el \emph{Front Controller (FC)}. 
+        \item El \emph{FC} extrae parámetros y delega el controlador adecuado.
+        \item El controlador valida los datos de entrada.
+        \item El controlador delega en la capa de servicio.
+        \item La capa de servicio recupera objetos de los repositorios.
+        \item La capa de servicio abre una transacción.
+        \item La capa de servicio delega en una entidad de dominio.
+        \item La capa de servicio recoge los resultados de la entidad de dominio.
+        \item La capa de servicio cierra (o aborta) la transacción.
+        \item La capa de servicio devuelve la respuesta al controlador.
+        \item El controlador compone una respuesta modelo.
+        \item El \emph{Front Controller} convierte la respuesta modelo en respuesta HTTP.
+        \item El servidor web devuelve la respuesta HTTP al cliente.  
+    \end{enumerate}
+\end{frame}
+
 \subsection{Unit of Work}
+
+\begin{frame}[c]
+    \frametitle{Unit Of Work}
+    \begin{block}{Problema}
+        \begin{enumerate}
+            \item<1-> ¿Cómo saber qué elementos han cambiado tras delegar en una entidad de dominio?
+            \item<2-> ¿Cómo evitar tener abiertas transacciones demasiado largas en persistencia?
+        \end{enumerate}
+    \end{block}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/patterns/unitOfWork00.eps}
+%    \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Unit Of Work}
+    \begin{block}{Solución}
+        \begin{enumerate}
+            \item<1-> Crear una clase, denominada \emph{Unidad de Trabajo}, que permita registrar los cambios acontecidos durante una \emph{transacción de negocio}.
+            \item<2-> Conseguir que las modificaciones realizadas durante una transacción de negocio se anoten en la \emph{Unidad de Trabajo} de manera transparente a la lógica de negocio. 
+            \item<3-> Al cerrar una transacción de negocio, guardar todos los cambios anotados en la unidad de trabajo en el almacén persistente.
+        \end{enumerate}
+    \end{block}
+%    \begin{center}
+%        \includegraphics[width=\linewidth]{images/patterns/unitOfWork00.eps}
+%    \end{center}
+\end{frame}
 
 
 \section{Sumario}
-%%
-%%\begin{frame}[c]
-%%    \frametitle{¿Qué tengo que saber de todo ésto?}
-%%    \begin{enumerate}[<+->]
-%%        \item
-%%    \end{enumerate}
-%%\end{frame}
+
+\begin{frame}[c]
+    \frametitle{¿Qué tengo que saber de todo ésto?}
+    \begin{enumerate}[<+->]
+        \item Comprender cuáles son las responsabilidades de la capa de negocio.
+        \item Comprender cuáles son los fundamentos de las arquitecturas REST.
+        \item Comprender el funcionamiento básico del protocolo HTTP.
+        \item Comprender la sintaxis básica de JSON.
+        \item Ser capaz de especificar una API REST para un modelo de dominio.
+        \item Ser capaz de definir DTOs.
+        \item Comprender el funcionamiento de los \emph{Front Controller}.
+        \item Comprender el funcionamiento de las \emph{Unit of Work}. 
+    \end{enumerate}
+\end{frame}
 
 \end{document} 
