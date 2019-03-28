@@ -5,7 +5,7 @@
 
 \newcommand{\ann}[1]{\color{blue}\texttt{#1}\color{black}}
 
-\title[Rest Controllers]{Capa de Servicio  \\ Spring Rest Controllers y Soporte para Transacciones}
+\title[Rest Controllers]{Capa de Servicio \\ Spring Rest Controllers y Soporte para Transacciones}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -176,11 +176,30 @@ public ResponseEntity<Viaje>
 \end{lstlisting}
 \end{frame}
 
-\section{Soporte para Transacciones}
+\section{Soporte para Transacciones Spring JPA}
+
+\subsection{Elementos JPA}
+
+\begin{frame}[c]
+    \frametitle{Anotaciones Rest}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{@PersistenceUnit}    & Datos de acceso a un almacén persistente. \\
+        \ann{@PersistenceContext} & \emph{Identity Map} asociado a una \emph{Persistence Unit}. \\
+        \ann{EntityManager}       &  Unidad de Trabajo (asociado a un @PersistenceContext) \\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Elementos JPA}
+    \begin{center}
+        \includegraphics[width=\linewidth,keepaspectratio=true]{images/jpa/jpaLayers.eps}
+    \end{center}
+\end{frame}
 
 \subsection{Entity Manager}
 
-%% Poner figura
+
+
 
 \subsection{Persistence Context}
 
