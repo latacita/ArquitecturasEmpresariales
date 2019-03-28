@@ -522,23 +522,23 @@
             \item<2-> ¿Cómo evitar tener abiertas transacciones demasiado largas en persistencia?
         \end{enumerate}
     \end{block}
-%    \begin{center}
-%        \includegraphics[width=\linewidth]{images/patterns/unitOfWork00.eps}
-%    \end{center}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth]{images/patterns/unitOfWork00.eps}
+    \end{center}
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{Unit Of Work}
     \begin{block}{Solución}
         \begin{enumerate}
-            \item<1-> Crear una clase, denominada \emph{Unidad de Trabajo}, que permita registrar los cambios acontecidos durante una \emph{transacción de negocio}.
-            \item<2-> Conseguir que las modificaciones realizadas durante una transacción de negocio se anoten en la \emph{Unidad de Trabajo} de manera transparente a la lógica de negocio.
-            \item<3-> Al cerrar una transacción de negocio, guardar todos los cambios anotados en la unidad de trabajo en el almacén persistente.
+            \item<1-> Crear una clase \emph{Unidad de Trabajo}, para registrar los cambios realizadas en una \emph{transacción de negocio}.
+            \item<2-> Anotar en la \emph{Unidad de Trabajo} las modificaciones realizadas de manera transparente a la lógica de negocio.
+            \item<3-> Persistir todos los cambios anotados al cerrar la transacción de negocio.
         \end{enumerate}
     \end{block}
-%    \begin{center}
-%        \includegraphics[width=\linewidth]{images/patterns/unitOfWork00.eps}
-%    \end{center}
+    \begin{center}
+        \includegraphics[width=0.40\linewidth]{images/patterns/unitOfWork01.eps}
+    \end{center}
 \end{frame}
 
 \section{Sumario}
