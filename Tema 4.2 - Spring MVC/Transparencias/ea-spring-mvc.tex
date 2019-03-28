@@ -1,11 +1,11 @@
-\documentclass[handout,a4paper,slidestop,xcolor=pst,blue]{beamer}
+\documentclass[a4paper,slidestop,xcolor=pst,blue]{beamer}
 
 \input{slidesHeader.tex}
 \input{customListings.tex}
 
 \newcommand{\ann}[1]{\color{blue}\texttt{#1}\color{black}}
 
-\title[JPA + Spring Data]{Capa de Servicios - Spring Rest Controllers}
+\title[Rest Controllers]{Capa de Servicio  \\ Spring Rest Controllers y Soporte para Transacciones}
 
 \author[P. S{\'a}nchez]{\alert{Pablo S{\'a}nchez}}
 
@@ -93,8 +93,8 @@
     \frametitle{Respuestas HTTP}
     \begin{lstlisting}[basicstyle=\small,language=Java]
 @GetMapping(value="usuarios/{id}")
-public ResponseEntity<Usuario> 
-        obtenerUsuario(@PathVariable("id") 
+public ResponseEntity<Usuario>
+        obtenerUsuario(@PathVariable("id")
                               String userId) {
 
    Optional<Usuario> u = ur.findById(userId);
@@ -138,7 +138,7 @@ public ResponseEntity<Usuario>
     \frametitle{Vistas Jackson - Definición}
 \begin{lstlisting}[basicstyle=\small,language=Java]
 public class Views {
-  
+
   public static class DescripcionViaje {};
   public static class DescripcionUsuario {}
 
@@ -161,7 +161,7 @@ public class Usuario {
   protected String apellido;
   @JsonView({Views.DescripcionUsuario.class})
   protected String email;
-  
+
 }
 \end{lstlisting}
 \end{frame}
@@ -171,7 +171,7 @@ public class Usuario {
 \begin{lstlisting}[basicstyle=\small,language=Java]
 @GetMapping("/{viajeId}")
 @JsonView(Views.DescripcionViaje.class)
-public ResponseEntity<Viaje> 
+public ResponseEntity<Viaje>
                 getViaje(@PathVariable Long viajeId) {}
 \end{lstlisting}
 \end{frame}
