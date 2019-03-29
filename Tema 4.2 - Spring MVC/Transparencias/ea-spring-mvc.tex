@@ -178,36 +178,51 @@ public ResponseEntity<Viaje>
 
 \section{Soporte para Transacciones Spring JPA}
 
-\subsection{Elementos JPA}
+\subsection{Elementos de una Transacción JPA}
 
 \begin{frame}[c]
-    \frametitle{Anotaciones Rest}
-    \begin{tabular}{lp{0.70\linewidth}}
-        \ann{@PersistenceUnit}    & Datos de acceso a un almacén persistente. \\
-        \ann{@PersistenceContext} & \emph{Identity Map} asociado a una \emph{Persistence Unit}. \\
-        \ann{EntityManager}       &  Unidad de Trabajo (asociado a un @PersistenceContext) \\
-    \end{tabular}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Elementos JPA}
+    \frametitle{Elementos Transaccionales JPA}
     \begin{center}
-        \includegraphics[width=\linewidth,keepaspectratio=true]{images/jpa/jpaLayers.eps}
+        \includegraphics[width=0.5\linewidth,keepaspectratio=true]{images/jpa/jpaElements.eps}
     \end{center}
 \end{frame}
 
-\subsection{Entity Manager}
+\subsection{Ciclo de Vida de una Entidad JPA}
 
+\begin{frame}[c]
+    \frametitle{Ciclo de Vida de una Entidad}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth,keepaspectratio=true]{images/jpa/jpaElements.eps}
+    \end{center}
+\end{frame}
 
+\begin{frame}[c]
+    \frametitle{Interfaz Entity Manager}
+    \begin{tabular}{lp{0.70\linewidth}}
+        persist(Object ent)    & Registra una entidad como nueva \\
+        remove(Object entity)  & Anota una entidad para su eliminación.    \\
+        find(Class type, Object id) & Carga una entidad desde persistencia. \\
+        detach(Object entity)  & Carga una entidad desde persistencia. \\
+        merge(Object entity)   & Anota una entidad para su actualización.  \\
+        refresh(Object entity) & Actualiza una entidad en el \emph{identity map}. \\
+        flush()                & Guarda los cambios en persistencia. \\
+    \end{tabular}
+\end{frame}
 
+\subsection{Anotaciones \emph{Entity Manager}}
 
-\subsection{Persistence Context}
-
-%% Buscar Info
+\begin{frame}[c]
+    \frametitle{Anotaciones \emph{Entity Manager}}
+    \begin{tabular}{lp{0.70\linewidth}}
+        \ann{@PersistenceUnit}    & Inyecta una \emph{Entity Manager Factory} \\
+        \ann{@PersistenceContext} & Inyecta un \emph{Entity Manager} \\
+    \end{tabular}
+\end{frame}
 
 \subsection{Métodos Transaccionales}
 
-%% #Transactional
+%% Método largo, con entity manager inyectado
+%% Anotacion Transactional
 
 \section{Sumario}
 
