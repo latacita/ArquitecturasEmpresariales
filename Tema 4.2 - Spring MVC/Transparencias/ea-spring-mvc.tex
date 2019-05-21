@@ -1,4 +1,4 @@
-\documentclass[a4paper,slidestop,xcolor=pst,blue]{beamer}
+\documentclass[handout,a4paper,slidestop,xcolor=pst,blue]{beamer}
 
 \input{slidesHeader.tex}
 \input{customListings.tex}
@@ -183,29 +183,37 @@ public ResponseEntity<Viaje>
 \begin{frame}[c]
     \frametitle{Elementos Transaccionales JPA}
     \begin{center}
-        \includegraphics[width=0.8\linewidth,keepaspectratio=true]{images/jpa/jpaElements.eps}
+        \includegraphics[width=0.9\linewidth,keepaspectratio=true]{images/jpa/jpaElements.eps}
     \end{center}
+\end{frame}
+
+\begin{frame}[c]
+    \frametitle{Ciclo de Vida de un \emph{Persistence Context}}
+    \begin{tabular}{lp{0.7\textwidth}}
+        \texttt{TRANSACTION} & Los \emph{persistence context} se crean al inicio de la transacción y se eliminan al final. \\
+        \texttt{EXTENDED}    & Los \emph{persistence context} viven más allá de una transacción. \\
+    \end{tabular}
 \end{frame}
 
 \subsection{Ciclo de Vida de una Entidad JPA}
 
 \begin{frame}[c]
     \frametitle{Ciclo de Vida de una Entidad}
-%    \begin{center}
-%        \includegraphics[width=0.8\linewidth,keepaspectratio=true]{images/jpa/jpaElements.eps}
-%    \end{center}
+    \begin{center}
+        \includegraphics[width=0.8\linewidth,keepaspectratio=true]{images/jpa/entityLifecycle.eps}
+    \end{center}
 \end{frame}
 
 \begin{frame}[c]
     \frametitle{Interfaz Entity Manager}
     \begin{tabular}{lp{0.70\linewidth}}
-        persist(Object ent)    & Registra una entidad como nueva \\
-        remove(Object entity)  & Anota una entidad para su eliminación.    \\
-        find(Class type, Object id) & Carga una entidad desde persistencia. \\
-        detach(Object entity)  & Carga una entidad desde persistencia. \\
-        merge(Object entity)   & Anota una entidad para su actualización.  \\
-        refresh(Object entity) & Actualiza una entidad en el \emph{identity map}. \\
-        flush()                & Guarda los cambios en persistencia. \\
+        \texttt{persist} & Registra una entidad como nueva para inserción.  \\
+        \texttt{remove}  & Registra una entidad para su eliminación.        \\
+        \texttt{find}    & Carga una entidad desde persistencia.            \\
+        \texttt{detach}  & \emph{Desconecta} una entidad.                   \\
+        \texttt{merge}   & Registra una entidad para su actualización.      \\
+        \texttt{refresh} & Actualiza una entidad en el \emph{identity map}. \\
+        \texttt{flush}   & Guarda los cambios en persistencia.              \\
     \end{tabular}
 \end{frame}
 
@@ -221,8 +229,49 @@ public ResponseEntity<Viaje>
 
 \subsection{Métodos Transaccionales}
 
-%% Método largo, con entity manager inyectado
-%% Anotacion Transactional
+\begin{frame}[c,fragile]
+    \frametitle{Transacción Gestionada Manualmente}
+\begin{lstlisting}[basicstyle=\footnotesize,language=Java]
+@PersistenceUnit
+EntityManagerFactory emf;
+
+public Viaje anhadirViajero(Long viajeId, 
+               String username) throws ResourceNotFound {
+   EntityManager em = emf.createEntityManager();
+   em.getTransaction().begin();
+   Viaje v = em.find(Viaje.class, viajeId);
+   Viaje result;
+   if (v != null) {
+      Usuario user = em.find(Usuario.class,username);
+      if (user != null) {
+         result = v.aceptarUsuario(user)?v:null;
+      } else { throw new ResourceNotFound(); }
+   } else { throw new ResourceNotFound(); }
+	
+   em.getTransaction().commit();
+   return result;
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[c,fragile]
+    \frametitle{Anotación \ann{@Transactional}}
+\begin{lstlisting}[basicstyle=\small,language=Java]
+@Transactional
+public Viaje anhadirViajero(Long viajeId, 
+                            String username) 
+                            throws ResourceNotFound {
+	
+  Viaje v = vr.findById(viajeId).
+                   orElseThrow(ResourceNotFound::new);
+  Usuario user = ur.findById(username).
+                   orElseThrow(ResourceNotFound::new);
+	
+  return (v.aceptarUsuario(user))?v:null;
+}
+\end{lstlisting}
+\end{frame}
 
 \section{Sumario}
 
