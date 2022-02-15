@@ -48,10 +48,10 @@
     \begin{enumerate}[<+->]
          \item Comprender qué es un \emph{Sistema de Información Empresarial (SIE)}.
          \item Comprender el concepto de \emph{Arquitectura Software}.
-         \item Conocer los principales patrones arquitectónicos que aplican a los SIEs.
+         \item Conocer los patrones arquitectónicos utilizados por los SIEs.
          \item Comprender cómo se divide un SIE en capas.
          \item Comprender la función de cada capa de un SIE.
-         \item Conocer las tecnologías que se utilizan para implementar las capas de un SIE.
+         \item Conocer las tecnologías utilizadas para implementar un SIE.
          \item Comprender cómo se pueden independizar módulos sw mediante \emph{inyección de dependencias}.
     \end{enumerate}
 \end{frame}
@@ -92,7 +92,7 @@
 \begin{frame}[c]
     \frametitle{Características de los SIEs}
     \begin{enumerate}[<+->]
-        \item Necesita almacenar datos, y normalmente, en gran volumen.
+        \item Necesita almacenar datos, normalmente en gran volumen.
         \item Los datos que almacenan representan un activo importante y duradero en el tiempo.
         \item Los gestión de los datos debe obedecer a ciertas \emph{reglas de negocio}.
         \item Las operaciones ejecutadas necesitan ser \emph{transaccionales}.
@@ -178,7 +178,7 @@
 \begin{frame}[c]
 	\frametitle{Patrones Arquitectónicos}
     \begin{block}{Patrón Arquitectónico}
-        Un \emph{patrón arquitectónico} es un conjunto con nombre de decisiones de diseño reutilizables Y aplicables a problemas de diseño arquitectónico recurrentes, pero que necesitan ser adaptadas a cada sistema concreto.
+        Un \emph{patrón arquitectónico} es un conjunto con nombre de decisiones de diseño reutilizables y aplicables a problemas de diseño arquitectónico recurrentes, pero que necesitan ser adaptadas a cada sistema concreto.
 	\end{block}
 \end{frame}
 
@@ -195,12 +195,12 @@
     \end{block}
 \end{frame}
 
-\begin{frame}[c]
-	\frametitle{Arquitecturas en Capas}
-	\begin{center}
-        \includegraphics[width=.40\linewidth,keepaspectratio=true]{images/patterns/layered00.eps}
-	\end{center}
-\end{frame}
+%\begin{frame}[c]
+%	\frametitle{Arquitecturas en Capas}
+%	\begin{center}
+%        \includegraphics[width=.40\linewidth,keepaspectratio=true]{images/patterns/layered00.eps}
+%	\end{center}
+%\end{frame}
 
 \begin{frame}[c]
 	\frametitle{Arquitecturas en Capas}
@@ -234,7 +234,7 @@
         \begin{itemize}[<+->]
             \item Existe un nodo especializado denominado \emph{servidor}.
             \item El servidor centraliza ciertos cómputos del sistema.
-            \item Los clientes realizan peticiones al servidor, el cual las procesa y devuelve las respuesta a los clientes.
+            \item Los clientes realizan peticiones al servidor, el cual las procesa y devuelve las respuestas correspondientes a cada clientes.
         \end{itemize}
     \end{block}
 \end{frame}
@@ -530,7 +530,7 @@ public static void main(String[] args) {
   D d1 = new D_X(c1);
   C c2 = new C_X();
   B b1 = new B_X(c2);
-  A a = new A_X(b1,d1);
+  A a  = new A_X(b1,d1);
 }
 \end{lstlisting}
 \end{frame}
@@ -579,8 +579,8 @@ public class Runner {
   public void run(String... arg0) throws Exception {
     	
     oh = context.getBean(OrderHandler.class);
-    ...		
-	oh.processOrder(o);
+    ...
+    oh.processOrder(o);
   }
 }\end{lstlisting}
 \end{frame}
