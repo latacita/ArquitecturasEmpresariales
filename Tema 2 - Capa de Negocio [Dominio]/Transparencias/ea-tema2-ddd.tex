@@ -30,14 +30,14 @@
 \end{frame}
 
 \begin{frame}[c]
-    \frametitle{\alert{Advertencia}}
-    \begin{center}
-        Todo el material contenido en este documento no constituye en modo alguno una obra de referencia o apuntes oficiales mediante el cual se puedan preparar las pruebas evaluables necesarias para superar la asignatura. \ \\
-        \ \\
-        Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisión del contenido sobre el cual versarán las mencionadas pruebas evaluables.  \ \\
-        \ \\
-        Dicho de forma más clara, \alert{estas transparencias no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura.}
-    \end{center}
+	\frametitle{\alert{Advertencia}}
+	\begin{center}
+	Todo el material contenido en este documento no constituye en modo alguno una obra de referencia o apuntes oficiales mediante el cual se pueda preparar las pruebas evaluables necesarias para superar la asignatura. 
+	\ \\ \ \\
+	Este documento contiene exclusivamente una serie de diapositivas cuyo objetivo es servir de complemento visual a las actividades realizadas en el aula para la transmisión del contenido sobre el cual versarán las mencionadas pruebas evaluables.  
+	\ \\ \ \\
+	Dicho de forma más clara, \alert{estas diapositivas no son apuntes y su objetivo no es servir para que el alumno pueda preparar la asignatura de manera autónoma.}
+	\end{center}
 \end{frame}
 
 \section{Introducción}
@@ -45,9 +45,8 @@
 \begin{frame}[c]
     \frametitle{Objetivos del Tema}
     \begin{enumerate}[<+->]
-         \item Comprender en profundidad cuáles son las responsabilidades de la capa de negocio.
-         \item Conocer los principales patrones relacionados con el desarrollo de una capa de negocio.
-         \item Conocer las ventajas e inconvenientes del patrón \emph{Domain Model}.
+         \item Comprender cuáles son las responsabilidades de la capa de negocio.
+         \item Conocer los principales patrones de diseño relacionados con el desarrollo de una capa de negocio.
          \item Ser capaz de aplicar el patrón \emph{Domain Model}.
          \item Ser capaz de aplicar los principios de \emph{Domain-Driven Design}.
     \end{enumerate}
@@ -148,12 +147,12 @@
     \uncover<3->{
         \centering{\textbf{Desventajas}}
         \begin{enumerate}
-            \item<3-> Manipula mal instancias en solitario.
+            \item<3-> Complica la manipulación de elementos individuales.
             \item<4-> Dificulta la gestión de datos residentes en varias tablas.
             \item<5-> Genera problemas de integración con otras aplicaciones.
             \item<6-> No utiliza orientación a objetos.
-            \item<7-> Crea rápidamente problemas de redundancia en la lógica de negocio.
-            \item<8-> Genera problemas con reglas de negocio complejas.
+            \item<7-> Crea redundancias en la lógica de negocio.
+            \item<8-> Dificulta la implementación de reglas de negocio complejas.
         \end{enumerate}
     }
 \end{frame}
@@ -180,9 +179,8 @@
         \centering{\textbf{Desventajas}}
         \begin{enumerate}
             \item<4-> No utiliza orientación a objetos.
-            \item<5-> Crea rápidamente problemas de redundancia en la lógica de negocio.
-            \item<6-> Genera problemas con reglas de negocio complejas.
-            \item<7-> Genera problemas de evolución.
+            \item<5-> Crea redundancias en la lógica de negocio.
+            \item<6-> Dificulta la implementación de reglas de negocio complejas.
         \end{enumerate}
     }
 \end{frame}
@@ -202,11 +200,10 @@
     \frametitle{Domain Model}
     \centering{\textbf{Ventajas}}
     \begin{enumerate}
-        \item<2-> Orientado a objetos.
-        \item<3-> Permite la utilización de patrones de diseño.
-        \item<4-> Reduce la redundancia de código.
-        \item<5-> Soporta mejor las reglas de negocio complejas.
-        \item<6-> Ofrece una mayor facilidad de evolución.
+        \item<2-> Utiliza orientación a objetos.
+        \item<3-> Reduce la redundancia en la lógica de negocio.
+        \item<4-> Permite la utilización de patrones de diseño.
+        \item<5-> Ofrece abstracciones más potentes para la implementación de reglas  de negocio complejas.
     \end{enumerate}
     \ \\ \ \\
     \uncover<7->{
@@ -223,9 +220,9 @@
     \begin{block}{Solución Domain Model}
         Aislar al modelo de dominio de otras capas y aplicaciones mediante la creación de una capa de servicio que:
         \begin{enumerate}
-            \item Especifique las operaciones a las cuales el modelo de dominio es capaz de responder.
-            \item Permita redirigir peticiones a las operaciones del modelo de dominio que corresponda, devolviendo la respuesta que corresponda.
-            \item Permite encapsular la \emph{lógica de la aplicación} o \emph{workflow}.
+            \item<2-> Especifique las operaciones a las cuales es capaz de responder el modelo de dominio.
+            \item<3-> Permita redirigir peticiones a las operaciones del modelo de dominio que correspondan, devolviendo la respuestas a los clientes de una manera adecuada.
+            \item<4-> Permite encapsular la \emph{lógica de la aplicación} o \emph{workflow} (en caso de ser necesario).
         \end{enumerate}
     \end{block}
 \end{frame}
