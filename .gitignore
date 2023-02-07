@@ -1,6 +1,6 @@
-*.bak
-*.aux
-*.bbl
+Tema 0 - Presentacion/TransparenciasLatex/ae-tema0.aux
+Tema 0 - Presentacion/TransparenciasLatex/ae-tema0.bbl
+*.blg
 *.log
 *.nav
 *.out
@@ -8,7 +8,16 @@
 *.synctex
 *.toc
 *.prj
-*.sav
+*.bak
+*.aux
+*.bbl
 *.dvi
-*.blg
-Tema 3 - Capa de Persistencia/Transparencias/arqEmp-persistencia.synctex(busy)
+*.ps
+*.vrb
+*.pdf
+Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.lock
+Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/version.ini
+Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.plugins/org.eclipse.core.resources/.history/0/10dc877c4f340019179fd491bf219129
+Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.plugins/org.eclipse.core.resources/.history/11/a0a812ad50340019179fd491bf219129
+Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/
+*.classpath
