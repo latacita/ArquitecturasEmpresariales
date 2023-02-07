@@ -1,23 +1,20 @@
-Tema 0 - Presentacion/TransparenciasLatex/ae-tema0.aux
-Tema 0 - Presentacion/TransparenciasLatex/ae-tema0.bbl
+*.aux
+*.bak
+*.bbl
 *.blg
+*.class
+*.classpath
+*.dvi
 *.log
 *.nav
 *.out
+*.pdf
+*.prj
+*.ps
 *.snm
 *.synctex
+*.synctex(busy)
 *.toc
-*.prj
-*.bak
-*.aux
-*.bbl
-*.dvi
-*.ps
 *.vrb
-*.pdf
-Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.lock
-Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/version.ini
-Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.plugins/org.eclipse.core.resources/.history/0/10dc877c4f340019179fd491bf219129
-Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/.plugins/org.eclipse.core.resources/.history/11/a0a812ad50340019179fd491bf219129
 Tema 1 - Introduccion/Transparencias/workspaces/IoD/.metadata/
-*.classpath
+
