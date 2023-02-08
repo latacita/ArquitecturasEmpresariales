@@ -1,4 +1,4 @@
-\documentclass[a4paper,t,xcolor=pst,colortheme]{beamer}
+\documentclass[handout,a4paper,t,xcolor=pst,colortheme]{beamer}
 
 \input{slidesHeader.tex}
 
@@ -45,7 +45,6 @@
         \item Comprender el funcionamiento de los patrones de persistencia.
         \item Saber utilizar herramientas para la generación de puentes objeto-relacional.
         \item Saber aplicar patrones para el diseño de una capa de servicio.
-        \item Saber especificar e implementar una capa de servicio REST.
         \item Saber aplicar patrones para el diseño de una capa de presentación.
         \item Ser capaz de utilizar los servicios, como control de accesos, proporcionados por los servidores de aplicaciones.
 	\end{enumerate}
@@ -55,10 +54,10 @@
    \frametitle{Resultados de Aprendizaje}
    \begin{enumerate}[<+->]
         \item Elaborar modelos de dominio utilizando \emph{POJOs}.
-        \item Clasificar elementos de dominio conforme a la metodología \emph{Domain-Driven Design}.
+        \item Clasificar elementos de dominio usando \emph{Domain-Driven Design}.
         \item Anotar un modelo de dominio para persistirlo utilizando \emph{JPA}.
         \item Usar \emph{Spring} para la definición de repositorios de acceso a datos.
-        \item Especificar una interfaz \emph{REST} para la manipulación de  un modelo de dominio.
+        \item Especificar un servicio \emph{REST}.
         \item Serializar objetos en formato \emph{JSON} usando anotaciones.
         \item Implementar una controlador \emph{REST} usando \emph{Spring}.
         \item Implementar una capa de servicio usando \emph{Spring}.
@@ -86,7 +85,7 @@
 
 \subsection{Actividades}
 
-\begin{frame}[t]
+\begin{frame}[c]
 	\frametitle{Clases en Aula}
 	\begin{block}{Objetivo}
 		Entender los conocimientos teóricos que constituyen la base de las habilidades y destrezas a adquirir al final de la asignatura.
@@ -97,7 +96,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[c]
 	\frametitle{Clases en Laboratorio}
 	\begin{block}{Objetivo}
 		Aplicar los conceptos teóricos aprendidos en las clases de aula al desarrollo de un sistema software real de mediana escala, con el objetivo de desarrollar las competencias procedimentales y actitudinales propias de un Ingeniero.
@@ -176,13 +175,11 @@
 	\frametitle{Horario Tutorías}
 	\begin{itemize}[<+->]
 		\item A cualquier hora, preferentemente de mañana.
-		\item Si se quiere asegurar disponibilidad, avisad con antelación.
+		\item Si se quiere asegurar disponibilidad, avisar con antelación.
 		\item Se permiten tutorías tanto presenciales como telemáticas.
-		\item Disponible a través de correo, moodle y \alert{Discord}.
+		\item Disponible a través de Discord (y correo).
 	\end{itemize}
 \end{frame}
-
-
 
 \section{Métodos de Evaluación y Calificación}
 
@@ -193,14 +190,15 @@
 	\begin{block}{Fórmula de Cálculo de la Calificación Final}
 		\begin{center}
         \begin{tabular}{ll}
-			Calificación  Final  =  & Proyecto $\times$ 0.75 + \\
-                                    & Prueba  Final  Escrita $\times$ 0.25 \\
+			\multicolumn{2}{l}{Calificación  Final  =}  \\ 
+			\ \ \ \ \ & SI Prueba Final $\geq$ 4.00 AND  Proyecto $\geq$ 5.00 ENTONCES \\
+			\ \ \ \ \ & \ \ \ \ max(Proyecto, Proyecto $\times$ 0.75 + Prueba Final  $\times$ 0.25) \\
+			\ \ \ \ \ & SINO \\
+			\ \ \ \ \ & \ \ \ \ min( 4.9, Proyecto $\times$ 0.75 + Prueba Final  $\times$ 0.25) \\					
+			\ \ \ \ \ & FINSI   \\
 		\end{tabular}
         \end{center}
 	\end{block}
-	\begin{itemize}
-		\item<2-> Para poder aplicar la fórmula anterior se debe obtener un mínimo de 5.00 en el proyecto.
-	\end{itemize}
 \end{frame}
 
 \subsection{Ponderación de las Etapas del Proyecto}
@@ -214,13 +212,13 @@
     E02 & Domain-Driven Design & 10\% \\ \hline	
     E03 & Implementación POJOs &  5\% \\ \hline
     E04 & Anotaciones JPA                  & 10\% \\ \hline
-    E05 & Desarrollo de los Repositorios   &  5\% \\ \hline
+    E05 & Desarrollo de los Repositorios   & 10 \% \\ \hline
     E06 & Especificación de la API REST    & 10\% \\ \hline
     E07 & Implementación del Controlador HTTP   &   10\% \\ \hline
     E08 & Implementación de la Capa de Servicio &  10\% \\ \hline
     E09 & Implementación del Router SPA         & 10\% \\ \hline
     E10 & Implementación de Compomentes         & 15\% \\ \hline
-    E11 & Implementación de LLamadas AJAX       &  5\% \\ \hline
+    E11 & Implementación de LLamadas AJAX       & 10 \% \\ \hline
     E12 & Implementación del Control de Accesos & 10\% \\
     \hline \hline
 	\end{tabular}
