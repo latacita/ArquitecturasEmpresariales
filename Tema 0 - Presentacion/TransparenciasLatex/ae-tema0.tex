@@ -4,13 +4,13 @@
 
 \title[Aplicaciones Empresariales]{Tecnologías para el Desarrollo de Aplicaciones Empresariales sobre Internet}
 
-\author[Pablo Sánchez]{\alert{Pablo Sánchez}}
+\author[Pablo Sánchez]{\alert{Pablo Sánchez} y Juan María Rivas}
 
 \institute[I2E]{
 		   Dpto. Ingenier{\'i}a Inform{\'a}tica y Electr{\'o}nica \\
 		   Universidad de Cantabria \\
 		   Santander (Cantabria, España) \\
-		   p.sanchez@unican.es
+		   \{sanchezbp, juanmaria.rivas\}@unican.es
 }
 
 \date{}
@@ -19,14 +19,21 @@
 
 \begin{frame}[c]
 	\titlepage
-	\begin{columns}
-		\column{0.50\linewidth}
-			\centering
-    		\includegraphics[width=.28\textwidth,keepaspectratio=true]{images/istr.eps}
-		\column{0.50\linewidth}
-			\centering
-			\includegraphics[width=.25\textwidth,keepaspectratio=true]{images/uc.eps}
-	\end{columns}
+	\vspace{-20pt}
+\begin{columns}
+	\begin{column}{.1\textwidth}
+	\end{column}
+	\begin{column}{.4\textwidth}
+		\begin{flushleft}
+			\includegraphics[width=.30\textwidth,keepaspectratio=true]{images/istr.eps}
+		\end{flushleft}
+	\end{column}
+	\begin{column}{.5\textwidth}
+		\begin{flushright}
+			\includegraphics[width=\textwidth,keepaspectratio=true]{images/logoUC.pdf}
+		\end{flushright}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \section{Objetivos y Temario}
@@ -59,7 +66,7 @@
         \item Serializar objetos en formato \emph{JSON} usando anotaciones.
         \item Implementar una controlador \emph{REST} usando \emph{Spring}.
         \item Implementar una capa de servicio usando \emph{Spring}.
-        \item Implementar una interfaz \emph{SPA} utilizando \emph{Angular}.
+        \item Implementar una interfaz \emph{SPA} usando \emph{Angular}.
         \item Ser capaz de utilizar \emph{tokens de autenticación}.
         \item Utilizar los servicios de \emph{Spring} para el \emph{control de accesos}.
 	\end{enumerate}
@@ -97,11 +104,12 @@
 \begin{frame}[c]
 	\frametitle{Clases en Laboratorio}
 	\begin{block}{Objetivo}
-		Aplicar los conceptos teóricos aprendidos en las clases de aula al desarrollo de un sistema software real de mediana escala, con el objetivo de desarrollar las competencias procedimentales y actitudinales propias de un Ingeniero.
+		Aplicar los conceptos teóricos aprendidos en las clases de aula al desarrollo de un sistema software real de mediana escala, con el objetivo de desarrollar las competencias procedimentales y actitudinales propias de un ingeniero.
 	\end{block}
 	\begin{itemize}
-		\item<2-> Desarrollo de una aplicación empresarial de tamaño y complejidad moderada.
-		\item<3-> El desarrollo estará dividido en varias etapas, al final de cada una de las cuales se realizará su correspondiente entrega.
+		\item<2-> Desarrollo de una aplicación de tamaño y complejidad moderada.
+		\item<3-> El desarrollo estará dividido en varias etapas. 
+		\item<4-> Al final de cada una se realizará una entrega.
 	\end{itemize}
 \end{frame}
 
@@ -111,8 +119,8 @@
 	\frametitle{Plataforma de Trabajo}
 	\begin{itemize}
 		\item<1-> Las plataformas de trabajo de la asignatura son \emph{Moodle} y \emph{Discord}.
-		\item<2-> Todas las notificaciones oficiales se harán a través de Discord.
-		\item<3-> Es obligación del alumno estar atento a las posibles notificaciones y avisos que se realicen a través de Discord.
+		\item<2-> Todas las notificaciones oficiales se harán a través de \emph{Discord}.
+		\item<3-> Es obligación del alumno estar atento a las posibles notificaciones y avisos que se realicen a través de \emph{Discord}.
 	\end{itemize}
 \end{frame}
 
@@ -190,9 +198,9 @@
         \begin{tabular}{ll}
 			\multicolumn{2}{l}{Calificación  Final  =}  \\ 
 			\ \ \ \ \ & SI Prueba Final $\geq$ 4.00 AND  Proyecto $\geq$ 5.00 ENTONCES \\
-			\ \ \ \ \ & \ \ \ \ max(Proyecto, Proyecto $\times$ 0.75 + Prueba Final  $\times$ 0.25) \\
+			\ \ \ \ \ & \ \ \ \ max(Proyecto, Proyecto $\times$ 0.85 + Prueba Final  $\times$ 0.15) \\
 			\ \ \ \ \ & SINO \\
-			\ \ \ \ \ & \ \ \ \ min( 4.9, Proyecto $\times$ 0.75 + Prueba Final  $\times$ 0.25) \\					
+			\ \ \ \ \ & \ \ \ \ min( 4.9, Proyecto $\times$ 0.85 + Prueba Final  $\times$ 0.25) \\					
 			\ \ \ \ \ & FINSI   \\
 		\end{tabular}
         \end{center}
@@ -209,13 +217,13 @@
 	E01 & Modelo de Domino     & 10\% \\ \hline
     E02 & Domain-Driven Design & 10\% \\ \hline	
     E03 & Implementación POJOs &  5\% \\ \hline
-    E04 & Anotaciones JPA                  & 10\% \\ \hline
-    E05 & Desarrollo de los Repositorios   & 10 \% \\ \hline
-    E06 & Especificación de la API REST    & 10\% \\ \hline
+    E04 & Anotaciones JPA                     & 10\% \\ \hline
+    E05 & Desarrollo de los Repositorios        & 10 \% \\ \hline
+    E06 & Especificación de la API REST         & 10\% \\ \hline
     E07 & Implementación del Controlador HTTP   &   10\% \\ \hline
     E08 & Implementación de la Capa de Servicio &  10\% \\ \hline
-    E09 & Implementación del Router SPA         & 10\% \\ \hline
-    E10 & Implementación de Compomentes         & 15\% \\ \hline
+    E09 & Implementación del Router SPA         & 5\% \\ \hline
+    E10 & Implementación de Componentes         & 15\% \\ \hline
     E11 & Implementación de LLamadas AJAX       & 10 \% \\ \hline
     E12 & Implementación del Control de Accesos & 10\% \\
     \hline \hline
