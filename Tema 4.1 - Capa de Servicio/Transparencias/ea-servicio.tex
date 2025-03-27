@@ -1,4 +1,4 @@
-\documentclass[handout,a4paper,slidestop,xcolor=pst,blue]{beamer}
+\documentclass[a4paper,slidestop,blue]{beamer}
 
 \input{slidesHeader.tex}
 
@@ -10,7 +10,7 @@
 		   Dpto. Ingenier{\'i}a Inform{\'a}tica y Electr{\'o}nica \\
 		   Universidad de Cantabria \\
 		   Santander (Cantabria, Espa{\~n}a) \\
-		   \texttt{p.sanchez@unican.es}
+		   \texttt{sanchezbp@unican.es}
 }
 
 \date{}
@@ -19,13 +19,20 @@
 
 \begin{frame}[c]
 	\titlepage
+	\vspace{-20pt}
 	\begin{columns}
-		\column{0.50\linewidth}
-			\centering
-    		\includegraphics[width=.28\textwidth,keepaspectratio=true]{images/istr.eps}
-		\column{0.50\linewidth}
-			\centering
-			\includegraphics[width=.25\textwidth,keepaspectratio=true]{images/uc.eps}
+		\begin{column}{.1\textwidth}
+		\end{column}
+		\begin{column}{.4\textwidth}
+			\begin{flushleft}
+				\includegraphics[width=.30\textwidth,keepaspectratio=true]{images/istr.eps}
+			\end{flushleft}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{flushright}
+				\includegraphics[width=\textwidth,keepaspectratio=true]{images/logoUC.pdf}
+			\end{flushright}
+		\end{column}
 	\end{columns}
 \end{frame}
 
@@ -93,7 +100,7 @@
 \begin{frame}[c]
 	\frametitle{Responsabilidades de la Capa de Servicio}
 	\begin{enumerate}[<+->]
-        \item Atender las peticiones HTTP de los clientes, delegando en el modelo de dominio.
+        \item Atender las peticiones (HTTP) de los clientes.
         \item Asegurar la transaccionalidad de las operaciones de negocio.
         \item Validar las peticiones de los clientes.
         \item Recuperar y almacenar datos del almacén o almacenes persistentes.
@@ -103,6 +110,112 @@
         \item Gestionar de manera adecuada casos excepcionales.
         \item Ayudar a satisfacer los requisitos no funcionales.
 	\end{enumerate}
+\end{frame}
+
+\subsection{Definición}
+
+\begin{frame}[c]
+	\frametitle{Protocolo HTTP}
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Protocolo HTTP}
+	\begin{block}{Protocolo HTTP}
+		\emph{HTTP (Hypertext Transfer Protocol)} es un protocolo a nivel de aplicación diseñado inicialmente para la transferencia de archivos de hipertexto.
+	\end{block}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Características HTTP}
+	\begin{enumerate}[<+->]
+		\item Modelo cliente-servidor, petición-respuesta.
+		\item Los mensajes HTTP contienen códigos de control, metadatos y datos.
+		%% \item Facilita la creación de cachés intermedias.
+		\item Identifica recursos mediante URLs
+		\item Soporta varios mecanismos de autenticación.
+	\end{enumerate}
+\end{frame}
+
+\subsection{Peticiones HTTP}
+
+\begin{frame}[c,fragile]
+	\frametitle{HTTP Request}
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{images/http/httpRequest.eps}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Verbos HTTP}
+	\begin{tabular}{ll} \hline
+		GET    & Recupera un recurso. \\
+		POST   & Añade un recurso (no identificado) a una colección. \\
+		PUT    & Actualiza completamente (o añade) un recurso (identificado). \\
+		PATCH  & Actualizar parcialmente un recurso. \\
+		DELETE & Elimina un recurso. \\ \hline
+	\end{tabular}
+\end{frame}
+
+\subsection{Respuestas HTTP}
+
+\begin{frame}[c,fragile]
+	\frametitle{HTTP Response}
+	\begin{center}
+		\includegraphics[width=0.8\linewidth]{images/http/httpResponse.eps}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Códigos Respuesta HTTP}
+	\begin{center}
+		\begin{tabular}{ll}
+			\hline
+			200 & Ok         \\
+			201 & Created    \\
+			202 & Accepted   \\
+			204 & No content \\
+			\hline
+			400 & Bad request         \\
+			401 & Unauthorized        \\
+			404 & Not Found           \\
+			405 & Method Not Allowed  \\
+			412 & Precondition Failed \\
+			\hline
+			500 & Internal Server Error \\
+			501 & Not Implemented       \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\section{JSON}
+
+\begin{frame}[c]
+	\frametitle{Formato de intercambio JSON}
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Formato de intercambio JSON}
+	\begin{block}{JSON}
+		\emph{JSON (JavaScript Object Notation)} es un formato ligero de intercambio de datos fácilmente comprensible por humanos y fácilmente procesable por máquinas.
+	\end{block}
+\end{frame}
+
+\begin{frame}[c,fragile]
+	\frametitle{Gramática JSON}
+	\begin{verbatim}
+		<json> ::= <object> | <array>
+		<object> ::= {} |
+		{(<string>:<value>,)* <string>:<value>}
+		<value>  ::= <string> | <number> | <object> |
+		array | true | false | null
+	\end{verbatim}
 \end{frame}
 
 \section{Arquitecturas REST}
@@ -232,78 +345,11 @@
     \end{block}
 \end{frame}
 
-\section{Protocolo HTTP}
-
-\subsection{Definición}
-
 \begin{frame}[c]
-    \frametitle{Protocolo HTTP}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Protocolo HTTP}
-    \begin{block}{Protocolo HTTP}
-        \emph{HTTP (Hypertext Transfer Protocol)} es un protocolo a nivel de aplicación diseñado para su utilización en \emph{sistemas de información hipermedia} distribuidos y colaborativos.
-    \end{block}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Características HTTP}
-    \begin{enumerate}[<+->]
-        \item Modelo cliente-servidor, petición-respuesta.
-        \item Los mensajes HTTP contienen códigos de control, metadatos y datos.
-        \item Facilita la creación de cachés intermedias.
-        \item Identifica recursos mediante URLs
-        \item Soporta varios mecanismos de autenticación.
-    \end{enumerate}
-\end{frame}
-
-\subsection{Paquetes HTTP}
-
-\begin{frame}[c,fragile]
-    \frametitle{HTTP Request}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/http/httpRequest.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c,fragile]
-    \frametitle{HTTP Response}
-    \begin{center}
-        \includegraphics[width=0.8\linewidth]{images/http/httpResponse.eps}
-    \end{center}
-\end{frame}
-
-%% Añadir Códigos de Respuesta por Tramos
-
-\section{JSON}
-
-\begin{frame}[c]
-    \frametitle{Formato de intercambio JSON}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/http/enterpriseArchitectures02.eps}
-    \end{center}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Formato de intercambio JSON}
-    \begin{block}{JSON}
-        \emph{JSON (JavaScript Object Notation)} es un formato ligero de intercambio de datos fácilmente comprensible por humanos y fácilmente procesable por máquinas.
-    \end{block}
-\end{frame}
-
-\begin{frame}[c,fragile]
-    \frametitle{Gramática JSON}
-\begin{verbatim}
-    <json> ::= <object> | <array>
-    <object> ::= {} |
-                 {(<string>:<value>,)* <string>:<value>}
-    <value>  ::= <string> | <number> | <object> |
-                 array | true | false | null
-\end{verbatim}
+	\frametitle{HATEOAS sobre JSON}
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/apiRest/hateoas.eps}
+	\end{center}
 \end{frame}
 
 \section{Creación de una API REST sobre HTTP}
@@ -315,42 +361,35 @@
     \end{center}
 \end{frame}
 
-\begin{frame}[c]
-	\frametitle{Responsabilidades del Controlador HTTP}
-	\begin{enumerate}[<+->]
-        \item Atender las peticiones HTTP de los clientes.
-        \item Convertir datos de HTTP al lenguaje que corresponda (\emph{unmarshalling}).
-        \item Validar las peticiones de los clientes.
-        \item Convertir las respuestas a una respuesta HTTP adecuada.
-        \item Convertir los resultados a datos HTTP (\emph{marshalling}).
-	\end{enumerate}
-\end{frame}
+%\begin{frame}[c]
+%	\frametitle{Responsabilidades del Controlador HTTP}
+%	\begin{enumerate}[<+->]
+%        \item Atender las peticiones HTTP de los clientes.
+%        \item Convertir datos de HTTP al lenguaje que corresponda (\emph{unmarshalling}).
+%        \item Validar las peticiones de los clientes.
+%        \item Convertir las respuestas a una respuesta HTTP adecuada.
+%        \item Convertir los resultados a datos HTTP (\emph{marshalling}).
+%	\end{enumerate}
+%\end{frame}
 
 \subsection{Identificación de recursos}
 
-\begin{frame}[c]
+\begin{frame}[c, allowframebreaks]
     \frametitle{Creación de una API REST}
     \begin{enumerate}[<+->]
-        \item Decidir qué elementos del \emph{domain model} se expondrán como \emph{recursos}.
+        \item Decidir qué elementos del \emph{modelo de dominio} se expondrán como \emph{recursos}.
         \item Exponer los \emph{aggregate roots} como colecciones.
-        \item Exponer las partes internas de un \emph{aggregate roots} como elementos subordinados a un aggregate root.
-        \item Exponer las operaciones de negocio que no corresponda a operaciones CRUDs básicas o parametrizadas como controladores, asociados al recurso que corresponda.
-        \item Asignar una URI para cada recurso.
-        \item Decidir qué verbos HTTP son aplicables a cada respuesta.
-        \item Decidir los posibles parámetros de entrada a cada petición.
-        \item Decidir las posibles respuestas a cada petición.
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}[c]
-    \frametitle{Identificación de Recursos REST}
-    \begin{enumerate}[<+->]
         \item Las colecciones de \emph{aggregates roots} se identifican con sustantivos en plural asociados a la raíz de la organización (\texttt{http://carsharing.es/viajes}).
-        \item Las instancias de un \emph{aggregates roots} se identifican añadiendo el identificador de la instancia tras la URI asociado al \emph{aggregate root}
-            (\texttt{/viajes/\{viajeId\}}).
+        \item Las colecciones se puden filtrar mediante parámetros en la URL (\texttt{/viajes?origen=Santander\&destino=Bilbao}).
+        \item Las instancias de un \emph{aggregates roots} se identifican añadiendo el identificador de la instancia tras la URI asociado al \emph{aggregate root} (\texttt{/viajes/\{viajeId\}}).
+        \item Exponer las partes internas de un \emph{aggregate roots} como elementos subordinados a un aggregate root.
         \item Los partes internas de un \emph{aggregate} se exponen siguiendo las mismas reglas, utilizando la URI del \emph{aggregate root} como prefijo (\texttt{/viajes/\{viajeId\}/conductor}).
         \item La regla anterior se aplica recursivamente a las partes internas de las partes internas de un aggregate (\texttt{/viajes/\{viajeId\}/conductor/vehiculos/}).
+        \item Exponer las operaciones de negocio que no correspondan a operaciones CRUDs básicas o parametrizadas como controladores, asociados al recurso que corresponda.
         \item Las operaciones no CRUD sobre un recurso se especifican como verbos tras la instancia del recurso al que se aplican (\texttt{/viajes/\{viajeId\}/cerrar}).
+        \item Decidir qué verbos HTTP son aplicables a cada recurso.
+        \item Decidir los posibles parámetros de entrada a cada petición.
+        \item Decidir las posibles respuestas a cada petición.
     \end{enumerate}
 \end{frame}
 
@@ -364,58 +403,10 @@
         \item Usar sólo minúsculas.
         \item No referir ficheros, sino recursos.
         \item No utilizar URIs para distinguir operaciones CRUD.
-        \item Utilizar parámetros para refinar operaciones CRUD (\texttt{/viajes?origen=Santander\&destino=Bilbao}).
     \end{enumerate}
 \end{frame}
 
-\subsection{Verbos HTTP y Recursos REST}
-
-\begin{frame}[c]
-    \frametitle{Verbos HTTP y Recursos REST}
-    \begin{tabular}{ll} \hline
-        GET    & Recupera un recurso. \\
-        POST   & Añade un recurso (no identificado) a una colección. \\
-        PUT    & Actualiza completamente (o añade) un recurso (identificado). \\
-        PATCH  & Actualizar parcialmente un recurso. \\
-        DELETE & Elimina un recurso. \\ \hline
-    \end{tabular}
-\end{frame}
-
-\subsection{Códigos de Respuestas HTTP}
-
-\begin{frame}[c]
-    \frametitle{Códigos Respuesta HTTP}
-    \begin{center}
-        \begin{tabular}{ll}
-            \hline
-            200 & Ok         \\
-            201 & Created    \\
-            202 & Accepted   \\
-            204 & No content \\
-            \hline
-            400 & Bad request         \\
-            401 & Unauthorized        \\
-            404 & Not Found           \\
-            405 & Method Not Allowed  \\
-            412 & Precondition Failed \\
-            \hline
-            500 & Internal Server Error \\
-            501 & Not Implemented       \\
-            \hline
-        \end{tabular}
-    \end{center}
-\end{frame}
-
-\subsection{HATEOAS}
-
-\begin{frame}[c]
-    \frametitle{HATEOAS sobre JSON}
-    \begin{center}
-        \includegraphics[width=\linewidth]{images/apiRest/hateoas.eps}
-    \end{center}
-\end{frame}
-
-\subsection{Niveles de Adopción}
+\subsection{Niveles de Adopción REST}
 
 \begin{frame}[c]
     \frametitle{Niveles de Adopción REST}
